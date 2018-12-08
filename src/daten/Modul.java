@@ -3,6 +3,7 @@ package daten;
 import java.util.Date;
 
 public class Modul {
+
 	private int modulnummer;
 	private String name;
 	private int credits;
@@ -10,10 +11,10 @@ public class Modul {
 	private int versuche;
 	private Date ablaufdatum;
 	private int semester;
-	private String typ;
+	private Typ typ;
 
 	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum, int semester,
-			String typ) {
+			Typ typ) {
 		this.modulnummer = modulnummer;
 		this.name = name;
 		this.credits = credits;
@@ -52,7 +53,7 @@ public class Modul {
 		return semester;
 	}
 
-	public String getTypr() {
+	public Typ getTyp() {
 		return typ;
 	}
 
@@ -60,5 +61,9 @@ public class Modul {
 	public String toString() {
 		return "modulnummer: " + modulnummer + " name: " + name + " credits: " + credits + " note: " + note
 				+ " versuche: " + versuche + " ablaufdatum: " + ablaufdatum + " semseter: " + semester + " typ: " + typ;
+	}
+
+	public boolean isGeschrieben() {
+		return note != 0.0f;
 	}
 }

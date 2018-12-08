@@ -1,4 +1,4 @@
-package daten;
+package einlesen;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -9,8 +9,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CsvExtractor {
-	private static final char SEPERATOR = ',';
+import exceptions.CSVFormattierungsException;
+
+public class CSVExtractor {
+	private static final char SEPERATOR1 = ',';
+	private static final char SEPERATOR2 = ';';
 	private static final char QUOTE = '"';
 
 	public static List<List<String>> loadCsv(String path) throws IOException, CSVFormattierungsException {
@@ -21,7 +24,6 @@ public class CsvExtractor {
 		int i = 0;
 		String zeile;
 		while ((zeile = br.readLine()) != null) {
-			System.out.println(zeile);
 			ret.add(parseLine(zeile, i));
 			i++;
 		}
@@ -58,7 +60,7 @@ public class CsvExtractor {
 	}
 
 	private static boolean isSepereator(String line, int pos) {
-		return line.charAt(pos) == SEPERATOR;
+		return line.charAt(pos) == SEPERATOR1 || line.charAt(pos) == SEPERATOR2;
 	}
 
 	private static boolean isQuote(String line, int pos) {

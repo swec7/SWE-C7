@@ -1,4 +1,4 @@
-package daten;
+package exceptions;
 
 public class CSVException extends Exception {
 	private int zeile;

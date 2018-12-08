@@ -27,6 +27,14 @@ public class Studiengang {
 		return 0;
 	}
 
+	public Modul getModul(int i) {
+		return module.get(i);
+	}
+
+	public int getModuleSize() {
+		return module.size();
+	}
+
 	public List<Modul> getModule() {
 		return module;
 	}
@@ -55,14 +63,4 @@ public class Studiengang {
 		return maxVerbleibendeVersuche;
 	}
 
-	@Override
-	public String toString() {
-		String s = "name: " + name + " benötigteCredits: " + benötigteCredits + " anzSemester: " + anzSemester
-				+ " anzWahl: " + anzWahl + " anzSoftskill: " + anzSoftskill + " maxVerbleibendeVersuche: "
-				+ maxVerbleibendeVersuche + "\n";
-		for (Modul modul : module) {
-			s = s + modul.toString() + "\n";
-		}
-		return s;
-	}
 }
