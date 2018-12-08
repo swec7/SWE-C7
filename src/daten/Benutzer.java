@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import exceptions.CSVLeseException;
+import exceptions.TypFormatException;
+
 public class Benutzer {
 
 	private Studiengang studiengang;
-
-	private int wunschnote;
+	private float[] planNoten;
+	private float wunschnote;
 
 	public Benutzer(List<List<String>> csvDaten) throws CSVLeseException {
 
@@ -22,14 +25,16 @@ public class Benutzer {
 				int credits = Integer.parseInt(list.get(3));
 				float note = 0;
 				int versuche = 0;
-				Date ablaufdatum = new Date(0, 0, 0);
+				Date ablaufdatum = null;
 				int semester = Integer.parseInt(list.get(2));
-				String typ = list.get(4);
+				Typ typ = Typ.parseTyp(list.get(4));
 
 				Modul mod = new Modul(modulnummer, name, credits, note, versuche, ablaufdatum, semester, typ);
 				module.add(mod);
-			} catch (NumberFormatException | IndexOutOfBoundsException e) {
-				throw new CSVLeseException("Fehlender oder ungültiger Wert", i + 1);
+			} catch (NumberFormatException | TypFormatException e) {
+				throw new CSVLeseException("Ungültiger Wert", i + 1);
+			} catch (IndexOutOfBoundsException e) {
+				throw new CSVLeseException("Fehlender Wert", i + 1);
 			}
 		}
 		try {
@@ -44,24 +49,106 @@ public class Benutzer {
 			studiengang = new Studiengang(module, name, benötigteCredits, anzSemester, anzWahl, anzSoftskill,
 					maxVerbleibendeVersuche);
 			wunschnote = 0;
-		} catch (NumberFormatException | IndexOutOfBoundsException e) {
-			throw new CSVLeseException("Fehlender oder ungültiger Wert", 1);
+			planNoten = new float[module.size()];
+		} catch (NumberFormatException e) {
+			throw new CSVLeseException("Ungültiger Wert", 1);
+		} catch (IndexOutOfBoundsException e) {
+			throw new CSVLeseException("Fehlender Wert", 1);
 		}
 
+	}
+
+	public float durchschnitsNote() {
+		float summe = 0;
+		float credits = 0;
+		for (Modul m : studiengang.getModule()) {
+			if (m.isGeschrieben() && m.getTyp() != Typ.SOFTSKILL) {
+				summe += m.getCredits() * m.getNote();
+				credits += m.getCredits();
+			}
+		}
+		if (credits == 0) {
+			return 0;
+		}
+		return summe / credits;
+	}
+
+	public float durchschnitsPlanNote() {
+		float summe = 0;
+		float credits = 0;
+		for (int i = 0; i < planNoten.length; i++) {
+			Modul m = studiengang.getModul(i);
+			if (planNoten[i] != 0.0f && m.getTyp() != Typ.SOFTSKILL) {
+				summe += m.getCredits() * planNoten[i];
+				credits += m.getCredits();
+			}
+		}
+		if (credits == 0) {
+			return 0;
+		}
+		return summe / credits;
 	}
 
 	public Studiengang getStudiengang() {
 		return studiengang;
 	}
 
-	public int getWunschnote() {
+	public void setWunschNote(float wunschnote) {
+		this.wunschnote = wunschnote;
+	}
+
+	public float getWunschnote() {
 		return wunschnote;
+	}
+
+	public float getPlanNote(int i) {
+		return planNoten[i];
+	}
+
+	public void setPlanNote(int i, float f) {
+		planNoten[i] = f;
+	}
+
+	public float[] getPlanNoten() {
+		return planNoten;
+	}
+
+	public void setPlanNoten(float[] planNoten) {
+		this.planNoten = planNoten;
 	}
 
 	@Override
 	public String toString() {
-		String string = "wunschnote: " + wunschnote + "\n";
-		string = string + "studiengang: \n" + studiengang.toString();
-		return string;
+		String s = "<<Benutzer>>\n";
+
+		s += "Studiengang: " + studiengang.getName();
+		s += "\nwunschnote: " + wunschnote;
+		s += "\nbenötigte Credits: " + studiengang.getBenötigteCredits();
+		s += "\nanz. Semester: " + studiengang.getAnzSemester();
+		s += "\nanz. Wahlmodule: " + studiengang.getAnzWahl();
+		s += "\nanz. Softskill: " + studiengang.getAnzSoftskill();
+		s += "\nmax. verbleibende Versuche: " + studiengang.getMaxVerbleibendeVersuche() + "\n\n";
+
+		s += "durchschnitts Note: " + durchschnitsNote() + "\n";
+		s += "durchschnitts Plan-Note: " + durchschnitsPlanNote() + "\n\n";
+
+		s += "Modul Nr. |Name                                                        |Credits|Note|Plan  Note|Versuche|Ablaufdatum|Semester|Typ"
+				+ "\n";
+		s += "-----------------------------------------------------------------------------------------------------------------------------------------"
+				+ "\n";
+		for (int i = 0; i < studiengang.getModuleSize(); i++) {
+			Modul m = studiengang.getModul(i);
+			s += String.format("%-10s", m.getModulnummer()) + "|";
+			s += String.format("%-60s", m.getName().substring(0, Math.min(m.getName().length(), 60))) + "|";
+			s += String.format("%-7s", m.getCredits()) + "|";
+			s += String.format("%-4s", m.getNote()) + "|";
+			s += String.format("%-10s", planNoten[i]) + "|";
+			s += String.format("%-8s", m.getVersuche()) + "|";
+			s += String.format("%-11s", m.getAblaufdatum()) + "|";
+			s += String.format("%-8s", m.getSemester()) + "|";
+			s += String.format("%-10s", m.getTyp());
+			s += "\n";
+		}
+		return s;
 	}
 }
