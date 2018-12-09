@@ -11,7 +11,7 @@ import java.util.List;
 
 import exceptions.CSVFormattierungsException;
 
-public class CSVExtractor {
+public class CSVReader {
 	private static final char SEPERATOR1 = ',';
 	private static final char SEPERATOR2 = ';';
 	private static final char QUOTE = '"';

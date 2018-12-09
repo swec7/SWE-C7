@@ -3,6 +3,7 @@ package daten;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import exceptions.CSVLeseException;
 import exceptions.TypFormatException;
@@ -13,7 +14,7 @@ public class Benutzer {
 	private float[] planNoten;
 	private float wunschnote;
 
-	public Benutzer(List<List<String>> csvDaten) throws CSVLeseException {
+	public Benutzer(List<List<String>> csvDaten, Map<String, String[]> htmlDaten) throws CSVLeseException {
 
 		List<Modul> module = new ArrayList<>();
 
@@ -28,6 +29,19 @@ public class Benutzer {
 				Date ablaufdatum = null;
 				int semester = Integer.parseInt(list.get(2));
 				Typ typ = Typ.parseTyp(list.get(4));
+
+				String[] html = htmlDaten.get(list.get(0));
+
+				try {
+					if (html != null) {
+						note = Float.parseFloat(html[2].replaceAll(",", "."));
+						versuche = Integer.parseInt(html[4]);
+					}
+
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+					return;
+				}
 
 				Modul mod = new Modul(modulnummer, name, credits, note, versuche, ablaufdatum, semester, typ);
 				module.add(mod);
@@ -134,7 +148,7 @@ public class Benutzer {
 
 		s += "Modul Nr. |Name                                                        |Credits|Note|Plan  Note|Versuche|Ablaufdatum|Semester|Typ"
 				+ "\n";
-		s += "-----------------------------------------------------------------------------------------------------------------------------------------"
+		s += "----------+------------------------------------------------------------+-------+----+----------+--------+-----------+--------+-----------"
 				+ "\n";
 		for (int i = 0; i < studiengang.getModuleSize(); i++) {
 			Modul m = studiengang.getModul(i);
