@@ -1,6 +1,10 @@
 package daten;
 
 import java.util.Date;
+import java.util.List;
+
+import exceptions.CSVLeseException;
+import exceptions.TypFormatException;
 
 public class Modul {
 
@@ -15,8 +19,44 @@ public class Modul {
 	private Typ typ;
 	private float planNote;
 
+	public Modul() {
+		modulnummer = 0;
+		name = null;
+		credits = 0;
+		note = 0;
+		versuche = 0;
+		ablaufdatum = null;
+		prüfungsDatum = null;
+		semester = 0;
+		typ = null;
+		planNote = 0;
+	}
+
+	public Modul(List<String> csvZeile) throws CSVLeseException {
+		this();
+		try {
+			modulnummer = Integer.parseInt(csvZeile.get(0));
+			name = csvZeile.get(1);
+			credits = Integer.parseInt(csvZeile.get(3));
+			semester = Integer.parseInt(csvZeile.get(2));
+			typ = Typ.parseTyp(csvZeile.get(4));
+		} catch (NumberFormatException | TypFormatException e) {
+			throw new CSVLeseException("Ungültiger Wert", 0);
+		} catch (IndexOutOfBoundsException e) {
+			throw new CSVLeseException("Fehlender Wert", 0);
+		}
+	}
+
+	public void loadQIS(String[] htmlZeile) {
+		if (htmlZeile == null) {
+			return;
+		}
+		note = Float.parseFloat(htmlZeile[2].replaceAll(",", "."));
+		versuche = Integer.parseInt(htmlZeile[4]);
+	}
+
 	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum,
-			Date prüfungsDatum, int semester, Typ typ) {
+			Date prüfungsDatum, int semester, Typ typ, float planNote) {
 		this.modulnummer = modulnummer;
 		this.name = name;
 		this.credits = credits;
@@ -26,7 +66,7 @@ public class Modul {
 		this.prüfungsDatum = prüfungsDatum;
 		this.semester = semester;
 		this.typ = typ;
-		this.planNote = 0;
+		this.planNote = planNote;
 	}
 
 	public int getModulnummer() {

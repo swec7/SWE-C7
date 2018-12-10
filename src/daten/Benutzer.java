@@ -1,12 +1,10 @@
 package daten;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import exceptions.CSVLeseException;
-import exceptions.TypFormatException;
 
 public class Benutzer {
 
@@ -14,62 +12,12 @@ public class Benutzer {
 	private float wunschnote;
 
 	public Benutzer(List<List<String>> csvDaten, Map<String, String[]> htmlDaten) throws CSVLeseException {
-
 		List<Modul> module = new ArrayList<>();
-
-		for (int i = 2; i < csvDaten.size(); i++) {
-			List<String> list = csvDaten.get(i);
-			try {
-				int modulnummer = Integer.parseInt(list.get(0));
-				String name = list.get(1);
-				int credits = Integer.parseInt(list.get(3));
-				float note = 0;
-				int versuche = 0;
-				Date prüfungsDatum = null;
-				Date ablaufdatum = null;
-				int semester = Integer.parseInt(list.get(2));
-				Typ typ = Typ.parseTyp(list.get(4));
-
-				String[] html = htmlDaten.get(list.get(0));
-
-				try {
-					if (html != null) {
-						note = Float.parseFloat(html[2].replaceAll(",", "."));
-						versuche = Integer.parseInt(html[4]);
-					}
-
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-					return;
-				}
-
-				Modul mod = new Modul(modulnummer, name, credits, note, versuche, ablaufdatum, prüfungsDatum, semester,
-						typ);
-				module.add(mod);
-			} catch (NumberFormatException | TypFormatException e) {
-				throw new CSVLeseException("Ungültiger Wert", i + 1);
-			} catch (IndexOutOfBoundsException e) {
-				throw new CSVLeseException("Fehlender Wert", i + 1);
-			}
+		for (List<String> zeile : csvDaten) {
+			Modul m = new Modul(zeile);
+			m.loadQIS(htmlDaten.get(Integer.toString(m.getModulnummer())));
+			module.add(m);
 		}
-		try {
-			String name = csvDaten.get(0).get(0);
-			int benötigteCredits = Integer.parseInt(csvDaten.get(0).get(2));
-			int anzSemester = Integer.parseInt(csvDaten.get(0).get(1));
-			int anzWahl = Integer.parseInt(csvDaten.get(0).get(3));
-			int anzSoftskill = Integer.parseInt(csvDaten.get(0).get(4));
-			int maxVerbleibendeVersuche = 0;
-			// int maxVerbleibendeVersuche =
-			// Integer.parseInt(csvDaten.get(0).get(5));
-			studiengang = new Studiengang(module, name, benötigteCredits, anzSemester, anzWahl, anzSoftskill,
-					maxVerbleibendeVersuche);
-			wunschnote = 0;
-		} catch (NumberFormatException e) {
-			throw new CSVLeseException("Ungültiger Wert", 1);
-		} catch (IndexOutOfBoundsException e) {
-			throw new CSVLeseException("Fehlender Wert", 1);
-		}
-
 	}
 
 	public float durchschnitsNote() {
