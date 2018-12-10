@@ -10,18 +10,20 @@ public class Modul {
 	private float note;
 	private int versuche;
 	private Date ablaufdatum;
+	private Date prüfungsDatum;
 	private int semester;
 	private Typ typ;
 	private float planNote;
 
-	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum, int semester,
-			Typ typ) {
+	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum,
+			Date prüfungsDatum, int semester, Typ typ) {
 		this.modulnummer = modulnummer;
 		this.name = name;
 		this.credits = credits;
 		this.note = note;
 		this.versuche = versuche;
 		this.ablaufdatum = ablaufdatum;
+		this.prüfungsDatum = prüfungsDatum;
 		this.semester = semester;
 		this.typ = typ;
 		this.planNote = 0;
@@ -49,6 +51,10 @@ public class Modul {
 
 	public Date getAblaufdatum() {
 		return ablaufdatum;
+	}
+
+	public Date getPrüfungsDatum() {
+		return prüfungsDatum;
 	}
 
 	public int getSemester() {

@@ -25,6 +25,7 @@ public class Benutzer {
 				int credits = Integer.parseInt(list.get(3));
 				float note = 0;
 				int versuche = 0;
+				Date prüfungsDatum = null;
 				Date ablaufdatum = null;
 				int semester = Integer.parseInt(list.get(2));
 				Typ typ = Typ.parseTyp(list.get(4));
@@ -42,7 +43,8 @@ public class Benutzer {
 					return;
 				}
 
-				Modul mod = new Modul(modulnummer, name, credits, note, versuche, ablaufdatum, semester, typ);
+				Modul mod = new Modul(modulnummer, name, credits, note, versuche, ablaufdatum, prüfungsDatum, semester,
+						typ);
 				module.add(mod);
 			} catch (NumberFormatException | TypFormatException e) {
 				throw new CSVLeseException("Ungültiger Wert", i + 1);
