@@ -46,7 +46,7 @@ public class HTMLParser {
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		try {
-			inputStream = new FileInputStream("FH Aachen.html");
+			inputStream = new FileInputStream(path);
 
 			sc = new Scanner(inputStream, "UTF-8");
 			while (sc.hasNextLine()) {

@@ -12,6 +12,7 @@ public class Modul {
 	private Date ablaufdatum;
 	private int semester;
 	private Typ typ;
+	private float planNote;
 
 	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum, int semester,
 			Typ typ) {
@@ -23,6 +24,7 @@ public class Modul {
 		this.ablaufdatum = ablaufdatum;
 		this.semester = semester;
 		this.typ = typ;
+		this.planNote = 0;
 	}
 
 	public int getModulnummer() {
@@ -55,6 +57,14 @@ public class Modul {
 
 	public Typ getTyp() {
 		return typ;
+	}
+
+	public void setPlanNote(float planNote) {
+		this.planNote = planNote;
+	}
+
+	public float getPlanNote() {
+		return planNote;
 	}
 
 	@Override

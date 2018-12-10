@@ -11,7 +11,6 @@ import exceptions.TypFormatException;
 public class Benutzer {
 
 	private Studiengang studiengang;
-	private float[] planNoten;
 	private float wunschnote;
 
 	public Benutzer(List<List<String>> csvDaten, Map<String, String[]> htmlDaten) throws CSVLeseException {
@@ -63,7 +62,6 @@ public class Benutzer {
 			studiengang = new Studiengang(module, name, benötigteCredits, anzSemester, anzWahl, anzSoftskill,
 					maxVerbleibendeVersuche);
 			wunschnote = 0;
-			planNoten = new float[module.size()];
 		} catch (NumberFormatException e) {
 			throw new CSVLeseException("Ungültiger Wert", 1);
 		} catch (IndexOutOfBoundsException e) {
@@ -90,10 +88,9 @@ public class Benutzer {
 	public float durchschnitsPlanNote() {
 		float summe = 0;
 		float credits = 0;
-		for (int i = 0; i < planNoten.length; i++) {
-			Modul m = studiengang.getModul(i);
-			if (planNoten[i] != 0.0f && m.getTyp() != Typ.SOFTSKILL) {
-				summe += m.getCredits() * planNoten[i];
+		for (Modul m : studiengang.getModule()) {
+			if (m.isGeschrieben() && m.getTyp() != Typ.SOFTSKILL) {
+				summe += m.getCredits() * m.getPlanNote();
 				credits += m.getCredits();
 			}
 		}
@@ -113,22 +110,6 @@ public class Benutzer {
 
 	public float getWunschnote() {
 		return wunschnote;
-	}
-
-	public float getPlanNote(int i) {
-		return planNoten[i];
-	}
-
-	public void setPlanNote(int i, float f) {
-		planNoten[i] = f;
-	}
-
-	public float[] getPlanNoten() {
-		return planNoten;
-	}
-
-	public void setPlanNoten(float[] planNoten) {
-		this.planNoten = planNoten;
 	}
 
 	@Override
@@ -156,7 +137,7 @@ public class Benutzer {
 			s += String.format("%-60s", m.getName().substring(0, Math.min(m.getName().length(), 60))) + "|";
 			s += String.format("%-7s", m.getCredits()) + "|";
 			s += String.format("%-4s", m.getNote()) + "|";
-			s += String.format("%-10s", planNoten[i]) + "|";
+			s += String.format("%-10s", m.getPlanNote()) + "|";
 			s += String.format("%-8s", m.getVersuche()) + "|";
 			s += String.format("%-11s", m.getAblaufdatum()) + "|";
 			s += String.format("%-8s", m.getSemester()) + "|";
