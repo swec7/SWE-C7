@@ -47,12 +47,16 @@ public class Modul {
 		}
 	}
 
-	public void loadQIS(String[] htmlZeile) {
+	public void loadQIS(String[] htmlZeile) throws CSVLeseException {
 		if (htmlZeile == null) {
 			return;
 		}
-		note = Float.parseFloat(htmlZeile[2].replaceAll(",", "."));
-		versuche = Integer.parseInt(htmlZeile[4]);
+		try {
+			note = Float.parseFloat(htmlZeile[2].replaceAll(",", "."));
+			versuche = Integer.parseInt(htmlZeile[4]);
+		} catch (NumberFormatException e) {
+			throw new CSVLeseException("Ungültiger Wert", 0);
+		}
 	}
 
 	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum,
