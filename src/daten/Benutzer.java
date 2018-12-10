@@ -63,7 +63,7 @@ public class Benutzer {
 
 		s += "Studiengang: " + studiengang.getName();
 		s += "\nwunschnote: " + wunschnote;
-		s += "\nbenötigte Credits: " + studiengang.getBenoetigteCredits();
+		s += "\nbenoetigte Credits: " + studiengang.getBenoetigteCredits();
 		s += "\nanz. Semester: " + studiengang.getAnzSemester();
 		s += "\nanz. Wahlmodule: " + studiengang.getAnzWahl();
 		s += "\nanz. Softskill: " + studiengang.getAnzSoftskill();
