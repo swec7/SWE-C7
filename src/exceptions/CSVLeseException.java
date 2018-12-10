@@ -1,7 +1,7 @@
 package exceptions;
 
-public class CSVLeseException extends CSVException {
-	public CSVLeseException(String message, int zeile) {
-		super(message, zeile);
+public class CSVLeseException extends Exception {
+	public CSVLeseException(String message) {
+		super(message);
 	}
 }

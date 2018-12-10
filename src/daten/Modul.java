@@ -14,26 +14,13 @@ public class Modul {
 	private float note;
 	private int versuche;
 	private Date ablaufdatum;
-	private Date prüfungsDatum;
+	private Date pruefungsDatum;
 	private int semester;
 	private Typ typ;
 	private float planNote;
 
-	public Modul() {
-		modulnummer = 0;
-		name = null;
-		credits = 0;
-		note = 0;
-		versuche = 0;
-		ablaufdatum = null;
-		prüfungsDatum = null;
-		semester = 0;
-		typ = null;
-		planNote = 0;
-	}
-
 	public Modul(List<String> csvZeile) throws CSVLeseException {
-		this();
+		this(0, null, 0, 0, 0, null, null, 0, null, 0);
 		try {
 			modulnummer = Integer.parseInt(csvZeile.get(0));
 			name = csvZeile.get(1);
@@ -41,10 +28,24 @@ public class Modul {
 			semester = Integer.parseInt(csvZeile.get(2));
 			typ = Typ.parseTyp(csvZeile.get(4));
 		} catch (NumberFormatException | TypFormatException e) {
-			throw new CSVLeseException("Ungültiger Wert", 0);
+			throw new CSVLeseException("Ungültiger Wert");
 		} catch (IndexOutOfBoundsException e) {
-			throw new CSVLeseException("Fehlender Wert", 0);
+			throw new CSVLeseException("Fehlender Wert");
 		}
+	}
+
+	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum,
+			Date pruefungsDatum, int semester, Typ typ, float planNote) {
+		this.modulnummer = modulnummer;
+		this.name = name;
+		this.credits = credits;
+		this.note = note;
+		this.versuche = versuche;
+		this.ablaufdatum = ablaufdatum;
+		this.pruefungsDatum = pruefungsDatum;
+		this.semester = semester;
+		this.typ = typ;
+		this.planNote = planNote;
 	}
 
 	public void loadQIS(String[] htmlZeile) throws CSVLeseException {
@@ -55,22 +56,8 @@ public class Modul {
 			note = Float.parseFloat(htmlZeile[2].replaceAll(",", "."));
 			versuche = Integer.parseInt(htmlZeile[4]);
 		} catch (NumberFormatException e) {
-			throw new CSVLeseException("Ungültiger Wert", 0);
+			throw new CSVLeseException("Ungültiger Wert");
 		}
-	}
-
-	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum,
-			Date prüfungsDatum, int semester, Typ typ, float planNote) {
-		this.modulnummer = modulnummer;
-		this.name = name;
-		this.credits = credits;
-		this.note = note;
-		this.versuche = versuche;
-		this.ablaufdatum = ablaufdatum;
-		this.prüfungsDatum = prüfungsDatum;
-		this.semester = semester;
-		this.typ = typ;
-		this.planNote = planNote;
 	}
 
 	public int getModulnummer() {
@@ -97,8 +84,8 @@ public class Modul {
 		return ablaufdatum;
 	}
 
-	public Date getPrüfungsDatum() {
-		return prüfungsDatum;
+	public Date getPruefungsDatum() {
+		return pruefungsDatum;
 	}
 
 	public int getSemester() {

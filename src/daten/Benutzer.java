@@ -1,6 +1,5 @@
 package daten;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +11,8 @@ public class Benutzer {
 	private float wunschnote;
 
 	public Benutzer(List<List<String>> csvDaten, Map<String, String[]> htmlDaten) throws CSVLeseException {
-		List<Modul> module = new ArrayList<>();
-		for (List<String> zeile : csvDaten) {
-			Modul m = new Modul(zeile);
-			m.loadQIS(htmlDaten.get(Integer.toString(m.getModulnummer())));
-			module.add(m);
-		}
+		studiengang = new Studiengang(csvDaten, htmlDaten);
+		wunschnote = 0;
 	}
 
 	public float durchschnitsNote() {
@@ -68,7 +63,7 @@ public class Benutzer {
 
 		s += "Studiengang: " + studiengang.getName();
 		s += "\nwunschnote: " + wunschnote;
-		s += "\nbenötigte Credits: " + studiengang.getBenötigteCredits();
+		s += "\nbenötigte Credits: " + studiengang.getBenoetigteCredits();
 		s += "\nanz. Semester: " + studiengang.getAnzSemester();
 		s += "\nanz. Wahlmodule: " + studiengang.getAnzWahl();
 		s += "\nanz. Softskill: " + studiengang.getAnzSoftskill();
