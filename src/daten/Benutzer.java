@@ -72,9 +72,9 @@ public class Benutzer {
 		s += "durchschnitts Note: " + durchschnitsNote() + "\n";
 		s += "durchschnitts Plan-Note: " + durchschnitsPlanNote() + "\n\n";
 
-		s += "Modul Nr. |Name                                                        |Credits|Note|Plan  Note|Versuche|Ablaufdatum|Semester|Typ"
+		s += "Modul Nr. |Name                                                        |Credits|Note|Plan  Note|Versuche|Pruefungsdatum|Ablaufdatum|Semester|Typ"
 				+ "\n";
-		s += "----------+------------------------------------------------------------+-------+----+----------+--------+-----------+--------+-----------"
+		s += "----------+------------------------------------------------------------+-------+----+----------+--------+--------------+--------+-----------"
 				+ "\n";
 		for (int i = 0; i < studiengang.getModuleSize(); i++) {
 			Modul m = studiengang.getModul(i);
@@ -84,6 +84,7 @@ public class Benutzer {
 			s += String.format("%-4s", m.getNote()) + "|";
 			s += String.format("%-10s", m.getPlanNote()) + "|";
 			s += String.format("%-8s", m.getVersuche()) + "|";
+			s += String.format("%-14s", m.getPruefungsDatum()) + "|";
 			s += String.format("%-11s", m.getAblaufdatum()) + "|";
 			s += String.format("%-8s", m.getSemester()) + "|";
 			s += String.format("%-10s", m.getTyp());
