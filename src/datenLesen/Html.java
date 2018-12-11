@@ -5,7 +5,7 @@ import objekte.Studiengang;
 
 public class Html {
 
-	String pfad;
+	String pfadHtml;
 	
 	
 	
@@ -15,7 +15,7 @@ public class Html {
 	
 	Html(String pfad){
 		
-		this.pfad=pfad;
+		this.pfadHtml=pfad;
 		
 	}
 	
