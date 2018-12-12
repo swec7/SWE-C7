@@ -10,9 +10,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HTMLParser {
-
+	
 	public static Map<String, String[]> loadHTML(String path) throws IOException {
 		StringBuffer sb = new StringBuffer(5000);
+
+		Pattern course_name = Pattern.compile("align..left. colspan=.9.>\\s*(.*)<.th><.tr>");
+		Matcher course_name_matcher;
 
 		Pattern names = Pattern.compile("basic_1..([a-zA-Z]*)&nbsp;([a-zA-Z]*)");
 		Matcher name_matcher;
@@ -40,8 +43,9 @@ public class HTMLParser {
 		ArrayList<String> sstext = new ArrayList<String>();
 		ArrayList<String> pntext = new ArrayList<String>();
 
+		
 		String vorname = "", nachname = "", geburtsdatum = "", martikelnummer = "", pstring_text = "", p_dncv_text = "",
-				p_ss_text = "", p_pn_text = "";
+				p_ss_text = "", p_pn_text = "", course_n = "";
 
 		FileInputStream inputStream = null;
 		Scanner sc = null;
@@ -62,6 +66,7 @@ public class HTMLParser {
 			p_dncv_matcher = p_dncv.matcher(sb);
 			p_ss_matcher = p_ss.matcher(sb);
 			p_pn_matcher = p_pn.matcher(sb);
+			course_name_matcher = course_name.matcher(sb);
 
 			while (name_matcher.find()) {
 				// System.out.println("group 1: " + name_matcher.group(1));
@@ -90,7 +95,9 @@ public class HTMLParser {
 			while (p_pn_matcher.find()) {
 				p_pn_text = p_pn_text + "," + p_pn_matcher.group(1);
 			}
-
+			while (course_name_matcher.find()) {
+				course_n = course_name_matcher.group(1);
+			}
 			// note that Scanner suppresses exceptions
 			if (sc.ioException() != null) {
 				throw sc.ioException();
@@ -186,5 +193,41 @@ public class HTMLParser {
 
 		return output;
 	}
+
+	static String getCourseName(String path) {
+		
+		StringBuffer sb = new StringBuffer(5000);
+		String course_n = "";
+		Pattern course_name = Pattern.compile("align..left. colspan=.9.>\\s*(.*)<.th><.tr>");
+		Matcher course_name_matcher;
+
+		FileInputStream inputStream = null;
+		Scanner sc = null;
+		try {
+			inputStream = new FileInputStream(path);
+
+			sc = new Scanner(inputStream, "UTF-8");
+			while (sc.hasNextLine()) {
+				String line = sc.nextLine();
+				sb.append(line);
+				sb.append('\n');
+			}
+			course_name_matcher = course_name.matcher(sb);
+			while (course_name_matcher.find()) {
+				course_n = course_name_matcher.group(1);
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return course_n;
+	}
+			
+
+// TEST 
+//	public static void main(String[] args) {
+//
+//			System.out.println(getCourseName("Fh Aachen.html"));
+//
+//	}
 
 }
