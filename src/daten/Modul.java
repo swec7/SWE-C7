@@ -29,7 +29,7 @@ public class Modul {
 			semester = Integer.parseInt(csvZeile.get(2));
 			typ = Typ.parseTyp(csvZeile.get(4));
 		} catch (NumberFormatException | TypFormatException e) {
-			throw new CSVLeseException("Ungültiger Wert");
+			throw new CSVLeseException("Ungültiger Wert (" + e.getMessage() + ")");
 		} catch (IndexOutOfBoundsException e) {
 			throw new CSVLeseException("Fehlender Wert");
 		}
@@ -57,7 +57,10 @@ public class Modul {
 			note = Float.parseFloat(htmlZeile[2].replaceAll(",", "."));
 			versuche = Integer.parseInt(htmlZeile[4]);
 		} catch (NumberFormatException e) {
-			throw new HTMLLeseException("Ungültiger Wert");
+			for (int j = 0; j < htmlZeile.length; j++) {
+				System.out.println(htmlZeile[j]);
+			}
+			throw new HTMLLeseException("Ungültiger Wert (" + e.getMessage() + ")");
 		}
 	}
 

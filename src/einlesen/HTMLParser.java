@@ -9,8 +9,10 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import exceptions.HTMLLeseException;
+
 public class HTMLParser {
-	public static HTMLDaten loadHTML(String path) throws IOException {
+	public static HTMLDaten loadHTML(String path) throws IOException, HTMLLeseException {
 		StringBuffer sb = new StringBuffer(5000);
 
 		Pattern course_name = Pattern.compile("align..left. colspan=.9.>\\s*(.*)<.th><.tr>");
@@ -171,13 +173,15 @@ public class HTMLParser {
 		// vorname + " " + nachname + " " + geburtsdatum + " " +
 		// martikelnummer);
 
-		// for (int i = 0; i < rows; i++) {
-		// for (int j = 0; j < 8; j++) {
-		// System.out.print(strings[i][j] + "\t");
-		//
-		// }
-		// System.out.println();
-		// }
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < 8; j++) {
+				System.out
+						.print(String.format("%-10s", strings[i][j].substring(0, Math.min(strings[i][j].length(), 10)))
+								+ "|" + "\t");
+
+			}
+			System.out.println();
+		}
 
 		// von lukas
 		Map<String, String[]> map = new HashMap<>();
@@ -192,33 +196,34 @@ public class HTMLParser {
 		return new HTMLDaten(course_n, map);
 	}
 
-	static String getCourseName(String path) {
-
-		StringBuffer sb = new StringBuffer(5000);
-		String course_n = "";
-		Pattern course_name = Pattern.compile("align..left. colspan=.9.>\\s*(.*)<.th><.tr>");
-		Matcher course_name_matcher;
-
-		FileInputStream inputStream = null;
-		Scanner sc = null;
-		try {
-			inputStream = new FileInputStream(path);
-
-			sc = new Scanner(inputStream, "UTF-8");
-			while (sc.hasNextLine()) {
-				String line = sc.nextLine();
-				sb.append(line);
-				sb.append('\n');
-			}
-			course_name_matcher = course_name.matcher(sb);
-			while (course_name_matcher.find()) {
-				course_n = course_name_matcher.group(1);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return course_n;
-	}
+	// static String getCourseName(String path) {
+	//
+	// StringBuffer sb = new StringBuffer(5000);
+	// String course_n = "";
+	// Pattern course_name = Pattern.compile("align..left.
+	// colspan=.9.>\\s*(.*)<.th><.tr>");
+	// Matcher course_name_matcher;
+	//
+	// FileInputStream inputStream = null;
+	// Scanner sc = null;
+	// try {
+	// inputStream = new FileInputStream(path);
+	//
+	// sc = new Scanner(inputStream, "UTF-8");
+	// while (sc.hasNextLine()) {
+	// String line = sc.nextLine();
+	// sb.append(line);
+	// sb.append('\n');
+	// }
+	// course_name_matcher = course_name.matcher(sb);
+	// while (course_name_matcher.find()) {
+	// course_n = course_name_matcher.group(1);
+	// }
+	// } catch (Exception e) {
+	// // TODO: handle exception
+	// }
+	// return course_n;
+	// }
 
 	// TEST
 	// public static void main(String[] args) {

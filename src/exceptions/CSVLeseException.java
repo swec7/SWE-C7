@@ -1,7 +1,7 @@
 package exceptions;
 
 public class CSVLeseException extends Exception {
-	int zeile;
+	private int zeile;
 
 	public CSVLeseException(String message) {
 		super(message);
