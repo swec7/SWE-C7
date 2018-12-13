@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import exceptions.CSVLeseException;
+import exceptions.HTMLLeseException;
 
 public class Studiengang {
 	private List<Modul> module;
@@ -16,13 +17,19 @@ public class Studiengang {
 	private int anzSoftskill;
 	private int maxVerbleibendeVersuche;
 
-	public Studiengang(List<List<String>> csvDaten, Map<String, String[]> htmlDaten) throws CSVLeseException {
+	public Studiengang(List<List<String>> csvDaten, Map<String, String[]> htmlDaten)
+			throws CSVLeseException, HTMLLeseException {
 		this(null, null, 0, 0, 0, 0, 0);
 		module = new ArrayList<>();
 		for (int i = 1; i < csvDaten.size(); i++) {
-			Modul m = new Modul(csvDaten.get(i));
-			m.loadQIS(htmlDaten.get(Integer.toString(m.getModulnummer())));
-			module.add(m);
+			try {
+				Modul m = new Modul(csvDaten.get(i));
+				m.loadQIS(htmlDaten.get(Integer.toString(m.getModulnummer())));
+				module.add(m);
+			} catch (CSVLeseException e) {
+				e.beiZeile(i);
+				throw e;
+			}
 		}
 
 		// try {

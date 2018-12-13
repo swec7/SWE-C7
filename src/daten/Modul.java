@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import exceptions.CSVLeseException;
+import exceptions.HTMLLeseException;
 import exceptions.TypFormatException;
 
 public class Modul {
@@ -48,7 +49,7 @@ public class Modul {
 		this.planNote = planNote;
 	}
 
-	public void loadQIS(String[] htmlZeile) throws CSVLeseException {
+	public void loadQIS(String[] htmlZeile) throws HTMLLeseException {
 		if (htmlZeile == null) {
 			return;
 		}
@@ -56,7 +57,7 @@ public class Modul {
 			note = Float.parseFloat(htmlZeile[2].replaceAll(",", "."));
 			versuche = Integer.parseInt(htmlZeile[4]);
 		} catch (NumberFormatException e) {
-			throw new CSVLeseException("Ungültiger Wert");
+			throw new HTMLLeseException("Ungültiger Wert");
 		}
 	}
 

@@ -6,24 +6,26 @@ import java.util.List;
 import einlesen.CSVReader;
 import einlesen.HTMLDaten;
 import einlesen.HTMLParser;
-import exceptions.CSVFormattierungsException;
 import exceptions.CSVLeseException;
+import exceptions.HTMLLeseException;
 
 public class Benutzer {
 
 	private Studiengang studiengang;
 	private float wunschnote;
 
-	public Benutzer() throws CSVLeseException, IOException, CSVFormattierungsException {
-		HTMLDaten htmlDaten = HTMLParser.loadHTML("Fh Aachen.html");
-		List<List<String>> studiengaengeCSV = CSVReader.loadCsv("Studiengaenge.csv");
+	public Benutzer(String htmlPath, String csvPath) throws CSVLeseException, HTMLLeseException, IOException {
+		HTMLDaten htmlDaten = HTMLParser.loadHTML(htmlPath);
+		List<List<String>> studiengaengeCSV = CSVReader.loadCsv(csvPath);
 		List<List<String>> moduleCSV = null;
-		System.out.println(htmlDaten.getStudiengang());
 		for (int i = 1; i < studiengaengeCSV.size(); i++) {
 			if (htmlDaten.getStudiengang().equals(studiengaengeCSV.get(i).get(0))) {
-				System.out.println("loading");
 				moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
 			}
+		}
+
+		if (moduleCSV == null) {
+			throw new CSVLeseException("Es wurde kein Eintrag für " + htmlDaten.getStudiengang() + " gefunden.");
 		}
 
 		studiengang = new Studiengang(moduleCSV, htmlDaten.getMap());
