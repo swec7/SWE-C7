@@ -10,8 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class HTMLParser {
-	
-	public static Map<String, String[]> loadHTML(String path) throws IOException {
+	public static HTMLDaten loadHTML(String path) throws IOException {
 		StringBuffer sb = new StringBuffer(5000);
 
 		Pattern course_name = Pattern.compile("align..left. colspan=.9.>\\s*(.*)<.th><.tr>");
@@ -43,7 +42,6 @@ public class HTMLParser {
 		ArrayList<String> sstext = new ArrayList<String>();
 		ArrayList<String> pntext = new ArrayList<String>();
 
-		
 		String vorname = "", nachname = "", geburtsdatum = "", martikelnummer = "", pstring_text = "", p_dncv_text = "",
 				p_ss_text = "", p_pn_text = "", course_n = "";
 
@@ -182,20 +180,20 @@ public class HTMLParser {
 		// }
 
 		// von lukas
-		Map<String, String[]> output = new HashMap<>();
+		Map<String, String[]> map = new HashMap<>();
 		for (int x = 0; x < strings.length; x++) {
 			String[] string = new String[7];
 			for (int y = 1; y < strings[x].length; y++) {
 				string[y - 1] = strings[x][y];
 			}
-			output.put(strings[x][0], string);
+			map.put(strings[x][0], string);
 		}
 
-		return output;
+		return new HTMLDaten(course_n, map);
 	}
 
 	static String getCourseName(String path) {
-		
+
 		StringBuffer sb = new StringBuffer(5000);
 		String course_n = "";
 		Pattern course_name = Pattern.compile("align..left. colspan=.9.>\\s*(.*)<.th><.tr>");
@@ -216,18 +214,17 @@ public class HTMLParser {
 			while (course_name_matcher.find()) {
 				course_n = course_name_matcher.group(1);
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return course_n;
 	}
-			
 
-// TEST 
-//	public static void main(String[] args) {
-//
-//			System.out.println(getCourseName("Fh Aachen.html"));
-//
-//	}
+	// TEST
+	// public static void main(String[] args) {
+	//
+	// System.out.println(getCourseName("Fh Aachen.html"));
+	//
+	// }
 
 }
