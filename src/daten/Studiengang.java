@@ -17,7 +17,7 @@ public class Studiengang {
 	private int anzSoftskill;
 	private int maxVerbleibendeVersuche;
 
-	public Studiengang(List<List<String>> csvDaten, Map<String, String[]> htmlDaten)
+	public Studiengang(List<String> csv, List<List<String>> csvDaten, Map<String, String[]> htmlDaten)
 			throws CSVLeseException, HTMLLeseException {
 		this(null, null, 0, 0, 0, 0, 0);
 		module = new ArrayList<>();
@@ -26,24 +26,26 @@ public class Studiengang {
 				Modul m = new Modul(csvDaten.get(i));
 				m.loadQIS(htmlDaten.get(Integer.toString(m.getModulnummer())));
 				module.add(m);
+			} catch (HTMLLeseException e) {
+				throw e;
 			} catch (CSVLeseException e) {
 				e.beiZeile(i);
 				throw e;
 			}
 		}
 
-		// try {
-		// name = csvDaten.get(0).get(0);
-		// benoetigteCredits = Integer.parseInt(csvDaten.get(0).get(2));
-		// anzSemester = Integer.parseInt(csvDaten.get(0).get(1));
-		// anzWahl = Integer.parseInt(csvDaten.get(0).get(3));
-		// anzSoftskill = Integer.parseInt(csvDaten.get(0).get(4));
-		// maxVerbleibendeVersuche = 0;
-		// } catch (NumberFormatException e) {
-		// throw new CSVLeseException("Ungültiger Wert");
-		// } catch (IndexOutOfBoundsException e) {
-		// throw new CSVLeseException("Fehlender Wert");
-		// }
+		try {
+			name = csv.get(0);
+			benoetigteCredits = Integer.parseInt(csv.get(2));
+			anzSemester = Integer.parseInt(csv.get(1));
+			anzWahl = Integer.parseInt(csv.get(3));
+			anzSoftskill = Integer.parseInt(csv.get(4));
+			maxVerbleibendeVersuche = 0;
+		} catch (NumberFormatException e) {
+			throw new CSVLeseException("Ungültiger Wert");
+		} catch (IndexOutOfBoundsException e) {
+			throw new CSVLeseException("Fehlender Wert");
+		}
 
 	}
 

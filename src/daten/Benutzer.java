@@ -18,17 +18,19 @@ public class Benutzer {
 		HTMLDaten htmlDaten = HTMLParser.loadHTML(htmlPath);
 		List<List<String>> studiengaengeCSV = CSVReader.loadCsv(csvPath);
 		List<List<String>> moduleCSV = null;
-		for (int i = 1; i < studiengaengeCSV.size(); i++) {
+		int i = 0;
+		for (i = 1; i < studiengaengeCSV.size(); i++) {
 			if (htmlDaten.getStudiengang().equals(studiengaengeCSV.get(i).get(0))) {
-				moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
+				break;
 			}
 		}
+		moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
 
 		if (moduleCSV == null) {
 			throw new CSVLeseException("Es wurde kein Eintrag für " + htmlDaten.getStudiengang() + " gefunden.");
 		}
 
-		studiengang = new Studiengang(moduleCSV, htmlDaten.getMap());
+		studiengang = new Studiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap());
 		wunschnote = 0;
 	}
 
