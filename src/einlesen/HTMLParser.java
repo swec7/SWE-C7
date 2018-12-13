@@ -96,6 +96,17 @@ public class HTMLParser {
 			while (course_name_matcher.find()) {
 				course_n = course_name_matcher.group(1);
 			}
+			
+			if(vorname.isEmpty())vorname = "00000";
+			if(nachname.isEmpty())nachname = "00000";
+			if(geburtsdatum.isEmpty())geburtsdatum = "00000";
+			if(pstring_text.isEmpty())pstring_text = "00000";
+			if(p_dncv_text.isEmpty())p_dncv_text = "00000";
+			if(p_ss_text.isEmpty())p_ss_text = "00000";
+			if(p_pn_text.isEmpty())p_pn_text = "00000";
+			if(course_n.isEmpty())course_n = "00000";
+			if(martikelnummer.isEmpty())martikelnummer = "00000";
+			
 			// note that Scanner suppresses exceptions
 			if (sc.ioException() != null) {
 				throw sc.ioException();
@@ -220,11 +231,11 @@ public class HTMLParser {
 		return course_n;
 	}
 
-	// TEST
-	// public static void main(String[] args) {
-	//
-	// System.out.println(getCourseName("Fh Aachen.html"));
-	//
-	// }
+//	 //TEST
+//	 public static void main(String[] args) {
+//	
+//	 System.out.println(getCourseName("Fh Aachen.html"));
+//	
+//	 }
 
 }
