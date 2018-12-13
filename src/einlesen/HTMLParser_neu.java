@@ -8,13 +8,15 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.plaf.synth.SynthSplitPaneUI;
+
 public class HTMLParser_neu {
 
 	static StringBuffer sb = new StringBuffer(5000);
 
 	final static String regex = "<tr>\\s.*\\s*(\\d*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)";
 	
-
+	static boolean empty_ = true;
 
 	
 	
@@ -30,7 +32,7 @@ public class HTMLParser_neu {
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		try {
-			inputStream = new FileInputStream("FH Aachen.html");
+			inputStream = new FileInputStream("FH Aachen 3.html");
 
 			sc = new Scanner(inputStream, "UTF-8");
 			while (sc.hasNextLine()) {
@@ -43,6 +45,7 @@ public class HTMLParser_neu {
 
 		while (matcher.find()) {
 			//System.out.println("Full match: " + matcher.group(0));
+			if(empty_)empty_ = false;
 			for (int i = 1; i <= matcher.groupCount(); i++) {
 				if(i == 1)System.out.println();
 				System.out.println("Group " + i + ": " + matcher.group(i));
@@ -52,8 +55,10 @@ public class HTMLParser_neu {
 	}
 
 	}catch (Exception e) {
-		// TODO: handle exception
+		System.out.println("EXCEPTION");
 	}
 	
+		if(empty_)System.out.println("NO Entrys found!");
+		
 	}
 }
