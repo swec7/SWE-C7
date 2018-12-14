@@ -80,13 +80,12 @@ public class Modul {
 			return;
 		}
 		try {
-			note = Float.parseFloat(htmlZeile[2].replaceAll(",", "."));
-			versuche = Integer.parseInt(htmlZeile[4]);
+			note = Float.parseFloat(htmlZeile[3].replaceAll(",", "."));
+			versuche = (int) Float.parseFloat(htmlZeile[3].replaceAll(",", "."));
 		} catch (NumberFormatException e) {
-			for (int j = 0; j < htmlZeile.length; j++) {
-				System.out.println(htmlZeile[j]);
-			}
-			throw new HTMLLeseException("Ungültiger Wert (" + e.getMessage() + ")");
+			e.printStackTrace();
+			throw new HTMLLeseException(
+					"Ungültiger Wert (" + e.getMessage() + ")\"" + note + "\"+\"" + versuche + "\"");
 		}
 	}
 

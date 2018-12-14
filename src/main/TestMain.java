@@ -7,7 +7,7 @@ import exceptions.CSVLeseException;
 import exceptions.HTMLLeseException;
 
 public class TestMain {
-	public static final String HTML_PATH = "FHAachenAasdfd.htm";
+	public static final String HTML_PATH = "FHAachen.html";
 	public static final String CSV_PATH = "studiengaenge.csv";
 
 	public static void main(String[] args) throws IOException, CSVLeseException, HTMLLeseException {
