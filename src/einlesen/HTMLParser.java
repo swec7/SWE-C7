@@ -110,4 +110,47 @@ public class HTMLParser {
 		sc.close();
 		return course_n;
 	}
+
+	// static boolean empty_ = true;
+	//
+	// public static void main(String[] args) {
+	//
+	// final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+	// String string = null;
+	//
+	// FileInputStream inputStream = null;
+	// Scanner sc = null;
+	// try {
+	// inputStream = new FileInputStream("FHAachen.html");
+	//
+	// sc = new Scanner(inputStream, "UTF-8");
+	// while (sc.hasNextLine()) {
+	// String line = sc.nextLine();
+	// sb.append(line);
+	// sb.append('\n');
+	// }
+	//
+	// final Matcher matcher = pattern.matcher(sb);
+	//
+	// while (matcher.find()) {
+	// // System.out.println("Full match: " + matcher.group(0));
+	// if (empty_)
+	// empty_ = false;
+	// for (int i = 1; i <= matcher.groupCount(); i++) {
+	// if (i == 1)
+	// System.out.println();
+	// System.out.println("Group " + i + ": " + matcher.group(i));
+	// }
+	//
+	// }
+	//
+	// } catch (Exception e) {
+	// System.out.println("EXCEPTION");
+	// e.printStackTrace();
+	// }
+	//
+	// if (empty_)
+	// System.out.println("NO Entrys found!");
+	//
+	// }
 }
