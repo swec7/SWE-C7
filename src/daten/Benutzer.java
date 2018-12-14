@@ -9,11 +9,29 @@ import einlesen.HTMLParser;
 import exceptions.CSVLeseException;
 import exceptions.HTMLLeseException;
 
+/**
+ * Speichert alle daten die für alle taps relevfant sein können.
+ *
+ */
 public class Benutzer {
 
 	private Studiengang studiengang;
 	private float wunschnote;
 
+	/**
+	 * initialisiert den Benutzer mit den angegebenen html und csv daten.
+	 * 
+	 * @param htmlPath
+	 *            der Pfad zu der html datei
+	 * @param csvPath
+	 *            der Pfad zu der csv datei mit allen Studiengängen
+	 * @throws CSVLeseException
+	 *             wenn beim parsen einer CSV ein fehler auftritt.
+	 * @throws HTMLLeseException
+	 *             wenn beim lesen der html datein ein fehler auftritt
+	 * @throws IOException
+	 *             wenn beim laden einer datei ein fehler auftritt.
+	 */
 	public Benutzer(String htmlPath, String csvPath) throws CSVLeseException, HTMLLeseException, IOException {
 		HTMLDaten htmlDaten = HTMLParser.loadHTML(htmlPath);
 		List<List<String>> studiengaengeCSV = CSVReader.loadCsv(csvPath);
@@ -34,6 +52,13 @@ public class Benutzer {
 		wunschnote = 0;
 	}
 
+	/**
+	 * Berechnet die durchschnitts Note der Module. Module mit mehr Credits
+	 * werden stärker gewichtet. Module ohne Note oder Softskill Module werden
+	 * nicht beachtet.
+	 * 
+	 * @return summe(note*credits)/summe(credits)
+	 */
 	public float durchschnitsNote() {
 		float summe = 0;
 		float credits = 0;
@@ -49,6 +74,13 @@ public class Benutzer {
 		return summe / credits;
 	}
 
+	/**
+	 * Berechnet die durchschnitts Note aus den Plan-Moten der Module. Module
+	 * mit mehr Credits werden stärker gewichtet. Module ohne Plan-Note oder
+	 * Softskill Module werden nicht beachtet.
+	 * 
+	 * @return summe(planNote*credits)/summe(credits)
+	 */
 	public float durchschnitsPlanNote() {
 		float summe = 0;
 		float credits = 0;

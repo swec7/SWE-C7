@@ -12,11 +12,27 @@ import java.util.List;
 
 import exceptions.CSVLeseException;
 
+/**
+ * lieﬂt eine csv datei ein und speichert die daten in einer List<List<String>>.
+ * die ‰uﬂereliste speichert die zeilen und die inneren die spalten in ihnen.
+ *
+ */
 public class CSVReader {
 	private static final char SEPERATOR1 = ',';
 	private static final char SEPERATOR2 = ';';
 	private static final char QUOTE = '"';
 
+	/**
+	 * L‰dt die angegebene datei.
+	 * 
+	 * @param path
+	 *            der pfad zu der enzulesenden datei.
+	 * @return den inhalt der datein in form von zwei verschachtelten listen.
+	 * @throws IOException
+	 *             wenn beim Laden der Datei ein fehler auftritt.
+	 * @throws CSVLeseException
+	 *             wenn beim Parsen der datei ein fehler auftritt.
+	 */
 	public static List<List<String>> loadCsv(String path) throws IOException, CSVLeseException {
 		BufferedReader br = new BufferedReader(
 				new InputStreamReader(new FileInputStream(path), StandardCharsets.UTF_8.name()));

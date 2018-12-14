@@ -11,7 +11,24 @@ import java.util.regex.Pattern;
 
 import exceptions.HTMLLeseException;
 
+/**
+ * ließt eine html datei ein und speichert die daten in einer instaz von
+ * HTMLDaten.
+ *
+ */
 public class HTMLParser {
+	/**
+	 * lädt die angegebene datei und gibt ein Obejct von HTMLDaten zurück
+	 * welches alle eingelesenen Informationen enthällt.
+	 * 
+	 * @param path
+	 *            der pfad zu der einzulesenden datei
+	 * @return ein HTMLDaten obejct mit allen eingelesenen Informationen.
+	 * @throws IOException
+	 *             wenn beim laden der datei ein fehler auftritt.
+	 * @throws HTMLLeseException
+	 *             wenn beim paresen der datei ein fehler auftritt.
+	 */
 	public static HTMLDaten loadHTML(String path) throws IOException, HTMLLeseException {
 		StringBuffer sb = new StringBuffer(5000);
 
@@ -98,17 +115,26 @@ public class HTMLParser {
 			while (course_name_matcher.find()) {
 				course_n = course_name_matcher.group(1);
 			}
-			
-			if(vorname.isEmpty())vorname = "00000";
-			if(nachname.isEmpty())nachname = "00000";
-			if(geburtsdatum.isEmpty())geburtsdatum = "00000";
-			if(pstring_text.isEmpty())pstring_text = "00000";
-			if(p_dncv_text.isEmpty())p_dncv_text = "00000";
-			if(p_ss_text.isEmpty())p_ss_text = "00000";
-			if(p_pn_text.isEmpty())p_pn_text = "00000";
-			if(course_n.isEmpty())course_n = "00000";
-			if(martikelnummer.isEmpty())martikelnummer = "00000";
-			
+
+			if (vorname.isEmpty())
+				vorname = "00000";
+			if (nachname.isEmpty())
+				nachname = "00000";
+			if (geburtsdatum.isEmpty())
+				geburtsdatum = "00000";
+			if (pstring_text.isEmpty())
+				pstring_text = "00000";
+			if (p_dncv_text.isEmpty())
+				p_dncv_text = "00000";
+			if (p_ss_text.isEmpty())
+				p_ss_text = "00000";
+			if (p_pn_text.isEmpty())
+				p_pn_text = "00000";
+			if (course_n.isEmpty())
+				course_n = "00000";
+			if (martikelnummer.isEmpty())
+				martikelnummer = "00000";
+
 			// note that Scanner suppresses exceptions
 			if (sc.ioException() != null) {
 				throw sc.ioException();
@@ -236,11 +262,11 @@ public class HTMLParser {
 	// return course_n;
 	// }
 
-//	 //TEST
-//	 public static void main(String[] args) {
-//	
-//	 System.out.println(getCourseName("Fh Aachen.html"));
-//	
-//	 }
+	// //TEST
+	// public static void main(String[] args) {
+	//
+	// System.out.println(getCourseName("Fh Aachen.html"));
+	//
+	// }
 
 }

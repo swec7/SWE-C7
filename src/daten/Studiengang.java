@@ -17,6 +17,14 @@ public class Studiengang {
 	private int anzSoftskill;
 	private int maxVerbleibendeVersuche;
 
+	/**
+	 * 
+	 * @param csv
+	 * @param csvDaten
+	 * @param htmlDaten
+	 * @throws CSVLeseException
+	 * @throws HTMLLeseException
+	 */
 	public Studiengang(List<String> csv, List<List<String>> csvDaten, Map<String, String[]> htmlDaten)
 			throws CSVLeseException, HTMLLeseException {
 		this(null, null, 0, 0, 0, 0, 0);

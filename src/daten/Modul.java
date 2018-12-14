@@ -7,6 +7,11 @@ import exceptions.CSVLeseException;
 import exceptions.HTMLLeseException;
 import exceptions.TypFormatException;
 
+/**
+ * Speichert alle daten die über ein modul verfügbar sind. nur die wunschnote
+ * ist veränderbar.
+ *
+ */
 public class Modul {
 
 	private int modulnummer;
@@ -20,6 +25,15 @@ public class Modul {
 	private Typ typ;
 	private float planNote;
 
+	/**
+	 * initialisiert das modul mit den werten aus einer csv zeile. um daten aus
+	 * einer html datein hinzuzufügen muss loadQIS() benutzt werden
+	 * 
+	 * @param csvZeile
+	 *            die geparste zeile aus der csv datei
+	 * @throws CSVLeseException
+	 *             wenn beim lesen der CSV daten ein Fehler auftritt.
+	 */
 	public Modul(List<String> csvZeile) throws CSVLeseException {
 		this(0, null, 0, 0, 0, null, null, 0, null, 0);
 		try {
@@ -35,6 +49,9 @@ public class Modul {
 		}
 	}
 
+	/**
+	 * initialisiert das modul mit den gegebenen werten.
+	 */
 	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum,
 			Date pruefungsDatum, int semester, Typ typ, float planNote) {
 		this.modulnummer = modulnummer;
@@ -49,6 +66,15 @@ public class Modul {
 		this.planNote = planNote;
 	}
 
+	/**
+	 * läd die daten aus einer html datei
+	 * 
+	 * @param htmlZeile
+	 *            die geparste zeile aus der html datei (eine zeile aus der
+	 *            tabelle)
+	 * @throws HTMLLeseException
+	 *             wenn beim lesen der HTML daten ein Fehler auftritt.
+	 */
 	public void loadQIS(String[] htmlZeile) throws HTMLLeseException {
 		if (htmlZeile == null) {
 			return;

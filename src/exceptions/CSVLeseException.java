@@ -1,5 +1,10 @@
 package exceptions;
 
+/**
+ * wird geworfen wenn beim einlesen oder parsen einer csv datei ein fehler
+ * auftritt.
+ *
+ */
 public class CSVLeseException extends Exception {
 	private int zeile;
 
