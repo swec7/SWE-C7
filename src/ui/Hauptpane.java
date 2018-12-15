@@ -10,7 +10,6 @@ import javafx.scene.text.Text;
 
 public class Hauptpane extends BorderPane {
 	private Text activeText;
-	private QisTab activeTab;
 	public Hauptpane(HostServices services){
 		//this.setMinSize(800, 600);
 		this.setPrefSize(800, 600);
@@ -25,6 +24,7 @@ public class Hauptpane extends BorderPane {
 		Text startText = new Text("Start");
 		startText.getStyleClass().add("tabtext");
 		hStart.getChildren().add(startText);
+		startText.getStyleClass().add("pressed");
 		activeText = startText;
 		
 		HBox hUebersicht = new HBox();

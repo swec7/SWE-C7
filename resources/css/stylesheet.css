@@ -37,11 +37,18 @@ Text{
 }
 Label{
 	-fx-font-family: 'sans-serif';
+	-fx-font-size: 14px;
 }
+WrapLabel{
+	-fx-font-family: 'sans-serif';
+	-fx-font-size: 14px;
+}
+
 Hyperlink{
 	-fx-font-family: 'sans-serif';
 	-fx-border-width: 0 0 0 0;
 	-fx-padding: 0 0 0 0;
+	-fx-font-size: 14px;
 }
 
 .tab {
@@ -54,6 +61,47 @@ Hyperlink{
 
 .ueberschrift{
 	-fx-font-size: 24 px;
+}
+
+
+Button{
+	-fx-border-color: grey;	
+	-fx-background-color: #EEEEEE; 
 	
+	-fx-border-width: 1 1 1 1;
+	-fx-border-radius: 5 5 5 5;
+	-fx-background-radius: 5 5 5 5;
+	
+	-fx-focus-color: transparent;
+	-fx-faint-focus-color: transparent;
+}
+
+Button:hover{
+	-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.2) , 10, 0.0 , 2 , 2 );
+}
+Button:pressed {
+	-fx-background-color: #DEDEDE;
+}
+
+
+.importBtn{
+	-fx-border-width: 1 1 1 1;
+	-fx-border-radius: 0 5 5 0;
+	-fx-background-radius: 0 5 5 0;
+
+	-fx-focus-color: transparent;
+	-fx-faint-focus-color: transparent;
+}
+
+
+
+.importTf{
+	-fx-border-width: 1 1 1 1;
+	-fx-border-radius: 5 0 0 5;
+	-fx-background-radius: 5 0 0 5;
+	-fx-border-color: grey;	
+	-fx-focus-color: transparent;
+	-fx-faint-focus-color: transparent;
+
 	
 }
