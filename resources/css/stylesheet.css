@@ -1,14 +1,59 @@
 .box{
-	-fx-border-width: 1 1 0 ;
+	-fx-border-width: 0 1 0 ;
 	-fx-border-color: grey;	
+	-fx-background-color: white;
 }
 
 .tabtext{
 	-fx-font-size: 16px;
 }
 
+.border{
+	-fx-border-width: 1 1 1 1;
+	-fx-border-color: grey;
+}
+
+.ueberschriftBox{
+	-fx-border-width: 0 0 1 ;
+	-fx-border-color: grey;	
+	-fx-padding: 10 10 10;
+	-fx-background-color: white;
+}
 
 .tabbox:hover .tabtext{
-	-fx-font-size: 16px;
-	-fx-fill: blue;
+	-fx-fill: #00b5ad;
+}
+
+.pressed{
+	-fx-fill: #00b5ad;
+}
+
+BorderPane{
+	-fx-background-color: white;
+}
+
+Text{
+	-fx-font-family: 'sans-serif';
+}
+Label{
+	-fx-font-family: 'sans-serif';
+}
+Hyperlink{
+	-fx-font-family: 'sans-serif';
+	-fx-border-width: 0 0 0 0;
+	-fx-padding: 0 0 0 0;
+}
+
+.tab {
+	-fx-background-image: url("logo.png");
+	-fx-background-position: right 10%;
+	-fx-background-repeat: no-repeat;
+	-fx-background-color: white;
+}
+
+
+.ueberschrift{
+	-fx-font-size: 24 px;
+	
+	
 }

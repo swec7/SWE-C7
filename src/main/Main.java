@@ -12,7 +12,7 @@ public class Main extends Application{
 
 		@Override
 		public void start(Stage primaryStage) throws Exception {
-			Hauptpane pane = new Hauptpane();
+			Hauptpane pane = new Hauptpane(getHostServices());
 			Scene scene = new Scene(pane);
 			scene.getStylesheets().add("/css/stylesheet.css");
 //			scene.getStylesheets().add(getClass().getResource("/SWE-C7/resources/css/stylesheet.css").toExternalForm());
@@ -24,6 +24,7 @@ public class Main extends Application{
 			primaryStage.setMinWidth(800);
 			primaryStage.setWidth(800);
 			primaryStage.show();
+			
 		}
 
 }
