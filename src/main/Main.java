@@ -7,17 +7,23 @@ import ui.Hauptpane;
 
 public class Main extends Application{
 		public static void main(String[] args) {
-			launch(args);
+			launch(args); 	// führt start(Stage primaryStage) aus
 		}
 
+		/**
+		 * @param Stage 
+		 */
+		
 		@Override
 		public void start(Stage primaryStage) throws Exception {
+			/*
+			 * HostServices (Abrufbar von Application) ermöglicht öffnen des Browsers in start tab
+			 */
 			Hauptpane pane = new Hauptpane(getHostServices());
 			Scene scene = new Scene(pane);
 			scene.getStylesheets().add("/css/stylesheet.css");
-//			scene.getStylesheets().add(getClass().getResource("/SWE-C7/resources/css/stylesheet.css").toExternalForm());
 
-			primaryStage.setTitle("QIS");
+			primaryStage.setTitle("QIS Klausurplaner");
 			primaryStage.setScene(scene);
 			primaryStage.setMinHeight(600);
 			primaryStage.setHeight(600);

@@ -9,21 +9,22 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class Hauptpane extends BorderPane {
-	private Text activeText;
+	
+	private Text activeText; 	//Text des aktiven Tabs. Befindet sich innerhalb der klickbaren HBox
+	
 	public Hauptpane(HostServices services){
-		//this.setMinSize(800, 600);
 		this.setPrefSize(800, 600);
 		VBox box = new VBox();
-		box.getStyleClass().add("box");
+		box.getStyleClass().add("box"); 	// Fügt dem Object eine style Class aus der CSS datei hinzu
 		box.setPrefSize(200, 600);
 		box.setMaxWidth(200);
 		HBox hStart = new HBox();
 		hStart.getStyleClass().add("tabbox");
-		hStart.setAlignment(Pos.CENTER);
+		hStart.setAlignment(Pos.CENTER);	// Positioniert Elemente in der Mitte der von der Box zugeteilten Fläche
 		hStart.setPrefSize(200, 100);
 		Text startText = new Text("Start");
 		startText.getStyleClass().add("tabtext");
-		hStart.getChildren().add(startText);
+		hStart.getChildren().add(startText);	// Fügt einem JavaFX Object Objects hinzu
 		startText.getStyleClass().add("pressed");
 		activeText = startText;
 		
@@ -52,16 +53,16 @@ public class Hauptpane extends BorderPane {
 		hKalkulator.getChildren().add(kalkulatorText);
 		
 		StartTab start = new StartTab();
-		start.setHostServices(services);
-		QisTab uebersicht = new QisTab();
+		start.setHostServices(services);	// setzt die HostServices für das Tab (wird beim Hyperlink benötigt)
+		UebersichtTab uebersicht = new UebersichtTab();
 		QisTab klausuren = new QisTab();
 		QisTab kalkulator = new QisTab();
 
-		hStart.setOnMouseClicked(event ->{
-			activeText.getStyleClass().remove("pressed");
+		hStart.setOnMouseClicked(event ->{		// Gibt der HBox das ClickEvent
+			activeText.getStyleClass().remove("pressed");	//entfernt den Style des Texts zum aktiiven Tab
 			activeText = startText;
 			startText.getStyleClass().add("pressed");	
-			this.setCenter(start);
+			this.setCenter(start);							// Wechselt Tab
 		});
 		
 		hUebersicht.setOnMouseClicked(event ->{

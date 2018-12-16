@@ -19,26 +19,22 @@ import javafx.scene.text.Text;
 public class StartTab extends QisTab{
 	public StartTab(){
 		
-		this.setPadding(new Insets(20, 20, 20, 20));
-		this.setVgap(20);
-		this.setHgap(20);
 		GridPane anleitungBox = new GridPane();
 		anleitungBox.setHgap(10);
 		anleitungBox.setVgap(10);
 		anleitungBox.getStyleClass().add("border");
 		anleitungBox.setPadding(new Insets(15));
-		GridPane.setMargin(anleitungBox, new Insets(0, 60, 0, 0));
+		GridPane.setMargin(anleitungBox, new Insets(0, 60, 0, 0)); 	//setzt margin Für die Anleitung (Berührt nicht das Logo)
 		
 		Label z1 = new Label("1.");
-		GridPane.setValignment(z1, VPos.TOP);
+		GridPane.setValignment(z1, VPos.TOP); 
 		HBox anleitungZ1 = new HBox();
 		
 		Label anleitung1_1 = new Label("Melden Sie sich im ");
 		anleitung1_1.setMinWidth(Region.USE_PREF_SIZE);
 		Hyperlink qisLink = new Hyperlink("QIS");
 		qisLink.setOnAction((ActionEvent event)->{
-			super.getHostServices().showDocument("https://www.qis.fh-aachen.de");
-			
+			super.getHostServices().showDocument("https://www.qis.fh-aachen.de"); 	// Öffnet den Browser zur QIS-Seite		
 		});
 		qisLink.setMinWidth(Region.USE_PREF_SIZE);
 //		qisLink.setWrapText(true);
@@ -68,7 +64,7 @@ public class StartTab extends QisTab{
 		anleitungBox.addRow(1, z2, anleitung2);
 		anleitungBox.addRow(2, z3,anleitung3);
 		anleitungBox.addRow(3, z4, anleitung4);
-		GridPane.setHgrow(anleitungBox, Priority.ALWAYS);
+		GridPane.setHgrow(anleitungBox, Priority.ALWAYS); // Gibt an ob das Element bei resizing Horizontal größer werden soll/darf 
 		
 //		GridPane.setMargin(anleitungBox, new Insets(20, 0, 0, 20));
 //		anleitungBox.getChildren().addAll(anleitungZ1, anleitung2);

@@ -105,3 +105,15 @@ Button:pressed {
 
 	
 }
+
+.rowGrey{
+	-fx-background-color: grey;
+}
+
+.rowRed{
+	-fx-background-color: indianred ;
+}
+
+.rowGreen{
+	-fx-background-color: lightgreen;
+}
