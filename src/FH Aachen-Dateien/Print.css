@@ -1,0 +1,93 @@
+/*
+$Log: Print.css,v $
+Revision 2.9  2011-09-05 15:03:29  schaefer#his.de
+Print-Formatierungen für den Konfliktplan in LSF
+
+Revision 2.8  2010-03-10 14:02:39  monente-helber#his.de
+import von QisDesign.css entfernt
+
+Revision 2.7  2007/12/06 08:58:37  monente
+Ersatz von LSFServlet.css durch QISDesign.css
+
+Revision 2.6  2005/04/02 17:06:28  brummermann
+grauen Hintergrund nicht mit ausdrucken
+
+Revision 2.5  2004/07/12 11:33:32  bolte
+Gruene Warnung ist jetzt dunkler
+
+Revision 2.4  2004/02/26 12:49:05  brummermann
+Bugfix: .input auch im Ausdruck anzeigen, dafuer .submit nicht mehr.
+
+Revision 2.3  2004/02/08 14:40:25  brummermann
+importiert jetzt LSFServlet.css, damit die Regel nicht mehr doppelt gepflegt werden muessen
+
+*/
+
+
+body {background-color: #FFF}
+
+.menu1_off,
+.menu1_on,
+.menu2_off,
+.menu2_on,
+.button,
+.submit,
+.kleinerButton {display:none;}
+
+.noprint {
+display:none;
+}
+
+/*****************************************************************************/
+/*                            Konfliktplan                                   */
+/*****************************************************************************/
+td.woch, td.Einzel, td.Block, td.BlockSa, td.BlockSaSo, td.twoWeek, td.conflict, td.plan_default, td.no_color, td.trenn_row{
+  width:1em;   
+}
+/*
+tr.conflictplan_row{
+  background-color:transparent;
+  margin:0;
+  padding:0;
+}
+tr.conflictplan_row:hover{
+  background-color:#C0C0C0;  
+}
+*/
+.trenn_row{
+  background-color: #808080;
+}
+.woch{
+  background-color: #BCDFF6;
+  text-align:center;
+}
+.Einzel{
+  background-color:#FAFAFA;
+  text-align:center;
+}
+.Block, .BlockSa, .BlockSaSo{
+  background-color:#FAFAFA;
+  text-align:center;
+}
+.twoWeek{
+  background-color:#E8BFB0;
+  text-align:center;
+}
+.conflict{
+  background-color: #ff0000;
+  color:#fff;
+  text-align:center;
+}
+.plan_default{
+  background-color: #dbdde9;
+  text-align:center;
+}
+.no_color{
+  /*border: 1px solid #C0C0C0;*/
+  background-color: #C0C0C0;
+  text-align:center;
+}
+a.conflictplan{
+  width:100%;
+  height:100%;
+}
