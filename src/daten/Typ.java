@@ -23,5 +23,9 @@ public enum Typ {
 		}
 		throw new TypFormatException();
 	}
+	
+	public String getTyp() {
+		return symbol;
+	}
 
 }

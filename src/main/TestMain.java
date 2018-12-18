@@ -11,6 +11,8 @@ public class TestMain {
 	public static final String CSV_PATH = "studiengaenge.csv";
 
 	public static void main(String[] args) throws IOException, CSVLeseException, HTMLLeseException {
-		System.out.println(new Benutzer(HTML_PATH, CSV_PATH));
+		Benutzer benutzer = new Benutzer(HTML_PATH, CSV_PATH);
+		System.out.println(benutzer);
+		System.out.println(benutzer.wunschnotenrechner(3.3f));
 	}
 }

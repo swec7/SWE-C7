@@ -25,13 +25,25 @@ public class Studiengang {
 	 * @throws CSVLeseException
 	 * @throws HTMLLeseException
 	 */
-	public Studiengang(List<String> csv, List<List<String>> csvDaten, Map<String, String[]> htmlDaten)
+	public Studiengang(List<String> csv, List<List<String>> csvDaten, List<List<String>> csvWahlSoft, Map<String, String[]> htmlDaten)
 			throws CSVLeseException, HTMLLeseException {
 		this(null, null, 0, 0, 0, 0, 0);
 		module = new ArrayList<>();
 		for (int i = 1; i < csvDaten.size(); i++) {
 			try {
 				Modul m = new Modul(csvDaten.get(i));
+				m.loadQIS(htmlDaten.get(Integer.toString(m.getModulnummer())));
+				module.add(m);
+			} catch (HTMLLeseException e) {
+				throw e;
+			} catch (CSVLeseException e) {
+				e.beiZeile(i);
+				throw e;
+			}
+		}
+		for (int i = 1; i < csvWahlSoft.size(); i++) {
+			try {
+				Modul m = new Modul(csvWahlSoft.get(i));
 				m.loadQIS(htmlDaten.get(Integer.toString(m.getModulnummer())));
 				module.add(m);
 			} catch (HTMLLeseException e) {
