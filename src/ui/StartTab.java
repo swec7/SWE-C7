@@ -6,11 +6,14 @@ import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 
 
 public class StartTab extends QisTab{
@@ -99,6 +102,28 @@ public class StartTab extends QisTab{
 		});
 		this.add(upload, 1, 1);
 		
+		HBox versucheBox = new HBox();
+		versucheBox.setSpacing(15.0);
+		Text versucheTx = new Text("Verbesserungsversuche:");
+		versucheTx.getStyleClass().add("tabtext");
+
+		ToggleGroup versucheGr = new ToggleGroup();
+		
+		RadioButton v0 = new RadioButton("0");
+		v0.setToggleGroup(versucheGr);
+		v0.setSelected(true);
+		
+		RadioButton v1 = new RadioButton("1");
+		v1.setToggleGroup(versucheGr);
+		
+		RadioButton v2 = new RadioButton("2");
+		v2.setToggleGroup(versucheGr);
+		
+		RadioButton v3 = new RadioButton("3");
+		v3.setToggleGroup(versucheGr);
+		
+		versucheBox.getChildren().addAll(versucheTx, v0, v1, v2, v3);
+		this.add(versucheBox, 0, 2);
 //		this.setGridLinesVisible(true);
 	}
 	
