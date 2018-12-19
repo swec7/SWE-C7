@@ -80,9 +80,11 @@ public class Modul {
 			return;
 		}
 		try {
+			if(htmlZeile[3].isEmpty()) htmlZeile[3] = "-1.0";
 			note = Float.parseFloat(htmlZeile[3].replaceAll(",", "."));
 			versuche = (int) Float.parseFloat(htmlZeile[3].replaceAll(",", "."));
 		} catch (NumberFormatException e) {
+			System.out.print("[DEBUG] ");
 			e.printStackTrace();
 			throw new HTMLLeseException(
 					"Ungültiger Wert (" + e.getMessage() + ")\"" + note + "\"+\"" + versuche + "\"");
