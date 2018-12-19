@@ -12,6 +12,11 @@
 	-fx-border-width: 1 1 1 1;
 	-fx-border-color: grey;
 }
+.border-top{
+	-fx-border-width: 1 0 0 0;
+	-fx-border-color: grey;
+	-fx-padding: 15 0 0 0;
+}
 
 .ueberschriftBox{
 	-fx-border-width: 0 0 1 ;
@@ -58,7 +63,9 @@ Hyperlink{
 	-fx-background-color: white;
 }
 
-
+.zueberschrift{
+	-fx-font-size: 20 px;
+}
 .ueberschrift{
 	-fx-font-size: 24 px;
 }
@@ -107,7 +114,7 @@ Button:pressed {
 }
 
 .rowGrey{
-	-fx-background-color: grey;
+	-fx-background-color: lightgrey;
 }
 
 .rowRed{
@@ -117,3 +124,48 @@ Button:pressed {
 .rowGreen{
 	-fx-background-color: lightgreen;
 }
+
+.table-view{
+	-fx-background-color: lightgrey ;
+	-fx-border-color: black;
+    -fx-border-width: 1;
+}
+
+
+
+.table-view .column-header-background{
+	-fx-border-color: black;
+	-fx-table-cell-border-color:black;
+	-fx-background-color: lightgrey ;
+	-fx-font-family: 'sans-serif';
+}
+
+
+.table-view .column-header{
+	-fx-border-color: black;
+	-fx-border-width: 0 1 0 0;
+	-fx-font-family: 'sans-serif';
+	-fx-background-color: #00b5ad;
+}
+.table-view .column-header-background .filler{
+	-fx-background-color: #00b5ad;
+}
+
+
+.table-row-cell {
+	-fx-border-color: black;
+	-fx-border-width: 1 0 0 0;
+	-fx-table-cell-border-color:black;
+	-fx-focus-color: transparent;
+   	-fx-text-background-color:  black;   
+   	-fx-font-family: 'sans-serif';
+}
+.grey .table-row-cell {
+	-fx-background-color: lightgrey ;
+}
+
+.table-row-cell:selected {
+   -fx-text-background-color:  black;   
+}
+
+

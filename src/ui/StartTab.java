@@ -1,20 +1,17 @@
 package ui;
 
-import javafx.application.HostServices;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+
 
 public class StartTab extends QisTab{
 	public StartTab(){

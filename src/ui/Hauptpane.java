@@ -55,8 +55,8 @@ public class Hauptpane extends BorderPane {
 		StartTab start = new StartTab();
 		start.setHostServices(services);	// setzt die HostServices für das Tab (wird beim Hyperlink benötigt)
 		UebersichtTab uebersicht = new UebersichtTab();
-		QisTab klausuren = new QisTab();
-		QisTab kalkulator = new QisTab();
+		KlausurrenTab klausuren = new KlausurrenTab();
+		KalkulatorTab kalkulator = new KalkulatorTab();
 
 		hStart.setOnMouseClicked(event ->{		// Gibt der HBox das ClickEvent
 			activeText.getStyleClass().remove("pressed");	//entfernt den Style des Texts zum aktiiven Tab

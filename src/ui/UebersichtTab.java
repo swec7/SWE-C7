@@ -1,6 +1,7 @@
 package ui;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import daten.Modul;
@@ -32,7 +33,7 @@ public class UebersichtTab extends QisTab{
 		TableColumn<Modul, Integer> semester = new TableColumn<Modul, Integer>("Semester");
 		TableColumn<Modul, Integer> credits = new TableColumn<Modul, Integer>("Credits");
 		TableColumn<Modul, Float> note = new TableColumn<Modul, Float>("Note");
-		TableColumn<Modul, Date> ablaufdatum = new TableColumn<Modul, Date>("Ablaufdatum");
+		TableColumn<Modul, LocalDate> ablaufdatum = new TableColumn<Modul, LocalDate>("Ablaufdatum");
 		TableColumn<Modul, Integer> versuch = new TableColumn<Modul, Integer>("Versuch");
 		
 		uebersicht.getColumns().addAll(modulname, semester, credits, note, ablaufdatum, versuch);
@@ -60,15 +61,15 @@ public class UebersichtTab extends QisTab{
 			   };
 			});
 		ablaufdatum.setCellValueFactory(new PropertyValueFactory<>("ablaufdatum"));
-		ablaufdatum.setCellFactory((TableColumn<Modul, Date> column) -> {
-			   return new TableCell<Modul, Date>() {
+		ablaufdatum.setCellFactory((TableColumn<Modul, LocalDate> column) -> {
+			   return new TableCell<Modul, LocalDate>() {
 			      @Override
-			      protected void updateItem(Date item, boolean empty) {
+			      protected void updateItem(LocalDate item, boolean empty) {
 			         super.updateItem(item, empty);
 			         if (item == null || empty) {
 			            setText(null);
 			         } else {
-			            setText(df.format(item));
+			            setText(item.getDayOfMonth()+"."+ item.getMonthValue()+"."+item.getYear());
 			        }
 			     }
 			   };
@@ -91,33 +92,43 @@ public class UebersichtTab extends QisTab{
 		
 		semester.setSortType(TableColumn.SortType.ASCENDING);
 		
+		
 		uebersicht.setRowFactory(row -> new TableRow<Modul>(){
 			 @Override
 			    public void updateItem(Modul item, boolean empty){
 			        super.updateItem(item, empty);
 
 			        if (item == null || empty) {
+			        	getStyleClass().remove("rowGreen");
+			        	getStyleClass().remove("rowRed");
 			        	getStyleClass().add("rowGrey");
 			        }else if(item.getNote()==0){
+			        	getStyleClass().remove("rowGreen");
+			        	getStyleClass().remove("rowRed");
 			        	getStyleClass().add("rowGrey");
 			        }else if(item.getNote()==5.0f){
+			        	getStyleClass().remove("rowGreen");
+			        	getStyleClass().remove("rowGrey");
 			        	getStyleClass().add("rowRed");
 			        }else{
+			        	getStyleClass().remove("rowGrey");
+			        	getStyleClass().remove("rowRed");
 			        	getStyleClass().add("rowGreen");
 			        }
 			    }
 			
 			
 		});
-		
-		
+		LocalDate d = LocalDate.of(2019, 1, 1);
 //		Testdaten 	------------------------------------------------------------------------------
-		Modul bestanden = new Modul(1, "Gip", 8, 1.6f, 2, new Date(2019, 1, 1), new Date(2018, 1, 1),1,Typ.PFLICHT, 0);
-		Modul durchgefallen = new Modul(2, "dnis", 8, 5.0f, 1, null, new Date(2018, 1, 1),2,Typ.PFLICHT, 0);
+		Modul bestanden = new Modul(1, "Gip", 8, 1.6f, 2, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1),1,Typ.PFLICHT, 0);
+		Modul durchgefallen = new Modul(2, "dnis", 8, 5.0f, 1, null, LocalDate.of(2018, 1, 1),2,Typ.PFLICHT, 0);
 		Modul offen = new Modul(3, "TI", 8, 0, 0, null, null,1,Typ.PFLICHT, 0);
 		
 		uebersicht.setItems( FXCollections.observableArrayList(bestanden, durchgefallen, offen));
 //		------------------------------------------------------------------------------------------
+		uebersicht.getSortOrder().add(semester);
+		
 		GridPane.setHgrow(uebersicht, Priority.ALWAYS);
 		GridPane.setVgrow(uebersicht, Priority.ALWAYS);
 		this.add(uebersicht, 0, 0);
