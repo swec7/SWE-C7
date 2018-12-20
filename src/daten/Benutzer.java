@@ -1,33 +1,14 @@
 package daten;
 
-import java.io.IOException;
-import java.util.List;
-
-import einlesen.CSVReader;
-import einlesen.HTMLDaten;
-import einlesen.HTMLParser;
-import exceptions.CSVFormattierungsException;
-import exceptions.CSVLeseException;
-
 public class Benutzer {
 
 	private Studiengang studiengang;
 	private float wunschnote;
 
-	public Benutzer() throws CSVLeseException, IOException, CSVFormattierungsException {
-		HTMLDaten htmlDaten = HTMLParser.loadHTML("Fh Aachen.html");
-		List<List<String>> studiengaengeCSV = CSVReader.loadCsv("Studiengaenge.csv");
-		List<List<String>> moduleCSV = null;
-		System.out.println(htmlDaten.getStudiengang());
-		for (int i = 1; i < studiengaengeCSV.size(); i++) {
-			if (htmlDaten.getStudiengang().equals(studiengaengeCSV.get(i).get(0))) {
-				System.out.println("loading");
-				moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
-			}
-		}
-
-		studiengang = new Studiengang(moduleCSV, htmlDaten.getMap());
-		wunschnote = 0;
+	public Benutzer(Studiengang studiengang, float wunschnote) {
+		super();
+		this.studiengang = studiengang;
+		this.wunschnote = wunschnote;
 	}
 
 	public float durchschnitsNote() {

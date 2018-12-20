@@ -1,10 +1,8 @@
 package daten;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import exceptions.CSVLeseException;
-import exceptions.TypFormatException;
 
 public class Modul {
 
@@ -18,21 +16,6 @@ public class Modul {
 	private int semester;
 	private Typ typ;
 	private float planNote;
-
-	public Modul(List<String> csvZeile) throws CSVLeseException {
-		this(0, null, 0, 0, 0, null, null, 0, null, 0);
-		try {
-			modulnummer = Integer.parseInt(csvZeile.get(0));
-			name = csvZeile.get(1);
-			credits = Integer.parseInt(csvZeile.get(3));
-			semester = Integer.parseInt(csvZeile.get(2));
-			typ = Typ.parseTyp(csvZeile.get(4));
-		} catch (NumberFormatException | TypFormatException e) {
-			throw new CSVLeseException("Ungültiger Wert");
-		} catch (IndexOutOfBoundsException e) {
-			throw new CSVLeseException("Fehlender Wert");
-		}
-	}
 
 	public Modul(int modulnummer, String name, int credits, float note, int versuche, LocalDate ablaufdatum,
 			LocalDate pruefungsDatum, int semester, Typ typ, float planNote) {
