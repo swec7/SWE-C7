@@ -18,11 +18,9 @@ public class Factory {
 		HTMLDaten htmlDaten = HTMLParser.loadHTML("Fh Aachen.html");
 		List<List<String>> studiengaengeCSV = CSVReader.loadCsv("Studiengaenge.csv");
 		List<List<String>> moduleCSV = null;
-		System.out.println(htmlDaten.getStudiengang());
 		int i = 1;
 		for (; i < studiengaengeCSV.size(); i++) {
 			if (htmlDaten.getStudiengang().equals(studiengaengeCSV.get(i).get(0))) {
-				System.out.println("loading");
 				moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
 				break;
 			}
