@@ -1,0 +1,28 @@
+Modulnummer,Modulname,Semester,CreditPoints,Typ
+51101,Höhere Mathematik 1    ,1,8,P
+51104,Grundlagen der Informatik und höhere Programmiersprache höhere,1,11,P
+52105,Technische Informatik     ,1,8,P
+51301,Softskill-Wahlmodul 1     ,1,2,S
+52108,Höhere Mathematik 2 für Informatik  Informatik,2,6,P
+52110,Datennetze und IT-Sicherheit    ,2,8,P
+52106,Algorithmen und Datenstrukturen    ,2,8,P
+53105,Theoretische Informatik und Logik   ,2,7,P
+52301,Softskill-Wahlmodul 2     ,2,2,S
+53106,Datenbanken und Webtechnologien    ,3,8,P
+53107,"Architektur von Rechnersystemen, Betriebssystemkonzepte und verteilte und",3,8,P
+55107,Software Engineering     ,3,5,P
+53111,Objektorientierte Softwareentwicklung     ,3,5,P
+55301,BWL      ,3,4,P
+54201,Wahlmodul 1     ,4,6,W
+54202,Wahlmodul 2     ,4,6,W
+54203,Wahlmodul 3     ,4,6,W
+54204,Wahlmodul 4     ,4,6,W
+54205,Wahlmodul 5     ,4,6,W
+54206,Wahlmodul 6     ,5,6,W
+54207,Wahlmodul 7     ,5,6,W
+54208,Wahlmodul 8     ,5,6,W
+54209,Wahlmodul 9     ,5,6,W
+55201,Interdisziplinäres Projekt     ,5,6,P
+56101,Praxisprojekt      ,6,15,P
+8998,Bachelorarbeit      ,6,12,P
+8999,Bachelorkolloquium      ,6,3,P

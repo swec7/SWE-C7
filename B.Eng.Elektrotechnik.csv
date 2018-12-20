@@ -1,0 +1,27 @@
+Modulname,Semester,CreditPoints,Typ
+Höhere Mathematik 1 für Elektrotechnik,1,9,P
+Grundlagen der Elektrotechnik 1,1,11,P
+Grundlagen der Programmierung und technische Informatik,1,10,P
+Höhere Mathematik 2 für Elektrotechnik,2,5,P
+Grundlagen der Elektrotechnik 2,2,7,P
+Physik,2,7,P
+Digitaltechnik,2,4,P
+Bauelemente und Grundschaltungen der Elektronik 1,2,7,P
+Elektrische Messtechnik,3,8,P
+Numerische Mathematik,3,4,P
+Grundlagen der Regelungstechnik,3,8,P
+Angewandte Leitungs- und Signaltheorie,3,8,P
+Softskill Wahlmodul,3,2,S
+Wahlmodul 1     ,4,6,W
+Wahlmodul 2     ,4,6,W
+Wahlmodul 3     ,4,6,W
+Wahlmodul 4     ,4,6,W
+Wahlmodul 5     ,4,6,W
+Wahlmodul 6     ,5,6,W
+Wahlmodul 7     ,5,6,W
+Wahlmodul 8     ,5,6,W
+Wahlmodul 9     ,5,6,W
+Interdisziplinäres Projekt     ,5,6,P
+Praxisprojekt      ,6,15,P
+Bachelorarbeit      ,6,12,P
+Bachelorkolloquium      ,6,3,P
