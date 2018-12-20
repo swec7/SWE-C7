@@ -9,12 +9,12 @@ import daten.Benutzer;
 import daten.Modul;
 import daten.Studiengang;
 import daten.Typ;
-import exceptions.CSVFormattierungsException;
 import exceptions.CSVLeseException;
+import exceptions.HTMLLeseException;
 import exceptions.TypFormatException;
 
 public class Factory {
-	public static Benutzer loadBenutzer() throws CSVLeseException, IOException, CSVFormattierungsException {
+	public static Benutzer loadBenutzer() throws CSVLeseException, IOException, HTMLLeseException {
 		HTMLDaten htmlDaten = HTMLParser.loadHTML("Fh Aachen.html");
 		List<List<String>> studiengaengeCSV = CSVReader.loadCsv("Studiengaenge.csv");
 		List<List<String>> moduleCSV = null;
@@ -50,7 +50,7 @@ public class Factory {
 	}
 
 	public static Studiengang buildStudiengang(List<String> studiengangDaten, List<List<String>> csvDaten,
-			Map<String, String[]> htmlDaten) throws CSVLeseException {
+			Map<String, String[]> htmlDaten) throws CSVLeseException, HTMLLeseException {
 		Studiengang gang = new Studiengang(null, null, 0, 0, 0, 0, 0);
 		List<Modul> module = new ArrayList<>();
 		for (int i = 1; i < csvDaten.size(); i++) {

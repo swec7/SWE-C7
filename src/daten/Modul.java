@@ -2,12 +2,7 @@ package daten;
 
 import java.time.LocalDate;
 
-import exceptions.CSVLeseException;
-<<<<<<< HEAD
-=======
 import exceptions.HTMLLeseException;
-import exceptions.TypFormatException;
->>>>>>> refs/remotes/origin/prototype
 
 /**
  * Speichert alle daten die über ein modul verfügbar sind. nur die wunschnote
@@ -27,40 +22,8 @@ public class Modul {
 	private Typ typ;
 	private float planNote;
 
-<<<<<<< HEAD
 	public Modul(int modulnummer, String name, int credits, float note, int versuche, LocalDate ablaufdatum,
 			LocalDate pruefungsDatum, int semester, Typ typ, float planNote) {
-=======
-	/**
-	 * initialisiert das modul mit den werten aus einer csv zeile. um daten aus
-	 * einer html datein hinzuzufügen muss loadQIS() benutzt werden
-	 * 
-	 * @param csvZeile
-	 *            die geparste zeile aus der csv datei
-	 * @throws CSVLeseException
-	 *             wenn beim lesen der CSV daten ein Fehler auftritt.
-	 */
-	public Modul(List<String> csvZeile) throws CSVLeseException {
-		this(0, null, 0, 0, 0, null, null, 0, null, 0);
-		try {
-			modulnummer = Integer.parseInt(csvZeile.get(0));
-			name = csvZeile.get(1);
-			credits = Integer.parseInt(csvZeile.get(3));
-			semester = Integer.parseInt(csvZeile.get(2));
-			typ = Typ.parseTyp(csvZeile.get(4));
-		} catch (NumberFormatException | TypFormatException e) {
-			throw new CSVLeseException("Ungültiger Wert (" + e.getMessage() + ")");
-		} catch (IndexOutOfBoundsException e) {
-			throw new CSVLeseException("Fehlender Wert");
-		}
-	}
-
-	/**
-	 * initialisiert das modul mit den gegebenen werten.
-	 */
-	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum,
-			Date pruefungsDatum, int semester, Typ typ, float planNote) {
->>>>>>> refs/remotes/origin/prototype
 		this.modulnummer = modulnummer;
 		this.name = name;
 		this.credits = credits;

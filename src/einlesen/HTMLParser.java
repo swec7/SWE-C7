@@ -37,18 +37,20 @@ public class HTMLParser {
 		Map<String, String[]> map = getMap(path);
 		String name = getName(path);
 
-		for (String key : map.keySet()) {
-			System.out.print(String.format("%-10s", key.substring(0, Math.min(key.length(), 10))) + ":" + "\t");
-			for (String value : map.get(key)) {
-				if (value == null) {
-					System.out.print("null");
-				} else {
-					System.out.print(
-							String.format("%-10s", value.substring(0, Math.min(value.length(), 10))) + "|" + "\t");
-				}
-			}
-			System.out.println();
-		}
+		// for (String key : map.keySet()) {
+		// System.out.print(String.format("%-10s", key.substring(0,
+		// Math.min(key.length(), 10))) + ":" + "\t");
+		// for (String value : map.get(key)) {
+		// if (value == null) {
+		// System.out.print("null");
+		// } else {
+		// System.out.print(
+		// String.format("%-10s", value.substring(0, Math.min(value.length(),
+		// 10))) + "|" + "\t");
+		// }
+		// }
+		// System.out.println();
+		// }
 		return new HTMLDaten(name, map);
 	}
 
