@@ -1,6 +1,6 @@
 package daten;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import exceptions.CSVLeseException;
@@ -13,8 +13,8 @@ public class Modul {
 	private int credits;
 	private float note;
 	private int versuche;
-	private Date ablaufdatum;
-	private Date pruefungsDatum;
+	private LocalDate ablaufdatum;
+	private LocalDate pruefungsDatum;
 	private int semester;
 	private Typ typ;
 	private float planNote;
@@ -34,8 +34,8 @@ public class Modul {
 		}
 	}
 
-	public Modul(int modulnummer, String name, int credits, float note, int versuche, Date ablaufdatum,
-			Date pruefungsDatum, int semester, Typ typ, float planNote) {
+	public Modul(int modulnummer, String name, int credits, float note, int versuche, LocalDate ablaufdatum,
+			LocalDate pruefungsDatum, int semester, Typ typ, float planNote) {
 		this.modulnummer = modulnummer;
 		this.name = name;
 		this.credits = credits;
@@ -80,11 +80,11 @@ public class Modul {
 		return versuche;
 	}
 
-	public Date getAblaufdatum() {
+	public LocalDate getAblaufdatum() {
 		return ablaufdatum;
 	}
 
-	public Date getPruefungsDatum() {
+	public LocalDate getPruefungsDatum() {
 		return pruefungsDatum;
 	}
 
