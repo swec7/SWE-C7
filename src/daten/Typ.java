@@ -2,6 +2,10 @@ package daten;
 
 import exceptions.TypFormatException;
 
+/**
+ * Der Type eines Moduls (Wahl, Pfilicht oder Softskill).
+ *
+ */
 public enum Typ {
 	PFLICHT("P"), WAHL("W"), SOFTSKILL("S");
 

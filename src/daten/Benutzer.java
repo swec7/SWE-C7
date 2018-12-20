@@ -1,16 +1,74 @@
 package daten;
 
+<<<<<<< HEAD
+=======
+import java.io.IOException;
+import java.util.List;
+
+import einlesen.CSVReader;
+import einlesen.HTMLDaten;
+import einlesen.HTMLParser;
+import exceptions.CSVLeseException;
+import exceptions.HTMLLeseException;
+
+/**
+ * Speichert alle daten die für alle taps relevfant sein können.
+ *
+ */
+>>>>>>> refs/remotes/origin/prototype
 public class Benutzer {
 
 	private Studiengang studiengang;
 	private float wunschnote;
 
+<<<<<<< HEAD
 	public Benutzer(Studiengang studiengang, float wunschnote) {
 		super();
 		this.studiengang = studiengang;
 		this.wunschnote = wunschnote;
+=======
+	/**
+	 * initialisiert den Benutzer mit den angegebenen html und csv daten.
+	 * 
+	 * @param htmlPath
+	 *            der Pfad zu der html datei
+	 * @param csvPath
+	 *            der Pfad zu der csv datei mit allen Studiengängen
+	 * @throws CSVLeseException
+	 *             wenn beim parsen einer CSV ein fehler auftritt.
+	 * @throws HTMLLeseException
+	 *             wenn beim lesen der html datein ein fehler auftritt
+	 * @throws IOException
+	 *             wenn beim laden einer datei ein fehler auftritt.
+	 */
+	public Benutzer(String htmlPath, String csvPath) throws CSVLeseException, HTMLLeseException, IOException {
+		HTMLDaten htmlDaten = HTMLParser.loadHTML(htmlPath);
+		List<List<String>> studiengaengeCSV = CSVReader.loadCsv(csvPath);
+		List<List<String>> moduleCSV = null;
+		int i = 0;
+		for (i = 1; i < studiengaengeCSV.size(); i++) {
+			if (htmlDaten.getStudiengang().equals(studiengaengeCSV.get(i).get(0))) {
+				break;
+			}
+		}
+		moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
+
+		if (moduleCSV == null) {
+			throw new CSVLeseException("Es wurde kein Eintrag für " + htmlDaten.getStudiengang() + " gefunden.");
+		}
+
+		studiengang = new Studiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap());
+		wunschnote = 0;
+>>>>>>> refs/remotes/origin/prototype
 	}
 
+	/**
+	 * Berechnet die durchschnitts Note der Module. Module mit mehr Credits
+	 * werden stärker gewichtet. Module ohne Note oder Softskill Module werden
+	 * nicht beachtet.
+	 * 
+	 * @return summe(note*credits)/summe(credits)
+	 */
 	public float durchschnitsNote() {
 		float summe = 0;
 		float credits = 0;
@@ -26,6 +84,13 @@ public class Benutzer {
 		return summe / credits;
 	}
 
+	/**
+	 * Berechnet die durchschnitts Note aus den Plan-Moten der Module. Module
+	 * mit mehr Credits werden stärker gewichtet. Module ohne Plan-Note oder
+	 * Softskill Module werden nicht beachtet.
+	 * 
+	 * @return summe(planNote*credits)/summe(credits)
+	 */
 	public float durchschnitsPlanNote() {
 		float summe = 0;
 		float credits = 0;

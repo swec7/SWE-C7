@@ -2,6 +2,11 @@ package einlesen;
 
 import java.util.Map;
 
+/**
+ * speichert alle daten die aus einer html-datei ausgelesen werden.
+ * (geschreibene module und name des studiengangs).
+ *
+ */
 public class HTMLDaten {
 	private String studiengang;
 	private Map<String, String[]> map;
