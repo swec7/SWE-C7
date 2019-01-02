@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
+import daten.Benutzer;
 import daten.Modul;
 import daten.Typ;
 import javafx.collections.FXCollections;
@@ -23,7 +24,7 @@ import javafx.scene.text.TextAlignment;
 public class KlausurrenTab extends QisTab {
 	SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 	Text bestandenTx = new Text("Bestandene Klausuren");
-	public KlausurrenTab(){
+	public KlausurrenTab(Benutzer user){
 		
 		this.setPadding(new Insets(20, 80, 20, 20));
 		this.setVgap(10);

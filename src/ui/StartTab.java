@@ -1,5 +1,17 @@
 package ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+
+import daten.Benutzer;
+import einlesen.CSVReader;
+import einlesen.Factory;
+import einlesen.HTMLDaten;
+import einlesen.HTMLParser;
+import exceptions.CSVLeseException;
+import exceptions.HTMLLeseException;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
@@ -14,10 +26,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 
 public class StartTab extends QisTab{
+	
+	String path = "";
+	float anzVersuche = 0;
+	Benutzer user = null;
+	
 	public StartTab(){
+		
 		
 		GridPane anleitungBox = new GridPane();
 		anleitungBox.setHgap(10);
@@ -75,6 +95,7 @@ public class StartTab extends QisTab{
 //		table.setPrefSize(100, 100);
 //		this.add(table, 7, 7);
 		
+		//TODO 
 		HBox importBox = new HBox();
 		importBox.setMaxWidth(400);
 		importBox.setPrefWidth(400);
@@ -85,7 +106,12 @@ public class StartTab extends QisTab{
 		Button importBtn = new Button("...");
 		importBtn.getStyleClass().add("importBtn");
 		importBtn.setOnAction(event ->{
-			
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Open Resource File");
+			File file = fileChooser.showOpenDialog(new Stage());
+			path = file.getAbsolutePath();
+			importTf.setText(path);
+			//System.out.println("FILE " + file.getAbsolutePath());
 		});
 		HBox.setHgrow(importTf, Priority.ALWAYS);
 		HBox.setHgrow(importBtn, Priority.NEVER);
@@ -93,13 +119,29 @@ public class StartTab extends QisTab{
 		importBox.getChildren().addAll(importTf,importBtn);
 		
 		
-		
+		//TODO Benutzer erstellen mit path zu HTML Datei und Felder enablen 
+		//TODO und vorher ausgrauen
 		this.add(importBox, 0, 1);
 		Button upload = new Button("Upload");
 		GridPane.setHgrow(upload, Priority.NEVER);
 		upload.setOnAction(event ->{
-			
-		});
+
+					
+			try {
+				path = importTf.getText();
+				user = loadBenutzer(path);
+				importTf.setText("Everythings seems fine ;)");
+			} catch (CSVLeseException e) {
+				importTf.setText(e.getMessage());
+				e.printStackTrace();
+			} catch (IOException e) {
+				importTf.setText(e.getMessage());
+				e.printStackTrace();
+			} catch (HTMLLeseException e) {
+				importTf.setText(e.getMessage());
+				e.printStackTrace();
+			}
+			});
 		this.add(upload, 1, 1);
 		
 		HBox versucheBox = new HBox();
@@ -112,20 +154,54 @@ public class StartTab extends QisTab{
 		RadioButton v0 = new RadioButton("0");
 		v0.setToggleGroup(versucheGr);
 		v0.setSelected(true);
+		v0.setOnAction(event->{
+			anzVersuche = 0;
+		});
 		
 		RadioButton v1 = new RadioButton("1");
 		v1.setToggleGroup(versucheGr);
+		v1.setOnAction(event->{
+			anzVersuche = 1;
+		});
 		
 		RadioButton v2 = new RadioButton("2");
 		v2.setToggleGroup(versucheGr);
+		v2.setOnAction(event->{
+			anzVersuche = 2;
+		});
 		
 		RadioButton v3 = new RadioButton("3");
 		v3.setToggleGroup(versucheGr);
+		v3.setOnAction(event->{
+			anzVersuche = 3;
+		});
 		
 		versucheBox.getChildren().addAll(versucheTx, v0, v1, v2, v3);
 		this.add(versucheBox, 0, 2);
 //		this.setGridLinesVisible(true);
 	}
 	
+	void setPath(String path) {
+		this.path = path;
+	}
 
+	public Benutzer loadBenutzer(String paht) throws CSVLeseException, IOException, HTMLLeseException {
+		HTMLDaten htmlDaten = HTMLParser.loadHTML(path);
+		List<List<String>> studiengaengeCSV = CSVReader.loadCsv("Studiengaenge.csv");
+		List<List<String>> moduleCSV = null;
+		int i = 1;
+		for (; i < studiengaengeCSV.size(); i++) {
+			if (htmlDaten.getStudiengang().equals(studiengaengeCSV.get(i).get(0))) {
+				moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
+				break;
+			}
+		}
+		//System.out.println("HALLO ICH BIN HIER");
+		return new Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap()), 0);
+	}
+	
+	public Benutzer getUser() {
+		return this.user;
+	}
+	
 }

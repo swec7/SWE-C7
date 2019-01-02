@@ -1,5 +1,6 @@
 package ui;
 
+import daten.Benutzer;
 import javafx.application.HostServices;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
@@ -12,7 +13,10 @@ public class Hauptpane extends BorderPane {
 	
 	private Text activeText; 	//Text des aktiven Tabs. Befindet sich innerhalb der klickbaren HBox
 	
+	
 	public Hauptpane(HostServices services){
+		
+
 		this.setPrefSize(800, 600);
 		VBox box = new VBox();
 		box.getStyleClass().add("box"); 	// Fügt dem Object eine style Class aus der CSS datei hinzu
@@ -29,6 +33,7 @@ public class Hauptpane extends BorderPane {
 		activeText = startText;
 		
 		HBox hUebersicht = new HBox();
+		hUebersicht.setDisable(true);
 		hUebersicht.getStyleClass().add("tabbox");
 		hUebersicht.setAlignment(Pos.CENTER);
 		hUebersicht.setPrefSize(200, 100);
@@ -37,6 +42,7 @@ public class Hauptpane extends BorderPane {
 		hUebersicht.getChildren().add(uebersichtText);
 		
 		HBox hKlausuren = new HBox();
+		hKlausuren.setDisable(true);
 		hKlausuren.getStyleClass().add("tabbox");
 		hKlausuren.setAlignment(Pos.CENTER);
 		hKlausuren.setPrefSize(200, 100);
@@ -45,6 +51,7 @@ public class Hauptpane extends BorderPane {
 		hKlausuren.getChildren().add(klausurenText);
 		
 		HBox hKalkulator = new HBox();
+		hKalkulator.setDisable(true);
 		hKalkulator.getStyleClass().add("tabbox");
 		hKalkulator.setAlignment(Pos.CENTER);
 		hKalkulator.setPrefSize(200, 100);
@@ -54,9 +61,9 @@ public class Hauptpane extends BorderPane {
 		
 		StartTab start = new StartTab();
 		start.setHostServices(services);	// setzt die HostServices für das Tab (wird beim Hyperlink benötigt)
-		UebersichtTab uebersicht = new UebersichtTab();
-		KlausurrenTab klausuren = new KlausurrenTab();
-		KalkulatorTab kalkulator = new KalkulatorTab();
+		//UebersichtTab uebersicht = new UebersichtTab();
+		//KlausurrenTab klausuren = new KlausurrenTab();
+		//KalkulatorTab kalkulator = new KalkulatorTab();
 
 		hStart.setOnMouseClicked(event ->{		// Gibt der HBox das ClickEvent
 			activeText.getStyleClass().remove("pressed");	//entfernt den Style des Texts zum aktiiven Tab
@@ -66,6 +73,7 @@ public class Hauptpane extends BorderPane {
 		});
 		
 		hUebersicht.setOnMouseClicked(event ->{
+			UebersichtTab uebersicht = new UebersichtTab(start.getUser());
 			activeText.getStyleClass().remove("pressed");
 			activeText = uebersichtText;
 			uebersichtText.getStyleClass().add("pressed");	
@@ -73,6 +81,7 @@ public class Hauptpane extends BorderPane {
 		});
 		
 		hKlausuren.setOnMouseClicked(event ->{
+			KlausurrenTab klausuren = new KlausurrenTab(start.getUser());
 			activeText.getStyleClass().remove("pressed");
 			activeText = klausurenText;
 			klausurenText.getStyleClass().add("pressed");	
@@ -80,6 +89,7 @@ public class Hauptpane extends BorderPane {
 		});
 		
 		hKalkulator.setOnMouseClicked(event ->{
+			KalkulatorTab kalkulator = new KalkulatorTab(start.getUser());
 			activeText.getStyleClass().remove("pressed");
 			activeText = kalkulatorText;
 			kalkulatorText.getStyleClass().add("pressed");	

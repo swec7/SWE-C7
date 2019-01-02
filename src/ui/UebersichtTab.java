@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
+import daten.Benutzer;
 import daten.Modul;
 import daten.Typ;
 import javafx.collections.FXCollections;
@@ -22,7 +23,7 @@ public class UebersichtTab extends QisTab{
 	private float notenspiegel = 1.6f;
 	
 	
-	public UebersichtTab(){
+	public UebersichtTab(Benutzer benutzer){
 		this.setPadding(new Insets(20, 20, 60, 20));
 		
 		TableView<Modul> uebersicht = new TableView<>();   

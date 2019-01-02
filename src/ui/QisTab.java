@@ -1,5 +1,6 @@
 package ui;
 
+import daten.Benutzer;
 import javafx.application.HostServices;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;

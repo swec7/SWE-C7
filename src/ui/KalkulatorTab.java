@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import daten.Benutzer;
 import daten.Modul;
 import daten.Typ;
 import javafx.beans.value.ObservableValue;
@@ -34,7 +35,7 @@ public class KalkulatorTab extends QisTab {
 
 	ArrayList<Modul> daten = new ArrayList<Modul>(Arrays.asList(bestanden,durchgefallen,offen));
 
-	public KalkulatorTab(){
+	public KalkulatorTab(Benutzer benutzer){
 		
 		TableView<Modul> kalkulator = new TableView<Modul>();
 		GridPane.setMargin(kalkulator, new Insets(0, 60, 0, 0));
