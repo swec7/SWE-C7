@@ -3,7 +3,6 @@ package ui;
 import javafx.application.HostServices;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -55,7 +54,7 @@ public class Hauptpane extends BorderPane {
 		StartTab start = new StartTab();
 		start.setHostServices(services);	// setzt die HostServices für das Tab (wird beim Hyperlink benötigt)
 		UebersichtTab uebersicht = new UebersichtTab();
-		KlausurrenTab klausuren = new KlausurrenTab();
+		KlausurenTab klausuren = new KlausurenTab();
 		KalkulatorTab kalkulator = new KalkulatorTab();
 
 		hStart.setOnMouseClicked(event ->{		// Gibt der HBox das ClickEvent
@@ -105,7 +104,5 @@ public class Hauptpane extends BorderPane {
 		this.setCenter(start);
 		this.setTop(ueberschriftBox);
 
-		
-		
 	}
 }

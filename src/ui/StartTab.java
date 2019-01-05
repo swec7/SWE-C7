@@ -126,6 +126,4 @@ public class StartTab extends QisTab{
 		this.add(versucheBox, 0, 2);
 //		this.setGridLinesVisible(true);
 	}
-	
-
 }
