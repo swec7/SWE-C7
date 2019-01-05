@@ -114,7 +114,7 @@ Button:pressed {
 }
 
 .rowGrey{
-	-fx-background-color: lightgrey;
+	-fx-background-color: #efefef;
 }
 
 .rowRed{
@@ -136,7 +136,7 @@ Button:pressed {
 .table-view .column-header-background{
 	-fx-border-color: black;
 	-fx-table-cell-border-color:black;
-	-fx-background-color: lightgrey ;
+	-fx-background-color: #efefef ;
 	-fx-font-family: 'sans-serif';
 }
 
@@ -161,7 +161,7 @@ Button:pressed {
    	-fx-font-family: 'sans-serif';
 }
 .grey .table-row-cell {
-	-fx-background-color: lightgrey ;
+	-fx-background-color: #efefef ;
 }
 
 .table-row-cell:selected {
