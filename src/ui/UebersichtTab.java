@@ -24,7 +24,7 @@ public class UebersichtTab extends QisTab{
 	public UebersichtTab(Benutzer benutzer){
 		//DEBUG ----------------------------------------------------------
 		//Data from parser follows
-		float durchschnittsnote = 1.6f;
+		//float durchschnittsnote = 1.6f;
 		//Testdaten follows
 		Modul m1 = new Modul(51101, "Hoehere Mathematik 1", 8, 3.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
 		Modul m2 = new Modul(51104, "Grundlagen der Informatik und hoehere Programmiersprache fuer Informatik", 11, 1.3f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
@@ -34,6 +34,7 @@ public class UebersichtTab extends QisTab{
 		Modul m6 = new Modul(55667, "Algorithmen und Datenstrukturen", 8, -1.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.PFLICHT, 0);
 		//END DEBUG ------------------------------------------------------
 
+		float durchschnittsnote = benutzer.durchschnitsNote();
 		this.setPadding(new Insets(20, 20, 60, 20));
 
 		//Texte des Tabs
@@ -63,7 +64,7 @@ public class UebersichtTab extends QisTab{
 		uebersicht.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		//Tabelle set Items
 		//TODO Use Parser Data
-		uebersicht.setItems( FXCollections.observableArrayList(m1,m2,m3,m4,m5,m6));
+		uebersicht.setItems( FXCollections.observableList(benutzer.getStudiengang().getModule()));
 
 		modulname.setCellValueFactory(new PropertyValueFactory<>("name"));
 		semester.setCellValueFactory(new PropertyValueFactory<>("semester"));

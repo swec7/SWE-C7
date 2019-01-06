@@ -3,6 +3,7 @@ package ui;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import daten.Benutzer;
 import daten.Modul;
@@ -37,10 +38,12 @@ public class KalkulatorTab extends QisTab {
     Modul m6 = new Modul(55667, "Algorithmen und Datenstrukturen", 8, -1.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.PFLICHT, 0);
     //END DEBUG ------------------------------------------------------
 
-    ArrayList<Modul> daten = new ArrayList<>(Arrays.asList(m1,m2,m3,m4,m5,m6));
+    //List<Modul> daten = new ArrayList<>(Arrays.asList(m1,m2,m3,m4,m5,m6));
+
 
     public KalkulatorTab(Benutzer benutzer){
-
+        List<Modul> daten = benutzer.getStudiengang().getModule();
+        benutzer.getStudiengang().getModule();
         //Output Texte des Tabs
         Text aktDurchschnittTx = new Text("Aktuelle Durchschnittsnote:\t");
         Text errechDurchschnittTx = new Text("Errechnete Durchschnittsnote:\t");
@@ -99,7 +102,7 @@ public class KalkulatorTab extends QisTab {
 
         Button wunschnoteBer = new Button("OK");
         wunschnoteBer.setOnAction(e->{
-            //TODO Berechnungsmethode Hier
+            //TODO
         });
 
         this.add(kalkulator, 0, 0, 4, 1);

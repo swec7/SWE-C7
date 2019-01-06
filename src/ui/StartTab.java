@@ -126,7 +126,6 @@ public class StartTab extends QisTab{
 		GridPane.setHgrow(upload, Priority.NEVER);
 		upload.setOnAction(event ->{
 
-					
 			try {
 				path = importTf.getText();
 				user = loadBenutzer(path);

@@ -1,10 +1,8 @@
 package ui;
 
-import daten.Benutzer;
 import javafx.application.HostServices;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -33,7 +31,7 @@ public class Hauptpane extends BorderPane {
 		activeText = startText;
 		
 		HBox hUebersicht = new HBox();
-		hUebersicht.setDisable(true);
+		//hUebersicht.setDisable(true);
 		hUebersicht.getStyleClass().add("tabbox");
 		hUebersicht.setAlignment(Pos.CENTER);
 		hUebersicht.setPrefSize(200, 100);
@@ -42,7 +40,7 @@ public class Hauptpane extends BorderPane {
 		hUebersicht.getChildren().add(uebersichtText);
 		
 		HBox hKlausuren = new HBox();
-		hKlausuren.setDisable(true);
+		//hKlausuren.setDisable(true);
 		hKlausuren.getStyleClass().add("tabbox");
 		hKlausuren.setAlignment(Pos.CENTER);
 		hKlausuren.setPrefSize(200, 100);
@@ -51,7 +49,7 @@ public class Hauptpane extends BorderPane {
 		hKlausuren.getChildren().add(klausurenText);
 		
 		HBox hKalkulator = new HBox();
-		hKalkulator.setDisable(true);
+		//hKalkulator.setDisable(true);
 		hKalkulator.getStyleClass().add("tabbox");
 		hKalkulator.setAlignment(Pos.CENTER);
 		hKalkulator.setPrefSize(200, 100);
@@ -62,7 +60,7 @@ public class Hauptpane extends BorderPane {
 		StartTab start = new StartTab();
 		start.setHostServices(services);	// setzt die HostServices für das Tab (wird beim Hyperlink benötigt)
 		//UebersichtTab uebersicht = new UebersichtTab();
-		//KlausurrenTab klausuren = new KlausurrenTab();
+		//KlausurenTab klausuren = new KlausurenTab();
 		//KalkulatorTab kalkulator = new KalkulatorTab();
 
 		hStart.setOnMouseClicked(event ->{		// Gibt der HBox das ClickEvent
@@ -81,7 +79,7 @@ public class Hauptpane extends BorderPane {
 		});
 		
 		hKlausuren.setOnMouseClicked(event ->{
-			KlausurrenTab klausuren = new KlausurrenTab(start.getUser());
+			KlausurenTab klausuren = new KlausurenTab(start.getUser());
 			activeText.getStyleClass().remove("pressed");
 			activeText = klausurenText;
 			klausurenText.getStyleClass().add("pressed");	
