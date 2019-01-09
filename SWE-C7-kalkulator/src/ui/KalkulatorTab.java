@@ -57,7 +57,7 @@ public class KalkulatorTab extends QisTab {
         //*/
 
         //Output Texte des Tabs
-        Text aktDurchschnittTx = new Text("Aktuelle Durchschnittsnote:\t"+benutzer.durchschnitsNote());
+        Text aktDurchschnittTx = new Text("Aktuelle Durchschnittsnote:\t"+benutzer.durchschnittsNote());
         Text errechDurchschnittTx = new Text("Errechnete Durchschnittsnote:\t");
         Text verblVersuche = new Text("Verbleibende Verbesserungsversuche:\t" + benutzer.getVersuche());
         Text wunschnoteRechTx = new Text("Wunschnotenenrechner");
@@ -104,7 +104,7 @@ public class KalkulatorTab extends QisTab {
             //Update items in TableView
             //Durchschnitt neu berechnen - Warum? Diese ändert sich nicht.
             //Text aktualisieren
-            aktDurchschnittTx.setText("Aktuelle Durchschnittsnote:\t" + benutzer.durchschnitsNote());
+            aktDurchschnittTx.setText("Aktuelle Durchschnittsnote:\t" + benutzer.durchschnittsNote());
             verblVersuche.setText("Verbleibende Verbesserungsversuche:\t" + benutzer.getVersuche());
 
         });
@@ -118,14 +118,14 @@ public class KalkulatorTab extends QisTab {
             //TODO Berechnungsmethode Hier
 
             int gesamtcredits = 0;
-            float fixednote = 0;
             int fixedcredits = 0;
+            float scalar = 0;
 
             ArrayList<Modul> geschrieben = new ArrayList<>();
             ArrayList<Modul> zuschreiben = new ArrayList<>();
             for (int c = 0; c < daten.size(); c++){
                 gesamtcredits += daten.get(c).getCredits();
-                if (daten.get(c).isGeschrieben()){
+                if (daten.get(c).isGeschrieben() && daten.get(c).getNote() < 5){
                     geschrieben.add(daten.get(c));
                 }
                 else{
@@ -134,21 +134,30 @@ public class KalkulatorTab extends QisTab {
             }
             float wunschnote = Float.parseFloat(wunschnoteTf.getCharacters().toString());
 
-            ArrayList<Modul> verbesserbar = new ArrayList<>();
             ArrayList<Modul> fixed = new ArrayList<>();
 
             for (int c = 0; c < geschrieben.size(); c++){
                 fixed.add(geschrieben.get(c));
                 fixedcredits += geschrieben.get(c).getCredits();
-                fixednote += geschrieben.get(c).getCredits() * geschrieben.get(c).getNote();
-                System.out.println(geschrieben.get(c).toString());
+                scalar += geschrieben.get(c).getCredits() * geschrieben.get(c).getNote();
             }
-            fixednote /= gesamtcredits;
-            float restnote = (wunschnote - fixednote) / zuschreiben.size();
+            float restnote = round_note_down((wunschnote * daten.size() * gesamtcredits - scalar)/((gesamtcredits - fixedcredits) * zuschreiben.size()));
 
             for (int c = 0; c < benutzer.getStudiengang().getModule().size(); c++){
-                if (zuschreiben.contains(benutzer.getStudiengang().getModul(c))){
+                if (zuschreiben.contains(benutzer.getStudiengang().getModul(c)) || benutzer.getStudiengang().getModul(c).getNote() == 5){
                     benutzer.getStudiengang().getModul(c).setPlanNote(restnote);
+                }
+                else{
+                    benutzer.getStudiengang().getModul(c).setPlanNote(benutzer.getStudiengang().getModul(c).getNote());
+                }
+            }
+            for (int c = 0; c < benutzer.getStudiengang().getModule().size(); c++){
+                if (zuschreiben.contains(benutzer.getStudiengang().getModul(c))){
+                    benutzer.getStudiengang().getModul(c).setPlanNote(round_note_down(benutzer.getStudiengang().getModul(c).getPlanNote()));
+                }
+                System.out.println(benutzer.PlanSchnitt());
+                if (benutzer.PlanSchnitt() < wunschnote){
+                    break;
                 }
             }
             System.out.println(benutzer.toString());
@@ -221,6 +230,43 @@ public class KalkulatorTab extends QisTab {
 //		this.setGridLinesVisible(true);
 //
 //		GridPane.setHgrow(wunschnoteNichtBerTx, Priority.ALWAYS);
+
+    }
+    private float round_note_down(float Note){
+        float ganzenote = (long) Note;
+
+        if (Note%1 < 0.3){
+            Note = ganzenote;
+        }
+        else if ( Note%1 < 0.7){
+            Note = ganzenote + (float) 0.3;
+        }
+        else {
+            Note = ganzenote + (float) 0.7;
+        }
+        if (Note >5.0){
+            Note = (float) 5.0;
+        }
+        return Note;
+    }
+
+    private float round_note_up(float Note){
+        float ganzenote = (long) Note;
+
+        if (Note%1 < 0.3){
+            Note = ganzenote + (float) 0.3;
+        }
+        else if ( Note%1 < 0.7){
+            Note = ganzenote + (float) 0.7;
+        }
+        else {
+            Note = ganzenote + (float) 1;
+        }
+        if (Note < 1){
+            Note = (float) 1.0;
+        }
+        System.out.println(Note);
+        return Note;
     }
 
     class EditingCell extends TableCell<Modul, Float> {
