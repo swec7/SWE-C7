@@ -2,10 +2,7 @@ package ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.util.*;
-
-import com.sun.istack.internal.NotNull;
 import daten.Benutzer;
 import daten.Modul;
 import daten.Typ;
@@ -117,14 +114,14 @@ public class KalkulatorTab extends QisTab {
         wunschnoteBer.setOnAction(e->{
             //TODO Berechnungsmethode Hier
 
-            int gesamtcredits = 0;
+            int credit = 0;
             int fixedcredits = 0;
             float scalar = 0;
 
             ArrayList<Modul> geschrieben = new ArrayList<>();
             ArrayList<Modul> zuschreiben = new ArrayList<>();
             for (int c = 0; c < daten.size(); c++){
-                gesamtcredits += daten.get(c).getCredits();
+                credit += daten.get(c).getCredits();
                 if (daten.get(c).isGeschrieben() && daten.get(c).getNote() < 5){
                     geschrieben.add(daten.get(c));
                 }
@@ -132,74 +129,34 @@ public class KalkulatorTab extends QisTab {
                     zuschreiben.add(daten.get(c));
                 }
             }
+            float opencredit = credit - fixedcredits;
             float wunschnote = Float.parseFloat(wunschnoteTf.getCharacters().toString());
+            benutzer.setWunschNote(wunschnote);
 
             ArrayList<Modul> fixed = new ArrayList<>();
-
             for (int c = 0; c < geschrieben.size(); c++){
                 fixed.add(geschrieben.get(c));
                 fixedcredits += geschrieben.get(c).getCredits();
                 scalar += geschrieben.get(c).getCredits() * geschrieben.get(c).getNote();
             }
-            float restnote = round_note_down((wunschnote * daten.size() * gesamtcredits - scalar)/((gesamtcredits - fixedcredits) * zuschreiben.size()));
+
+            System.out.println("Exact: " + (wunschnote  * credit - scalar)/opencredit);
+            float restnote = round_note_up((wunschnote  * credit - scalar)/opencredit);
 
             for (int c = 0; c < benutzer.getStudiengang().getModule().size(); c++){
-                if (zuschreiben.contains(benutzer.getStudiengang().getModul(c)) || benutzer.getStudiengang().getModul(c).getNote() == 5){
+                if (!fixed.contains(benutzer.getStudiengang().getModul(c)) || benutzer.getStudiengang().getModul(c).getNote() == 5 || benutzer.getStudiengang().getModul(c).getNote() == 0){
                     benutzer.getStudiengang().getModul(c).setPlanNote(restnote);
                 }
                 else{
                     benutzer.getStudiengang().getModul(c).setPlanNote(benutzer.getStudiengang().getModul(c).getNote());
                 }
             }
-            for (int c = 0; c < benutzer.getStudiengang().getModule().size(); c++){
+            for (int c = 0; benutzer.PlanSchnitt() > wunschnote && c < benutzer.getStudiengang().getModule().size(); c++){
                 if (zuschreiben.contains(benutzer.getStudiengang().getModul(c))){
-                    benutzer.getStudiengang().getModul(c).setPlanNote(round_note_down(benutzer.getStudiengang().getModul(c).getPlanNote()));
-                }
-                System.out.println(benutzer.PlanSchnitt());
-                if (benutzer.PlanSchnitt() < wunschnote){
-                    break;
+                    benutzer.getStudiengang().getModul(c).setPlanNote(round_note_down(benutzer.getStudiengang().getModul(c).getPlanNote() - (float) 0.01));
                 }
             }
             System.out.println(benutzer.toString());
-            /*
-            ArrayList<Modul> verbesserbar = new ArrayList<>();
-            ArrayList<Modul> fixed = new ArrayList<>();
-            for (int c = 0; c < daten.size(); c++){
-                if (daten.get(c).isGeschrieben() && daten.get(c).getVersuche() < 3 && !daten.get(c).getTyp().toString().equals("SOFTSKILL")){ //daten.get(c).getAblaufdatum().isBefore(LocalDate.now())){
-                    verbesserbar.add(daten.get(c));
-                }
-                else if (daten.get(c).getNote() != 0){
-                    fixed.add(daten.get(c));
-                }
-            }
-            ArrayList<Modul> zuverbessern = new ArrayList<>();
-            for (int c = 0; c < benutzer.getVersuche() && c < verbesserbar.size(); c++){
-                int max = 0;
-                for (int i = 1; i < verbesserbar.size(); i++){
-                    if (verbesserbar.get(max).getNote() > verbesserbar.get(i).getNote()){
-                        max = i;
-                    }
-                }
-                zuverbessern.add(verbesserbar.get(max));
-                fixed.add(verbesserbar.get(max));
-                verbesserbar.remove(max);
-            }
-            int gesamtcredits = 0;
-            float fixednote = 0;
-            float fixedcredits = 0;
-            for (int c = 0; c < daten.size(); c++){
-                gesamtcredits += daten.get(c).getCredits();
-                if (daten.get(c).isGeschrieben() && !fixed.contains(daten.get(c))){
-                    fixednote += daten.get(c).getNote() * daten.get(c).getCredits();
-                    fixedcredits += daten.get(c).getCredits();
-                    System.out.println(daten.get(c).toString());
-                }
-            }
-            System.out.println(gesamtcredits);
-            System.out.println(fixednote);
-            System.out.println(fixedcredits);
-            */
-
         });
 
         this.add(kalkulator, 0, 0, 4, 1);
