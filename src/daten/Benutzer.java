@@ -1,7 +1,7 @@
 package daten;
 
 /**
- * Speichert alle daten die für alle tabs relevant sein können.
+ * Speichert alle daten die fÃ¼r alle tabs relevant sein kÃ¶nnen.
  *
  */
 public class Benutzer {
@@ -17,9 +17,9 @@ public class Benutzer {
 
 	/**
 	 * Berechnet die durchschnitts Note der Module. Module mit mehr Credits
-	 * werden stärker gewichtet. Module ohne Note oder Softskill Module werden
+	 * werden stÃ¤rker gewichtet. Module ohne Note oder Softskill Module werden
 	 * nicht beachtet.
-	 * 
+	 *
 	 * @return summe(note*credits)/summe(credits)
 	 */
 	public float durchschnitsNote() {
@@ -34,14 +34,14 @@ public class Benutzer {
 		if (credits == 0) {
 			return 0;
 		}
-		return summe / credits;
+		return round_note(summe / credits);
 	}
 
 	/**
 	 * Berechnet die durchschnitts Note aus den Plan-Moten der Module. Module
-	 * mit mehr Credits werden stärker gewichtet. Module ohne Plan-Note oder
+	 * mit mehr Credits werden stÃ¤rker gewichtet. Module ohne Plan-Note oder
 	 * Softskill Module werden nicht beachtet.
-	 * 
+	 *
 	 * @return summe(planNote*credits)/summe(credits)
 	 */
 	public float durchschnitsPlanNote() {
@@ -56,7 +56,30 @@ public class Benutzer {
 		if (credits == 0) {
 			return 0;
 		}
-		return summe / credits;
+		return round_note(summe / credits);
+	}
+
+	public float round_note(float Note){
+		float note = Float.parseFloat(String.format("%.1f", Note));
+		System.out.println(note);
+		if(note >= 5)
+			note = 4.0f;
+		if (note < 1)
+			note = 1.0f;
+		return note;
+	}
+
+	public float PlanSchnitt(){
+		float note = 0;
+		float credits = 0;
+		for (int c = 0; c < studiengang.getModule().size(); c++){
+			note += studiengang.getModul(c).getPlanNote() * studiengang.getModul(c).getCredits();
+			credits += studiengang.getModul(c).getCredits();
+		}
+		if (credits == 0){
+			return 0;
+		}
+		return round_note(note/credits);
 	}
 
 	public Studiengang getStudiengang() {
