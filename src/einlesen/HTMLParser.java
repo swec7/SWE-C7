@@ -57,7 +57,7 @@ public class HTMLParser {
 	private static Map<String, String[]> getMap(String path) throws FileNotFoundException, HTMLLeseException {
 		final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
 		Map<String, String[]> map = new HashMap<>();
-
+		boolean empty = true;
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		try {
@@ -72,21 +72,29 @@ public class HTMLParser {
 
 			final Matcher matcher = pattern.matcher(sb);
 
+
 			while (matcher.find()) {
+				empty = false;
 				String[] row = new String[COLLUMS - 2];
 				for (int i = 2; i < COLLUMS; i++) {
 					String s = matcher.group(i);
-					// System.out.println(s);
+					System.out.println(s);
 					row[i - 2] = s;
 				}
 				map.put(matcher.group(1), row);
 			}
-
-		} catch (ArrayIndexOutOfBoundsException e) {
+			if(empty == true) {
+				noData();
+			}
+		} catch (ArrayIndexOutOfBoundsException e) {			
 			throw new HTMLLeseException("Fehlerhafte HTML Datei (" + e.getMessage() + ")");
 		}
 		sc.close();
 		return map;
+	}
+
+	private static void noData() throws HTMLLeseException {
+		throw new HTMLLeseException("Fehlerhafte HTML Datei ( KEINE DATEN )");
 	}
 
 	static String getName(String path) throws HTMLLeseException, FileNotFoundException {
