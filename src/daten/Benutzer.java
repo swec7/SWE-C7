@@ -22,7 +22,7 @@ public class Benutzer {
 	 *
 	 * @return summe(note*credits)/summe(credits)
 	 */
-	public float durchschnitsNote() {
+	public float durchschnittsNote() {
 		float summe = 0;
 		float credits = 0;
 		for (Modul m : studiengang.getModule()) {
@@ -44,7 +44,7 @@ public class Benutzer {
 	 *
 	 * @return summe(planNote*credits)/summe(credits)
 	 */
-	public float durchschnitsPlanNote() {
+	public float durchschnittsPlanNote() {
 		float summe = 0;
 		float credits = 0;
 		for (Modul m : studiengang.getModule()) {
@@ -106,8 +106,8 @@ public class Benutzer {
 		s += "\nanz. Softskill: " + studiengang.getAnzSoftskill();
 		s += "\nmax. verbleibende Versuche: " + studiengang.getMaxVerbleibendeVersuche() + "\n\n";
 
-		s += "durchschnitts Note: " + durchschnitsNote() + "\n";
-		s += "durchschnitts Plan-Note: " + durchschnitsPlanNote() + "\n\n";
+		s += "durchschnitts Note: " + durchschnittsNote() + "\n";
+		s += "durchschnitts Plan-Note: " + durchschnittsPlanNote() + "\n\n";
 
 		s += "Modul Nr. |Name                                                        |Credits|Note|Plan  Note|Versuche|Pruefungsdatum|Ablaufdatum|Semester|Typ"
 				+ "\n";
