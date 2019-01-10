@@ -41,7 +41,7 @@ public class UebersichtTab extends QisTab {
 		// Typ.PFLICHT, 0);
 		// //END DEBUG ------------------------------------------------------
 
-		float durchschnittsnote = benutzer.durchschnitsNote();
+		float durchschnittsnote = benutzer.durchschnittsNote();
 		this.setPadding(new Insets(20, 20, 60, 20));
 
 		// Texte des Tabs
