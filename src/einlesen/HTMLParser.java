@@ -17,7 +17,6 @@ import exceptions.HTMLLeseException;
  *
  */
 public class HTMLParser {
-	private static StringBuffer sb = new StringBuffer(5000);
 	private final static String regex = "<tr>\\s.*\\s*(\\d*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)";
 	private static final int COLLUMS = 9;
 
@@ -60,6 +59,7 @@ public class HTMLParser {
 		boolean empty = true;
 		FileInputStream inputStream = null;
 		Scanner sc = null;
+		StringBuffer sb = new StringBuffer(5000);
 		try {
 			inputStream = new FileInputStream(path);
 
@@ -72,7 +72,6 @@ public class HTMLParser {
 
 			final Matcher matcher = pattern.matcher(sb);
 
-
 			while (matcher.find()) {
 				empty = false;
 				String[] row = new String[COLLUMS - 2];
@@ -83,7 +82,7 @@ public class HTMLParser {
 				}
 				map.put(matcher.group(1), row);
 			}
-			if(empty == true) {
+			if (empty == true) {
 				noData();
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
