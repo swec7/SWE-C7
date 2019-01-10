@@ -53,9 +53,9 @@ public class KlausurenTab extends QisTab {
 
 		// Output Texte des Tabs
 		Text bestandenTx = new Text("Bestandene Klausuren");
-		Text durchschnittTx = new Text("Aktuelle durchschnittsnote:\t" + durchschnittsnote);
+		Text durchschnittTx = new Text("Aktuelle Durchschnittsnote:\t" + durchschnittsnote);
 		Text verbesserungsversucheTx = new Text("Verbleibende Verbesserungsversuche:\t" + versuche);
-		Text nichtBestandenTx = new Text("nicht Bestandene Klausuren");
+		Text nichtBestandenTx = new Text("nicht bestandene Klausuren");
 		// CSS Styles der Texte
 		bestandenTx.getStyleClass().add("zueberschrift");
 		durchschnittTx.getStyleClass().add("tabtext");
