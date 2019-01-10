@@ -186,7 +186,19 @@ public class StartTab extends QisTab {
 			anzVersuche = 3;
 		});
 
-		versucheBox.getChildren().addAll(versucheTx, v0, v1, v2, v3);
+		RadioButton v4 = new RadioButton("4");
+		v3.setToggleGroup(versucheGr);
+		v3.setOnAction(event -> {
+			anzVersuche = 4;
+		});
+
+		RadioButton v5 = new RadioButton("5");
+		v3.setToggleGroup(versucheGr);
+		v3.setOnAction(event -> {
+			anzVersuche = 5;
+		});
+
+		versucheBox.getChildren().addAll(versucheTx, v0, v1, v2, v3, v4, v5);
 		this.add(versucheBox, 0, 2);
 		// this.setGridLinesVisible(true);
 	}
