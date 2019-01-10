@@ -128,18 +128,28 @@ public class UebersichtTab extends QisTab {
 				if (item == null || empty) {
 					getStyleClass().remove("rowGreen");
 					getStyleClass().remove("rowRed");
+					getStyleClass().remove("rowOrange");
 					getStyleClass().add("rowGrey");
 				} else if (item.getNote() == 0) {
 					getStyleClass().remove("rowGreen");
 					getStyleClass().remove("rowRed");
+					getStyleClass().remove("rowOrange");
 					getStyleClass().add("rowGrey");
-				} else if (item.getNote() > durchschnittsnote) {
+				} else if (item.getNote() > 4.9) {
 					getStyleClass().remove("rowGreen");
 					getStyleClass().remove("rowGrey");
+					getStyleClass().remove("rowOrange");
 					getStyleClass().add("rowRed");
-				} else {
+				} else if (item.getNote() > durchschnittsnote){
 					getStyleClass().remove("rowGrey");
 					getStyleClass().remove("rowRed");
+					getStyleClass().remove("rowGreen");
+					getStyleClass().add("rowOrange");
+				}
+				else {
+					getStyleClass().remove("rowGrey");
+					getStyleClass().remove("rowRed");
+					getStyleClass().remove("rowOrange");
 					getStyleClass().add("rowGreen");
 				}
 			}

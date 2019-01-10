@@ -125,6 +125,10 @@ Button:pressed {
 	-fx-background-color: lightgreen;
 }
 
+.rowOrange{
+	-fx-background-color: orange;
+}
+
 .table-view{
 	-fx-background-color: lightgrey ;
 	-fx-border-color: black;
