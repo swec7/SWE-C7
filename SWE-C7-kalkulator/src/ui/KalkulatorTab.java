@@ -91,7 +91,7 @@ public class KalkulatorTab extends QisTab {
         modulname.setCellValueFactory(new PropertyValueFactory<>("name"));
         credits.setCellValueFactory(new PropertyValueFactory<>("credits"));
         note.setCellValueFactory(new PropertyValueFactory<>("note"));
-        verbesserung.setCellValueFactory(new PropertyValueFactory<>("verbesserung"));
+        verbesserung.setCellValueFactory(new PropertyValueFactory<>("planNote"));
         note.setCellFactory((TableColumn<Modul, Float> param) -> new EditingCell());
         note.setOnEditCommit((TableColumn.CellEditEvent<Modul,Float> e)->  (e.getTableView().getItems().get(e.getTablePosition().getRow())).setPlanNote(e.getNewValue()));
         kalkulator.setItems(FXCollections.observableArrayList(benutzer.getStudiengang().getModule()));
