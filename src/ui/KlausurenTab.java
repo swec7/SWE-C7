@@ -1,9 +1,9 @@
 package ui;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import daten.Benutzer;
+import daten.Datum;
 import daten.Modul;
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;
@@ -77,7 +77,7 @@ public class KlausurenTab extends QisTab {
 		TableColumn<Modul, Integer> credits = new TableColumn<>("Credits");
 		TableColumn<Modul, Float> note = new TableColumn<>("Note");
 		TableColumn<Modul, Float> verbesserungspotenzial = new TableColumn<>("Verbesserungspotenzial");
-		TableColumn<Modul, LocalDate> ablaufdatum = new TableColumn<>("Ablaufdatum");
+		TableColumn<Modul, Datum> ablaufdatum = new TableColumn<>("Ablaufdatum");
 		bestandeneKlausuren.getColumns().addAll(modulname, semester, credits, note, verbesserungspotenzial,
 				ablaufdatum);
 		// Properties von bestandeneKlausuren
@@ -112,15 +112,15 @@ public class KlausurenTab extends QisTab {
 		credits1.setCellValueFactory(new PropertyValueFactory<>("credits"));
 		note.setCellValueFactory(new PropertyValueFactory<>("note"));
 		ablaufdatum.setCellValueFactory(new PropertyValueFactory<>("ablaufdatum"));
-		ablaufdatum.setCellFactory((TableColumn<Modul, LocalDate> column) -> {
-			return new TableCell<Modul, LocalDate>() {
+		ablaufdatum.setCellFactory((TableColumn<Modul, Datum> column) -> {
+			return new TableCell<Modul, Datum>() {
 				@Override
-				protected void updateItem(LocalDate item, boolean empty) {
+				protected void updateItem(Datum item, boolean empty) {
 					super.updateItem(item, empty);
 					if (item == null || empty) {
 						setText(null);
 					} else {
-						setText(item.getDayOfMonth() + "." + item.getMonthValue() + "." + item.getYear());
+						setText(item.toString());
 					}
 				}
 			};

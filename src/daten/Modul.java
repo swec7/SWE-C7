@@ -1,7 +1,5 @@
 package daten;
 
-import java.time.LocalDate;
-
 import exceptions.HTMLLeseException;
 
 /**
@@ -15,14 +13,14 @@ public class Modul {
 	private int credits;
 	private float note;
 	private int versuche;
-	private LocalDate ablaufdatum;
-	private LocalDate pruefungsDatum;
+	private Datum ablaufdatum;
+	private Datum pruefungsDatum;
 	private int semester;
 	private Typ typ;
 	private float planNote;
 
-	public Modul(int modulnummer, String name, int credits, float note, int versuche, LocalDate ablaufdatum,
-			LocalDate pruefungsDatum, int semester, Typ typ, float planNote) {
+	public Modul(int modulnummer, String name, int credits, float note, int versuche, Datum ablaufdatum,
+			Datum pruefungsDatum, int semester, Typ typ, float planNote) {
 		this.modulnummer = modulnummer;
 		this.name = name;
 		this.credits = credits;
@@ -48,9 +46,11 @@ public class Modul {
 		if (htmlZeile == null) {
 			return;
 		}
+
 		try {
 			note = Float.parseFloat(htmlZeile[3].replaceAll(",", "."));
 			versuche = (int) Float.parseFloat(htmlZeile[3].replaceAll(",", "."));
+			ablaufdatum = Datum.parseDatum(htmlZeile[2]);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			throw new HTMLLeseException(
@@ -78,11 +78,11 @@ public class Modul {
 		return versuche;
 	}
 
-	public LocalDate getAblaufdatum() {
+	public Datum getAblaufdatum() {
 		return ablaufdatum;
 	}
 
-	public LocalDate getPruefungsDatum() {
+	public Datum getPruefungsDatum() {
 		return pruefungsDatum;
 	}
 
