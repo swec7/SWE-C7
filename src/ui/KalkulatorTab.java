@@ -1,10 +1,8 @@
 package ui;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import java.time.LocalDateTime;
+import java.util.*;
 import daten.Benutzer;
 import daten.Modul;
 import daten.Typ;
@@ -26,31 +24,44 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Text;
 import javafx.util.Callback;
 
+import static java.lang.Math.round;
+import static java.lang.Math.toIntExact;
+
 public class KalkulatorTab extends QisTab {
 
-//    //DEBUG ----------------------------------------------------------
-//    //Testdaten follows
-//    Modul m1 = new Modul(51101, "Hoehere Mathematik 1", 8, 3.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
-//    Modul m2 = new Modul(51104, "Grundlagen der Informatik und hoehere Programmiersprache fuer Informatik", 11, 1.3f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
-//    Modul m3 = new Modul(55667, "Kommunikationstechnicken", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.SOFTSKILL, 0);
-//    Modul m4 = new Modul(55668, "Wissenschaftliches Arbeiten", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.SOFTSKILL, 0);
-//    Modul m5 = new Modul(52105, "Technische Informatik", 2, 1.3f, 2, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
-//    Modul m6 = new Modul(55667, "Algorithmen und Datenstrukturen", 8, -1.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.PFLICHT, 0);
-//    //END DEBUG ------------------------------------------------------
-//
-//    //List<Modul> daten = new ArrayList<>(Arrays.asList(m1,m2,m3,m4,m5,m6));
+    /*
+    //DEBUG ----------------------------------------------------------
+    //Testdaten follows
+    Modul m1 = new Modul(51101, "Hoehere Mathematik 1", 8, 3.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
+    Modul m2 = new Modul(51104, "Grundlagen der Informatik und hoehere Programmiersprache fuer Informatik", 11, 1.3f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
+    Modul m3 = new Modul(55667, "Kommunikationstechnicken", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.SOFTSKILL, 0);
+    Modul m4 = new Modul(55668, "Wissenschaftliches Arbeiten", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.SOFTSKILL, 0);
+    Modul m5 = new Modul(52105, "Technische Informatik", 2, 1.3f, 2, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
+    Modul m6 = new Modul(55667, "Algorithmen und Datenstrukturen", 8, 1.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.PFLICHT, 0);
+    //END DEBUG ------------------------------------------------------
 
+    ArrayList<Modul> daten = new ArrayList<>(Arrays.asList(m1,m2,m3,m4,m5,m6));
+    //*/
 
     public KalkulatorTab(Benutzer benutzer){
-        List<Modul> daten = benutzer.getStudiengang().getModule();
-        benutzer.getStudiengang().getModule();
+
+        /*
+        ArrayList<Modul> daten = new ArrayList<>();
+        for (int i = 0; i < benutzer.getStudiengang().getModuleSize(); i++)
+        {
+            daten.add(benutzer.getStudiengang().getModul(i));
+        }
+        //*/
+        ArrayList<Modul> daten = (ArrayList<Modul>) benutzer.getStudiengang().getModule();
+        Benutzer backup = benutzer;
+
         //Output Texte des Tabs
-        Text aktDurchschnittTx = new Text("Aktuelle Durchschnittsnote:\t");
+        Text aktDurchschnittTx = new Text("Aktuelle Durchschnittsnote:\t"+String.format("%.1f", benutzer.durchschnittsNote()));
         Text errechDurchschnittTx = new Text("Errechnete Durchschnittsnote:\t");
-        Text verblVersuche = new Text("Verbleibende Verbesserungsversuche:\t");
+        Text verblVersuche = new Text("Verbleibende Verbesserungsversuche:\t" + round(benutzer.getVersuche()));
         Text wunschnoteRechTx = new Text("Wunschnotenenrechner");
         Text wunschnoteTx = new Text("Wunschnote");
-        Text wunschnoteNichtBerTx = new Text("deine Wunschnote ist nicht ohne Verbesserungsversuche erreichbar");
+        Text wunschnoteNichtBerTx = new Text("Deine Wunschnote ist nicht ohne Verbesserungsversuche erreichbar");
         TextField wunschnoteTf = new TextField();
         //CSS Styles der Texte
         aktDurchschnittTx.getStyleClass().add("tabtext");
@@ -65,7 +76,7 @@ public class KalkulatorTab extends QisTab {
         TableView<Modul> kalkulator = new TableView<>();
         //CSS Styles der Tabelle
         kalkulator.getStyleClass().add("grey");
-        //Columns der Tabelle
+        //Colums der Tabelle
         TableColumn<Modul, String> modulname = new TableColumn<>("Modulname");
         TableColumn<Modul, Integer> credits = new TableColumn<>("Credits");
         TableColumn<Modul, Float> note = new TableColumn<>("Note");
@@ -81,16 +92,62 @@ public class KalkulatorTab extends QisTab {
         credits.setCellValueFactory(new PropertyValueFactory<>("credits"));
         note.setCellValueFactory(new PropertyValueFactory<>("note"));
         note.setCellFactory((TableColumn<Modul, Float> param) -> new EditingCell());
-        note.setOnEditCommit((TableColumn.CellEditEvent<Modul,Float> e)->
-                (e.getTableView().getItems().get(e.getTablePosition().getRow())).setPlanNote(e.getNewValue()));
-        kalkulator.setItems(FXCollections.observableArrayList(daten));
+        /*note.setOnEditCommit((TableColumn.CellEditEvent<Modul,Float> e)-> (
+                e.getTableView().getItems().get(e.getTablePosition().getRow())).setPlanNote(e.getNewValue())
+        );
+        note.setOnEditCommit((TableColumn.CellEditEvent<Modul,Float> e)-> (
+                benutzer.getStudiengang().getModul(e.getTablePosition().getRow())).setPlanNote(e.getNewValue())
+        );*/
+        //*
+        note.setOnEditCommit(e->{
+            benutzer.getStudiengang().getModul(e.getTablePosition().getRow()).setPlanNote(round_note(e.getNewValue()));
+
+            ArrayList<Modul> wertung = new ArrayList<>();
+            for (int c = 0; c < benutzer.getStudiengang().getModuleSize(); c++){
+                if (daten.get(c).isGeschrieben()  || benutzer.getStudiengang().getModul(c).getPlanNote() != 0){
+                    wertung.add(benutzer.getStudiengang().getModul(c));
+                }
+            }
+
+            float scalar = 0;
+            int partialcredit = 0;
+            for (int c = 0; c < wertung.size(); c++){
+                if (wertung.get(c).getPlanNote() == 0 && wertung.get(c).getNote() != 0){
+                    wertung.get(c).setPlanNote(wertung.get(c).getNote());
+                    scalar += wertung.get(c).getCredits() * wertung.get(c).getPlanNote();
+                    partialcredit += wertung.get(c).getCredits();
+                }
+                else if (wertung.get(c).getPlanNote() != 0){
+                    scalar += wertung.get(c).getCredits() * wertung.get(c).getPlanNote();
+                    partialcredit += wertung.get(c).getCredits();
+                }
+            }
+            float schnitt = scalar / partialcredit;
+
+
+            aktDurchschnittTx.setText("Aktuelle Durchschnittsnote:\t" + String.format("%.1f", benutzer.durchschnittsNote()));
+            verblVersuche.setText("Verbleibende Verbesserungsversuche:\t" + round(benutzer.getVersuche()));
+            errechDurchschnittTx.setText("Errechnete Durchschnittsnote:\t" + String.format("%.1f", schnitt));
+            note.setCellValueFactory(new PropertyValueFactory<>("planNote"));
+            kalkulator.refresh();
+        });//*/
+        kalkulator.setItems(FXCollections.observableArrayList(benutzer.getStudiengang().getModule()));
+
 
         Button reset = new Button("Reset");
         reset.setOnAction(e->{
             //TODO Daten aus TableView-> Plannote auf note setzen
             //Update items in TableView
-            //Durchschnitt neu berechnen
             //Text aktualisieren
+            benutzer.reset(backup);
+            for (int c = 0; c < benutzer.getStudiengang().getModule().size(); c++){
+                benutzer.getStudiengang().getModule().get(c).setPlanNote(0);
+            }
+            aktDurchschnittTx.setText("Aktuelle Durchschnittsnote:\t" + String.format("%.1f", benutzer.durchschnittsNote()));
+            verblVersuche.setText("Verbleibende Verbesserungsversuche:\t" + round(benutzer.getVersuche()));
+            errechDurchschnittTx.setText("Errechnete Durchschnittsnote:\t");
+            note.setCellValueFactory(new PropertyValueFactory<>("note"));
+            kalkulator.refresh();
         });
 
         HBox wunschnoteBox = new HBox();
@@ -99,7 +156,81 @@ public class KalkulatorTab extends QisTab {
         wunschnoteBox.getChildren().add(wunschnoteRechTx);
         Button wunschnoteBer = new Button("OK");
         wunschnoteBer.setOnAction(e->{
-            //TODO Wunschnotenrechner Methode benutzen
+            //TODO Berechnungsmethode Hier
+
+
+            float wunschnote = Float.parseFloat(wunschnoteTf.getCharacters().toString());
+            Benutzer calc = benutzer;
+            for (int c = 0; c < calc.getStudiengang().getModuleSize(); c++)
+            {
+                calc.getStudiengang().getModul(c).setPlanNote(calc.getStudiengang().getModul(c).getNote());
+            }
+
+            int credit = 0;
+            float scoreone = 0;
+            int scalar = 0;
+
+            int partial = 0;
+            for (int c = 0; c < calc.getStudiengang().getModuleSize(); c++){
+                if (calc.getStudiengang().getModul(c).getTyp() == Typ.SOFTSKILL)
+                    continue;
+                scalar += calc.getStudiengang().getModul(c).getCredits() * calc.getStudiengang().getModul(c).getPlanNote();
+                credit += calc.getStudiengang().getModul(c).getCredits();
+                if (calc.getStudiengang().getModul(c).isGeschrieben() && calc.getStudiengang().getModul(c).getNote() < 5){
+                    scoreone += calc.getStudiengang().getModul(c).getCredits() * calc.getStudiengang().getModul(c).getPlanNote();
+                }
+                else{
+                    scoreone += calc.getStudiengang().getModul(c).getCredits();
+                    partial += calc.getStudiengang().getModul(c).getCredits();
+                }
+            }
+            scoreone = round_final(scoreone/credit);
+
+            float rawscore = (wunschnote*credit - scalar)/partial;
+            float score = round_note_down((wunschnote*credit - scalar)/partial);
+
+            calc.reset(benutzer);
+            for (int c = 0; c < calc.getStudiengang().getModuleSize(); c++)
+            {
+                calc.getStudiengang().getModul(c).setPlanNote(calc.getStudiengang().getModul(c).getNote());
+            }
+
+            credit = 0;
+            float scoretwo = 0;
+            for (int c = 0; c < calc.getVersuche(); c++){
+                int max = 0;
+                for (int i = 0; i< calc.getStudiengang().getModuleSize(); i++){
+                    if (calc.getStudiengang().getModul(i).getNote() > calc.getStudiengang().getModul(max).getNote())
+                        max = i;
+                }
+                calc.getStudiengang().getModul(max).setPlanNote(1);
+            }
+
+            for (int c = 0; c < calc.getStudiengang().getModuleSize(); c++){
+                if (calc.getStudiengang().getModul(c).getTyp() == Typ.SOFTSKILL)
+                    continue;
+                credit += calc.getStudiengang().getModul(c).getCredits();
+                if (calc.getStudiengang().getModul(c).isGeschrieben() && calc.getStudiengang().getModul(c).getNote() < 5){
+                    scoretwo += calc.getStudiengang().getModul(c).getCredits() * calc.getStudiengang().getModul(c).getPlanNote();
+                }
+                else{
+                    scoretwo += calc.getStudiengang().getModul(c).getCredits();
+                }
+            }
+
+
+
+            scoretwo = round_final(scoretwo/credit);
+            Boolean without = wunschnote > scoreone;
+            Boolean with = wunschnote > scoretwo;
+            if (without)
+                wunschnoteNichtBerTx.setText("Um deine Wunschnote zu erreichen, musst du einen Notendurchschnitt von " + score + "\nin den ausstehenden Klausuren erreichen. Dazu sind keine Verbesserungsversuche notwendig");
+            else if (with)
+                wunschnoteNichtBerTx.setText("Um deine Wunschnote zu erreichen, musst du einen Notendurchschnitt von " + score + "\nin den ausstehenden Klausuren erreichen. Dazu sind Verbesserungsversuche notwendig");
+            else
+                wunschnoteNichtBerTx.setText("Deine Wunschnote ist nicht erreichbar");
+            wunschnoteNichtBerTx.setVisible(true);
+
         });
 
         this.add(kalkulator, 0, 0, 4, 1);
@@ -118,7 +249,7 @@ public class KalkulatorTab extends QisTab {
 
 //		ColumnConstraints first = new ColumnConstraints();
 //		first.setHgrow(Priority.NEVER);
-//		ColumnConstraints second = new ColumnConstraints();
+//		ColumnConstraints second = new ColumnConstraints();Eugen Burikov
 //		second.setHgrow(Priority.NEVER);
 //		ColumnConstraints third = new ColumnConstraints();
 //		third.setHgrow(Priority.NEVER);
@@ -130,6 +261,60 @@ public class KalkulatorTab extends QisTab {
 //		this.setGridLinesVisible(true);
 //
 //		GridPane.setHgrow(wunschnoteNichtBerTx, Priority.ALWAYS);
+
+    }
+    private float round_note(float Note){
+        float ganzenote = (long) Note;
+        if (Note%1 < 0.3)
+            Note = ganzenote;
+        else if ( Note%1 < 0.7)
+            Note = ganzenote + (float) 0.3;
+        else
+            Note = ganzenote + (float) 0.7;
+        if (Note < 1)
+            Note = (float) 1.0;
+        if (Note >= 4)
+            return (float) 5.0;
+        return Note;
+    }
+
+    public float round_final(float note){
+        float score = Float.parseFloat(String.format("%.1f", note));
+        if (score < 1)
+            return 1;
+        if (score > 4 && score < 5)
+            return 4;
+        if (score > 5)
+            return 5;
+        return score;
+    }
+
+    private float round_note_down(float Note){
+        float ganzenote = (long) Note;
+        if (Note%1 < 0.3)
+            Note = ganzenote;
+        else if ( Note%1 < 0.7)
+            Note = ganzenote + (float) 0.3;
+        else
+            Note = ganzenote + (float) 0.7;
+        if (Note < 1)
+            Note = (float) 1.0;
+        if (Note >= 4)
+            return (float) 4.0;
+        return Note;
+    }
+
+    private float round_note_up(float Note){
+        float ganzenote = (long) Note;
+        if (Note%1 < 0.3)
+            Note = ganzenote + (float) 0.3;
+        else if ( Note%1 < 0.7)
+            Note = ganzenote + (float) 0.7;
+        else
+            Note = ganzenote + (float) 1;
+        if (Note >= 5)
+            Note = 5f;
+        return Note;
     }
 
     class EditingCell extends TableCell<Modul, Float> {
@@ -166,11 +351,14 @@ public class KalkulatorTab extends QisTab {
                 if (isEditing()) {
                     if (textField != null) {
                         textField.setText(getString());
+
 //	                        setGraphic(null);
                     }
+
                     setText(null);
                     setGraphic(textField);
                 } else {
+
                     setText(getString());
                     setGraphic(null);
                 }
