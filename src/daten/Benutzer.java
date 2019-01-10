@@ -1,7 +1,7 @@
 package daten;
 
 /**
- * Speichert alle daten die für alle taps relevfant sein können.
+ * Speichert alle daten die für alle tabs relevant sein können.
  *
  */
 public class Benutzer {

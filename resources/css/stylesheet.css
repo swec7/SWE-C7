@@ -168,4 +168,7 @@ Button:pressed {
    -fx-text-background-color:  black;   
 }
 
+.disable {
+	-fx-background-color: lightgray;
+}
 

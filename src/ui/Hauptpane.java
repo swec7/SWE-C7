@@ -10,17 +10,18 @@ import javafx.scene.text.Text;
 public class Hauptpane extends BorderPane {
 	
 	private Text activeText; 	//Text des aktiven Tabs. Befindet sich innerhalb der klickbaren HBox
-	
+	private HBox hKlausuren;
+	private HBox hKalkulator;
+	private HBox hStart;
+	private HBox hUebersicht;
 	
 	public Hauptpane(HostServices services){
-		
-
 		this.setPrefSize(800, 600);
 		VBox box = new VBox();
 		box.getStyleClass().add("box"); 	// Fügt dem Object eine style Class aus der CSS datei hinzu
 		box.setPrefSize(200, 600);
 		box.setMaxWidth(200);
-		HBox hStart = new HBox();
+		hStart = new HBox();
 		hStart.getStyleClass().add("tabbox");
 		hStart.setAlignment(Pos.CENTER);	// Positioniert Elemente in der Mitte der von der Box zugeteilten Fläche
 		hStart.setPrefSize(200, 100);
@@ -30,34 +31,34 @@ public class Hauptpane extends BorderPane {
 		startText.getStyleClass().add("pressed");
 		activeText = startText;
 		
-		HBox hUebersicht = new HBox();
-		//hUebersicht.setDisable(true);
-		hUebersicht.getStyleClass().add("tabbox");
+		hUebersicht = new HBox();
+		hUebersicht.setDisable(true);
+		hUebersicht.getStyleClass().addAll("tabbox", "disable");
 		hUebersicht.setAlignment(Pos.CENTER);
 		hUebersicht.setPrefSize(200, 100);
 		Text uebersichtText = new Text("Übersicht");
 		uebersichtText.getStyleClass().add("tabtext");
 		hUebersicht.getChildren().add(uebersichtText);
 		
-		HBox hKlausuren = new HBox();
-		//hKlausuren.setDisable(true);
-		hKlausuren.getStyleClass().add("tabbox");
+		hKlausuren = new HBox();
+		hKlausuren.setDisable(true);
+		hKlausuren.getStyleClass().addAll("tabbox", "disable");
 		hKlausuren.setAlignment(Pos.CENTER);
 		hKlausuren.setPrefSize(200, 100);
 		Text klausurenText = new Text("Klausuren");
 		klausurenText.getStyleClass().add("tabtext");
 		hKlausuren.getChildren().add(klausurenText);
 		
-		HBox hKalkulator = new HBox();
-		//hKalkulator.setDisable(true);
-		hKalkulator.getStyleClass().add("tabbox");
+		hKalkulator = new HBox();
+		hKalkulator.setDisable(true);
+		hKalkulator.getStyleClass().addAll("tabbox", "disable");
 		hKalkulator.setAlignment(Pos.CENTER);
 		hKalkulator.setPrefSize(200, 100);
 		Text kalkulatorText = new Text("Kalkulator");
 		kalkulatorText.getStyleClass().add("tabtext");
 		hKalkulator.getChildren().add(kalkulatorText);
 		
-		StartTab start = new StartTab();
+		StartTab start = new StartTab(this);
 		start.setHostServices(services);	// setzt die HostServices für das Tab (wird beim Hyperlink benötigt)
 		//UebersichtTab uebersicht = new UebersichtTab();
 		//KlausurenTab klausuren = new KlausurenTab();
@@ -69,7 +70,7 @@ public class Hauptpane extends BorderPane {
 			startText.getStyleClass().add("pressed");	
 			this.setCenter(start);							// Wechselt Tab
 		});
-		
+
 		hUebersicht.setOnMouseClicked(event ->{
 			UebersichtTab uebersicht = new UebersichtTab(start.getUser());
 			activeText.getStyleClass().remove("pressed");
@@ -112,8 +113,23 @@ public class Hauptpane extends BorderPane {
 		this.setLeft(box);
 		this.setCenter(start);
 		this.setTop(ueberschriftBox);
+	}
 
-		
-		
+	public void disableTabs() {
+		hKlausuren.getStyleClass().add("disable");
+		hUebersicht.getStyleClass().add("disable");
+		hKalkulator.getStyleClass().add("disable");
+		hKlausuren.setDisable(true);
+		hUebersicht.setDisable(true);
+		hKalkulator.setDisable(true);
+	}
+
+	public void enableTabs() {
+		hKlausuren.getStyleClass().remove("disable");
+		hUebersicht.getStyleClass().remove("disable");
+		hKalkulator.getStyleClass().remove("disable");
+		hKlausuren.setDisable(false);
+		hUebersicht.setDisable(false);
+		hKalkulator.setDisable(false);
 	}
 }
