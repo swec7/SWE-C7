@@ -28,17 +28,17 @@ import javafx.util.Callback;
 
 public class KalkulatorTab extends QisTab {
 
-    //DEBUG ----------------------------------------------------------
-    //Testdaten follows
-    Modul m1 = new Modul(51101, "Hoehere Mathematik 1", 8, 3.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
-    Modul m2 = new Modul(51104, "Grundlagen der Informatik und hoehere Programmiersprache fuer Informatik", 11, 1.3f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
-    Modul m3 = new Modul(55667, "Kommunikationstechnicken", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.SOFTSKILL, 0);
-    Modul m4 = new Modul(55668, "Wissenschaftliches Arbeiten", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.SOFTSKILL, 0);
-    Modul m5 = new Modul(52105, "Technische Informatik", 2, 1.3f, 2, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
-    Modul m6 = new Modul(55667, "Algorithmen und Datenstrukturen", 8, -1.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.PFLICHT, 0);
-    //END DEBUG ------------------------------------------------------
-
-    //List<Modul> daten = new ArrayList<>(Arrays.asList(m1,m2,m3,m4,m5,m6));
+//    //DEBUG ----------------------------------------------------------
+//    //Testdaten follows
+//    Modul m1 = new Modul(51101, "Hoehere Mathematik 1", 8, 3.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
+//    Modul m2 = new Modul(51104, "Grundlagen der Informatik und hoehere Programmiersprache fuer Informatik", 11, 1.3f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
+//    Modul m3 = new Modul(55667, "Kommunikationstechnicken", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.SOFTSKILL, 0);
+//    Modul m4 = new Modul(55668, "Wissenschaftliches Arbeiten", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.SOFTSKILL, 0);
+//    Modul m5 = new Modul(52105, "Technische Informatik", 2, 1.3f, 2, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
+//    Modul m6 = new Modul(55667, "Algorithmen und Datenstrukturen", 8, -1.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.PFLICHT, 0);
+//    //END DEBUG ------------------------------------------------------
+//
+//    //List<Modul> daten = new ArrayList<>(Arrays.asList(m1,m2,m3,m4,m5,m6));
 
 
     public KalkulatorTab(Benutzer benutzer){
@@ -65,7 +65,7 @@ public class KalkulatorTab extends QisTab {
         TableView<Modul> kalkulator = new TableView<>();
         //CSS Styles der Tabelle
         kalkulator.getStyleClass().add("grey");
-        //Colums der Tabelle
+        //Columns der Tabelle
         TableColumn<Modul, String> modulname = new TableColumn<>("Modulname");
         TableColumn<Modul, Integer> credits = new TableColumn<>("Credits");
         TableColumn<Modul, Float> note = new TableColumn<>("Note");
@@ -81,9 +81,9 @@ public class KalkulatorTab extends QisTab {
         credits.setCellValueFactory(new PropertyValueFactory<>("credits"));
         note.setCellValueFactory(new PropertyValueFactory<>("note"));
         note.setCellFactory((TableColumn<Modul, Float> param) -> new EditingCell());
-        note.setOnEditCommit((TableColumn.CellEditEvent<Modul,Float> e)->  (e.getTableView().getItems().get(e.getTablePosition().getRow())).setPlanNote(e.getNewValue()));
+        note.setOnEditCommit((TableColumn.CellEditEvent<Modul,Float> e)->
+                (e.getTableView().getItems().get(e.getTablePosition().getRow())).setPlanNote(e.getNewValue()));
         kalkulator.setItems(FXCollections.observableArrayList(daten));
-
 
         Button reset = new Button("Reset");
         reset.setOnAction(e->{
@@ -96,13 +96,10 @@ public class KalkulatorTab extends QisTab {
         HBox wunschnoteBox = new HBox();
         wunschnoteBox.getStyleClass().add("border-top");
         wunschnoteBox.setAlignment(Pos.CENTER);
-
         wunschnoteBox.getChildren().add(wunschnoteRechTx);
-
-
         Button wunschnoteBer = new Button("OK");
         wunschnoteBer.setOnAction(e->{
-            //TODO
+            //TODO Wunschnotenrechner Methode benutzen
         });
 
         this.add(kalkulator, 0, 0, 4, 1);

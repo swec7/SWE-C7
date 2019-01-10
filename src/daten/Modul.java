@@ -7,7 +7,6 @@ import exceptions.HTMLLeseException;
 /**
  * Speichert alle daten die über ein modul verfügbar sind. nur die wunschnote
  * ist veränderbar.
- *
  */
 public class Modul {
 

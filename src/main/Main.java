@@ -10,11 +10,11 @@ public class Main extends Application {
 		launch(args); // führt start(Stage primaryStage) aus
 	}
 
+
+	@Override
 	/**
 	 * @param Stage
 	 */
-
-	@Override
 	public void start(Stage primaryStage) throws Exception {
 		/*
 		 * HostServices (Abrufbar von Application) ermöglicht öffnen des

@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 import exceptions.HTMLLeseException;
 
 /**
- * ließt eine html datei ein und speichert die daten in einer instaz von
+ * lie?t eine html datei ein und speichert die daten in einer instaz von
  * HTMLDaten.
  *
  */
@@ -22,9 +22,9 @@ public class HTMLParser {
 	private static final int COLLUMS = 9;
 
 	/**
-	 * lädt die angegebene datei und gibt ein Obejct von HTMLDaten zurück
-	 * welches alle eingelesenen Informationen enthällt.
-	 * 
+	 * l?dt die angegebene datei und gibt ein Obejct von HTMLDaten zur?ck
+	 * welches alle eingelesenen Informationen enth?llt.
+	 *
 	 * @param path
 	 *            der pfad zu der einzulesenden datei
 	 * @return ein HTMLDaten obejct mit allen eingelesenen Informationen.
@@ -57,7 +57,7 @@ public class HTMLParser {
 	private static Map<String, String[]> getMap(String path) throws FileNotFoundException, HTMLLeseException {
 		final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
 		Map<String, String[]> map = new HashMap<>();
-
+		boolean empty = true;
 		FileInputStream inputStream = null;
 		Scanner sc = null;
 		try {
@@ -72,21 +72,29 @@ public class HTMLParser {
 
 			final Matcher matcher = pattern.matcher(sb);
 
+
 			while (matcher.find()) {
+				empty = false;
 				String[] row = new String[COLLUMS - 2];
 				for (int i = 2; i < COLLUMS; i++) {
 					String s = matcher.group(i);
-					// System.out.println(s);
+					System.out.println(s);
 					row[i - 2] = s;
 				}
 				map.put(matcher.group(1), row);
 			}
-
+			if(empty == true) {
+				noData();
+			}
 		} catch (ArrayIndexOutOfBoundsException e) {
 			throw new HTMLLeseException("Fehlerhafte HTML Datei (" + e.getMessage() + ")");
 		}
 		sc.close();
 		return map;
+	}
+
+	private static void noData() throws HTMLLeseException {
+		throw new HTMLLeseException("Fehlerhafte HTML Datei ( KEINE DATEN )");
 	}
 
 	static String getName(String path) throws HTMLLeseException, FileNotFoundException {

@@ -22,17 +22,17 @@ import javafx.scene.text.Text;
 public class UebersichtTab extends QisTab{
 	//SimpleDateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 	public UebersichtTab(Benutzer benutzer){
-		//DEBUG ----------------------------------------------------------
-		//Data from parser follows
-		//float durchschnittsnote = 1.6f;
-		//Testdaten follows
-		Modul m1 = new Modul(51101, "Hoehere Mathematik 1", 8, 3.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
-		Modul m2 = new Modul(51104, "Grundlagen der Informatik und hoehere Programmiersprache fuer Informatik", 11, 1.3f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
-		Modul m3 = new Modul(55667, "Kommunikationstechnicken", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.SOFTSKILL, 0);
-		Modul m4 = new Modul(55668, "Wissenschaftliches Arbeiten", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.SOFTSKILL, 0);
-		Modul m5 = new Modul(52105, "Technische Informatik", 2, 1.3f, 2, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
-		Modul m6 = new Modul(55667, "Algorithmen und Datenstrukturen", 8, -1.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.PFLICHT, 0);
-		//END DEBUG ------------------------------------------------------
+//		//DEBUG ----------------------------------------------------------
+//		//Data from parser follows
+//		//float durchschnittsnote = 1.6f;
+//		//Testdaten follows
+//		Modul m1 = new Modul(51101, "Hoehere Mathematik 1", 8, 3.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
+//		Modul m2 = new Modul(51104, "Grundlagen der Informatik und hoehere Programmiersprache fuer Informatik", 11, 1.3f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
+//		Modul m3 = new Modul(55667, "Kommunikationstechnicken", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.SOFTSKILL, 0);
+//		Modul m4 = new Modul(55668, "Wissenschaftliches Arbeiten", 2, 0.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.SOFTSKILL, 0);
+//		Modul m5 = new Modul(52105, "Technische Informatik", 2, 1.3f, 2, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 1, Typ.PFLICHT, 0);
+//		Modul m6 = new Modul(55667, "Algorithmen und Datenstrukturen", 8, -1.0f, 1, LocalDate.of(2019, 1, 1), LocalDate.of(2018, 1, 1), 2, Typ.PFLICHT, 0);
+//		//END DEBUG ------------------------------------------------------
 
 		float durchschnittsnote = benutzer.durchschnitsNote();
 		this.setPadding(new Insets(20, 20, 60, 20));
@@ -63,59 +63,52 @@ public class UebersichtTab extends QisTab{
 		GridPane.setVgrow(uebersicht, Priority.ALWAYS);
 		uebersicht.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		//Tabelle set Items
-		//TODO Use Parser Data
 		uebersicht.setItems( FXCollections.observableList(benutzer.getStudiengang().getModule()));
 
 		modulname.setCellValueFactory(new PropertyValueFactory<>("name"));
 		semester.setCellValueFactory(new PropertyValueFactory<>("semester"));
 		credits.setCellValueFactory(new PropertyValueFactory<>("credits"));
 		note.setCellValueFactory(new PropertyValueFactory<>("note"));
-		note.setCellFactory((TableColumn<Modul, Float> column) -> {
-			return new TableCell<Modul, Float>() {
-				@Override
-				protected void updateItem(Float item, boolean empty) {
-					super.updateItem(item, empty);
-					if (item == null || item == 0 || empty) {
-						setText(null);
-					} else {
-						setText(item.toString());
+		note.setCellFactory((TableColumn<Modul, Float> column) -> new TableCell<Modul, Float>() {
+			@Override
+			protected void updateItem(Float item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item == null || item == 0 || empty) {
+					setText(null);
+				} else {
+					setText(item.toString());
 //			            if(item == 5.0f){
 //			            	getTableRow().getStyleClass().setAll("rowRed");
 //			            }else if(item>=1.0f){
 //			            	getTableRow().getStyleClass().setAll("rowGreen");
 //			            }
-					}
 				}
-			};
+			}
 		});
 		ablaufdatum.setCellValueFactory(new PropertyValueFactory<>("ablaufdatum"));
-		ablaufdatum.setCellFactory((TableColumn<Modul, LocalDate> column) -> {
-			return new TableCell<Modul, LocalDate>() {
-				@Override
-				protected void updateItem(LocalDate item, boolean empty) {
-					super.updateItem(item, empty);
-					if (item == null || empty) {
-						setText(null);
-					} else {
-						setText(item.getDayOfMonth()+"."+ item.getMonthValue()+"."+item.getYear());
-					}
+		ablaufdatum.setCellFactory((TableColumn<Modul, LocalDate> column) -> new TableCell<Modul, LocalDate>() {
+			@Override
+			protected void updateItem(LocalDate item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item == null || empty) {
+					setText(null);
+				} else {
+					setText(item.getDayOfMonth()+"."+ item.getMonthValue()+"."+item.getYear());
 				}
-			};
+			}
 		});
 		versuch.setCellValueFactory(new PropertyValueFactory<>("versuche"));
-		versuch.setCellFactory((TableColumn<Modul, Integer> column) -> {
-			return new TableCell<Modul, Integer>() {
-				@Override
-				protected void updateItem(Integer item, boolean empty) {
-					super.updateItem(item, empty);
-					if (item == null || item == 0 || empty) {
-						setText(null);
+		versuch.setCellFactory((TableColumn<Modul, Integer> column) -> new TableCell<Modul, Integer>() {
+			@Override
+			protected void updateItem(Integer item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item == null || item == 0 || empty) {
+					setText(null);
 //			            getTableRow().getStyleClass().setAll("rowGrey");
-					} else {
-						setText(item.toString());
-					}
+				} else {
+					setText(item.toString());
 				}
-			};
+			}
 		});
 
 		semester.setSortType(TableColumn.SortType.ASCENDING);
@@ -130,12 +123,11 @@ public class UebersichtTab extends QisTab{
 					getStyleClass().remove("rowGreen");
 					getStyleClass().remove("rowRed");
 					getStyleClass().add("rowGrey");
-				}else if(item.getNote()==0){
+				}else if(item.getNote() == 0){
 					getStyleClass().remove("rowGreen");
 					getStyleClass().remove("rowRed");
 					getStyleClass().add("rowGrey");
-				}else if(item.getNote()==2.0f){
-					//TODO Use Durchschnittsnote
+				}else if(item.getNote() > durchschnittsnote){
 					getStyleClass().remove("rowGreen");
 					getStyleClass().remove("rowGrey");
 					getStyleClass().add("rowRed");
