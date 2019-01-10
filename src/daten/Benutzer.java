@@ -8,11 +8,13 @@ public class Benutzer {
 
 	private Studiengang studiengang;
 	private float wunschnote;
+	private float versuche;
 
-	public Benutzer(Studiengang studiengang, float wunschnote) {
+	public Benutzer(Studiengang studiengang, float wunschnote, float versuche) {
 		super();
 		this.studiengang = studiengang;
 		this.wunschnote = wunschnote;
+		this.versuche = versuche;
 	}
 
 	/**
@@ -82,6 +84,12 @@ public class Benutzer {
 		return round_note(note/credits);
 	}
 
+
+	public void reset(Benutzer backup){
+		studiengang = backup.getStudiengang();
+		wunschnote = backup.getWunschnote();
+	}
+
 	public Studiengang getStudiengang() {
 		return studiengang;
 	}
@@ -92,6 +100,10 @@ public class Benutzer {
 
 	public float getWunschnote() {
 		return wunschnote;
+	}
+
+	public float getVersuche() {
+		return versuche;
 	}
 
 	@Override
