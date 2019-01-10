@@ -82,16 +82,16 @@ public class StartTab extends QisTab {
 		GridPane.setValignment(z3, VPos.TOP);
 		WrapLabel anleitung3 = new WrapLabel(
 				"Exportieren Sie die HTML-Seite, indem Sie Strg und s"
-						+ " auf Ihrer Tastatur Drücken oder mit Rechtsklick irgendwo auf die Seite und '(Seite)"
-						+ " speichern unter...' drücken");
+						+ " auf Ihrer Tastatur DrÃ¼cken oder mit Rechtsklick irgendwo auf die Seite und '(Seite)"
+						+ " speichern unter...' drÃ¼cken");
 
 		Label z4 = new Label("4.");
 		GridPane.setValignment(z4, VPos.TOP);
 		WrapLabel anleitung4 = new WrapLabel(
 				"Importieren Sie nun die HTML-Datei mit hilfe des '...' Buttons."
-						+ "Wählen Sie im geöffneten Datei-Browse die entsprechende Datei aus und bestätigen Sie die"
+						+ "WÃ¤hlen Sie im geÃ¶ffneten Datei-Browse die entsprechende Datei aus und bestÃ¤tigen Sie die"
 						+ "Auswahl. Im Textfeld neben dem Button wird nun der Pfad der Datei angezeigt. Zum schluss"
-						+ "drücken Sie aud 'Importieren' um die Daten in das Programm  zu Lesen");
+						+ "drÃ¼cken Sie aud 'Importieren' um die Daten in das Programm  zu Lesen");
 
 		anleitungBox.addRow(0, z1, anleitungZ1);
 		anleitungBox.addRow(1, z2, anleitung2);
@@ -212,7 +212,7 @@ public class StartTab extends QisTab {
 			}
 			// System.out.println("HALLO ICH BIN HIER");
 			return new Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i),
-					moduleCSV, htmlDaten.getMap()), 0);
+					moduleCSV, htmlDaten.getMap()), 0, anzVersuche);
 		} catch (FileNotFoundException e) {
 			importTf.setText("Datei nicht gefunden !");
 			throw e;
