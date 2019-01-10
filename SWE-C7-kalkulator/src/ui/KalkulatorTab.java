@@ -55,9 +55,9 @@ public class KalkulatorTab extends QisTab {
         ArrayList<Modul> daten = (ArrayList<Modul>) benutzer.getStudiengang().getModule();
 
         //Output Texte des Tabs
-        Text aktDurchschnittTx = new Text("Aktuelle Durchschnittsnote:\t"+benutzer.durchschnittsNote());
+        Text aktDurchschnittTx = new Text("Aktuelle Durchschnittsnote:\t"+String.format("%.1f", benutzer.durchschnittsNote()));
         Text errechDurchschnittTx = new Text("Errechnete Durchschnittsnote:\t");
-        Text verblVersuche = new Text("Verbleibende Verbesserungsversuche:\t" + benutzer.getVersuche());
+        Text verblVersuche = new Text("Verbleibende Verbesserungsversuche:\t" + round(benutzer.getVersuche()));
         Text wunschnoteRechTx = new Text("Wunschnotenenrechner");
         Text wunschnoteTx = new Text("Wunschnote");
         Text wunschnoteNichtBerTx = new Text("deine Wunschnote ist nicht ohne Verbesserungsversuche erreichbar");
@@ -106,10 +106,10 @@ public class KalkulatorTab extends QisTab {
             for (int c = 0; c < benutzer.getStudiengang().getModule().size(); c++){
                 benutzer.getStudiengang().getModule().get(c).setPlanNote(0);
             }
-            aktDurchschnittTx.setText("Aktuelle Durchschnittsnote:\t" + benutzer.durchschnittsNote());
-            verblVersuche.setText("Verbleibende Verbesserungsversuche:\t" + benutzer.getVersuche());
+            aktDurchschnittTx.setText("Aktuelle Durchschnittsnote:\t" + String.format("%.1f", benutzer.durchschnittsNote()));
+            verblVersuche.setText("Verbleibende Verbesserungsversuche:\t" + round(benutzer.getVersuche()));
             errechDurchschnittTx.setText("Errechnete Durchschnittsnote:\t");
-            kalkulator.setItems(FXCollections.observableArrayList(benutzer.getStudiengang().getModule()));
+            kalkulator.refresh();
             System.out.println(benutzer.toString());
         });
 
@@ -165,10 +165,10 @@ public class KalkulatorTab extends QisTab {
                 }
             }
 
-            aktDurchschnittTx.setText("Aktuelle Durchschnittsnote:\t" + benutzer.durchschnittsNote());
-            verblVersuche.setText("Verbleibende Verbesserungsversuche:\t" + benutzer.getVersuche());
-            errechDurchschnittTx.setText("Errechnete Durchschnittsnote:\t" + benutzer.PlanSchnitt());
-            kalkulator.setItems(FXCollections.observableArrayList(benutzer.getStudiengang().getModule()));
+            aktDurchschnittTx.setText("Aktuelle Durchschnittsnote:\t" + String.format("%.1f", benutzer.durchschnittsNote()));
+            verblVersuche.setText("Verbleibende Verbesserungsversuche:\t" + round(benutzer.getVersuche()));
+            errechDurchschnittTx.setText("Errechnete Durchschnittsnote:\t" + String.format("%.1f", benutzer.PlanSchnitt()));
+            kalkulator.refresh();
             System.out.println(benutzer.toString());
         });
 
