@@ -1,5 +1,6 @@
 package daten;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Studiengang {
@@ -39,6 +40,26 @@ public class Studiengang {
 		return module;
 	}
 
+	public List<Modul> getBModule() {
+		List<Modul> l = new ArrayList<>();
+		for (Modul modul : module) {
+			if (modul.getNote() <= 4.0 && modul.getNote() > 0) {
+				l.add(modul);
+			}
+		}
+		return l;
+	}
+
+	public List<Modul> getNModule() {
+		List<Modul> l = new ArrayList<>();
+		for (Modul modul : module) {
+			if (modul.getNote() > 4.0 && modul.getNote() > 0) {
+				l.add(modul);
+			}
+		}
+		return l;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -62,5 +83,4 @@ public class Studiengang {
 	public int getMaxVerbleibendeVersuche() {
 		return maxVerbleibendeVersuche;
 	}
-
 }
