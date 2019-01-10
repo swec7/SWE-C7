@@ -279,7 +279,8 @@ public class KalkulatorTab extends QisTab {
     }
 
     public float round_final(float note){
-        float score = Float.parseFloat(String.format("%.1f", note));
+        float score = Math.round(note*10)/10;
+
         if (score < 1)
             return 1;
         if (score > 4 && score < 5)
