@@ -61,31 +61,30 @@ public class Benutzer {
 		return round_note(summe / credits);
 	}
 
-	public float round_note(float Note){
-		float note = Float.parseFloat(String.format("%.1f", Note));
+	public float round_note(float Note) {
+		float note = Float.parseFloat(String.format("%.1f", Note).replace(",", "."));
 		System.out.println(note);
-		if(note >= 5)
+		if (note >= 5)
 			note = 4.0f;
 		if (note < 1)
 			note = 1.0f;
 		return note;
 	}
 
-	public float PlanSchnitt(){
+	public float PlanSchnitt() {
 		float note = 0;
 		float credits = 0;
-		for (int c = 0; c < studiengang.getModule().size(); c++){
+		for (int c = 0; c < studiengang.getModule().size(); c++) {
 			note += studiengang.getModul(c).getPlanNote() * studiengang.getModul(c).getCredits();
 			credits += studiengang.getModul(c).getCredits();
 		}
-		if (credits == 0){
+		if (credits == 0) {
 			return 0;
 		}
-		return round_note(note/credits);
+		return round_note(note / credits);
 	}
 
-
-	public void reset(Benutzer backup){
+	public void reset(Benutzer backup) {
 		studiengang = backup.getStudiengang();
 		wunschnote = backup.getWunschnote();
 	}
