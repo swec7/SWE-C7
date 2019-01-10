@@ -46,7 +46,8 @@ public class StartTab extends QisTab {
 		anleitungBox.setVgap(10);
 		anleitungBox.getStyleClass().add("border");
 		anleitungBox.setPadding(new Insets(15));
-		GridPane.setMargin(anleitungBox, new Insets(0, 60, 0, 0)); // setzt margin
+		GridPane.setMargin(anleitungBox, new Insets(0, 60, 0, 0)); // setzt
+																	// margin
 		// F?r die
 		// Anleitung
 		// (Ber?hrt
@@ -68,47 +69,45 @@ public class StartTab extends QisTab {
 			// QIS-Seite
 		});
 		qisLink.setMinWidth(Region.USE_PREF_SIZE);
-//		qisLink.setWrapText(true);
+		// qisLink.setWrapText(true);
 		WrapLabel anleitung1_2 = new WrapLabel(" mit Ihren Nutzerdaten an.");
 		anleitungZ1.getChildren().addAll(anleitung1_1, qisLink, anleitung1_2);
 
 		Label z2 = new Label("2.");
 		GridPane.setValignment(z2, VPos.TOP);
-		WrapLabel anleitung2 = new WrapLabel(
-				"Klicken Sie auf den Punkt 'Notenspiegel' Und danach hinter dem"
-						+ "entsprechenden Studiengang auf 'Info'.");
+		WrapLabel anleitung2 = new WrapLabel("Klicken Sie auf den Punkt 'Notenspiegel' Und danach hinter dem"
+				+ "entsprechenden Studiengang auf 'Info'.");
 
 		Label z3 = new Label("3.");
 		GridPane.setValignment(z3, VPos.TOP);
-		WrapLabel anleitung3 = new WrapLabel(
-				"Exportieren Sie die HTML-Seite, indem Sie Strg und s"
-						+ " auf Ihrer Tastatur Drücken oder mit Rechtsklick irgendwo auf die Seite und '(Seite)"
-						+ " speichern unter...' drücken");
+		WrapLabel anleitung3 = new WrapLabel("Exportieren Sie die HTML-Seite, indem Sie Strg und s"
+				+ " auf Ihrer Tastatur Drücken oder mit Rechtsklick irgendwo auf die Seite und '(Seite)"
+				+ " speichern unter...' drücken");
 
 		Label z4 = new Label("4.");
 		GridPane.setValignment(z4, VPos.TOP);
-		WrapLabel anleitung4 = new WrapLabel(
-				"Importieren Sie nun die HTML-Datei mit hilfe des '...' Buttons."
-						+ "Wählen Sie im geöffneten Datei-Browse die entsprechende Datei aus und bestätigen Sie die"
-						+ "Auswahl. Im Textfeld neben dem Button wird nun der Pfad der Datei angezeigt. Zum schluss"
-						+ "drücken Sie aud 'Importieren' um die Daten in das Programm  zu Lesen");
+		WrapLabel anleitung4 = new WrapLabel("Importieren Sie nun die HTML-Datei mit hilfe des '...' Buttons."
+				+ "Wählen Sie im geöffneten Datei-Browse die entsprechende Datei aus und bestätigen Sie die"
+				+ "Auswahl. Im Textfeld neben dem Button wird nun der Pfad der Datei angezeigt. Zum schluss"
+				+ "drücken Sie aud 'Importieren' um die Daten in das Programm  zu Lesen");
 
 		anleitungBox.addRow(0, z1, anleitungZ1);
 		anleitungBox.addRow(1, z2, anleitung2);
 		anleitungBox.addRow(2, z3, anleitung3);
 		anleitungBox.addRow(3, z4, anleitung4);
-		GridPane.setHgrow(anleitungBox, Priority.ALWAYS); // Gibt an ob das Element
+		GridPane.setHgrow(anleitungBox, Priority.ALWAYS); // Gibt an ob das
+															// Element
 		// bei resizing Horizontal
 		// gr??er werden soll/darf
 
-//		GridPane.setMargin(anleitungBox, new Insets(20, 0, 0, 20));
-//		anleitungBox.getChildren().addAll(anleitungZ1, anleitung2);
+		// GridPane.setMargin(anleitungBox, new Insets(20, 0, 0, 20));
+		// anleitungBox.getChildren().addAll(anleitungZ1, anleitung2);
 		this.add(anleitungBox, 0, 0, 2, 1);
-//		Text anleitung2 = new Text("Anleitung");
-//		this.add(anleitung2, 6, 6);
-//		TableView<String> table = new TableView<String>();
-//		table.setPrefSize(100, 100);
-//		this.add(table, 7, 7);
+		// Text anleitung2 = new Text("Anleitung");
+		// this.add(anleitung2, 6, 6);
+		// TableView<String> table = new TableView<String>();
+		// table.setPrefSize(100, 100);
+		// this.add(table, 7, 7);
 
 		// TODO
 		HBox importBox = new HBox();
@@ -124,13 +123,15 @@ public class StartTab extends QisTab {
 			FileChooser fileChooser = new FileChooser();
 			fileChooser.setTitle("Open Resource File");
 			File file = fileChooser.showOpenDialog(new Stage());
-			path = file.getAbsolutePath();
-			importTf.setText(path);
+			if (file != null) {
+				path = file.getAbsolutePath();
+				importTf.setText(path);
+			}
 			// System.out.println("FILE " + file.getAbsolutePath());
 		});
 		HBox.setHgrow(importTf, Priority.ALWAYS);
 		HBox.setHgrow(importBtn, Priority.NEVER);
-//		GridPane.setHgrow(importBox, Priority.ALWAYS);
+		// GridPane.setHgrow(importBox, Priority.ALWAYS);
 		importBox.getChildren().addAll(importTf, importBtn);
 
 		// TODO Benutzer erstellen mit path zu HTML Datei und Felder enablen
@@ -147,7 +148,7 @@ public class StartTab extends QisTab {
 				haupt.enableTabs();
 			} catch (CSVLeseException | IOException | HTMLLeseException e) {
 				importTf.setText(e.getMessage());
-				//e.printStackTrace();
+				// e.printStackTrace();
 				haupt.disableTabs();
 			}
 		});
@@ -187,32 +188,29 @@ public class StartTab extends QisTab {
 
 		versucheBox.getChildren().addAll(versucheTx, v0, v1, v2, v3);
 		this.add(versucheBox, 0, 2);
-//		this.setGridLinesVisible(true);
+		// this.setGridLinesVisible(true);
 	}
 
 	void setPath(String path) {
 		this.path = path;
 	}
 
-	public Benutzer loadBenutzer(String path)
-			throws CSVLeseException, IOException, HTMLLeseException {
+	public Benutzer loadBenutzer(String path) throws CSVLeseException, IOException, HTMLLeseException {
 		try {
 			HTMLDaten htmlDaten = HTMLParser.loadHTML(path);
 
-			List<List<String>> studiengaengeCSV = CSVReader
-					.loadCsv("Studiengaenge.csv");
+			List<List<String>> studiengaengeCSV = CSVReader.loadCsv("Studiengaenge.csv");
 			List<List<String>> moduleCSV = null;
 			int i = 1;
 			for (; i < studiengaengeCSV.size(); i++) {
 				if (htmlDaten.getStudiengang().equals(studiengaengeCSV.get(i).get(0))) {
-					moduleCSV = CSVReader
-							.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
+					moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
 					break;
 				}
 			}
 			// System.out.println("HALLO ICH BIN HIER");
-			return new Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i),
-					moduleCSV, htmlDaten.getMap()), 0, anzVersuche);
+			return new Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap()), 0,
+					anzVersuche);
 		} catch (FileNotFoundException e) {
 			importTf.setText("Datei nicht gefunden !");
 			throw e;
