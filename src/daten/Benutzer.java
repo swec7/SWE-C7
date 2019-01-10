@@ -63,7 +63,7 @@ public class Benutzer {
 
 	public float round_note(float Note) {
 		float note = Float.parseFloat(String.format("%.1f", Note).replace(",", "."));
-		System.out.println(note);
+		// System.out.println(note);
 		if (note >= 5)
 			note = 4.0f;
 		if (note < 1)

@@ -2,27 +2,57 @@ Modulnummer,Modulname,Semester,CreditPoints,Typ
 51101,Höhere Mathematik 1    ,1,8,P
 51104,Grundlagen der Informatik und höhere Programmiersprache höhere,1,11,P
 52105,Technische Informatik     ,1,8,P
-51301,Softskill-Wahlmodul 1     ,1,2,S
 52108,Höhere Mathematik 2 für Informatik  Informatik,2,6,P
 52110,Datennetze und IT-Sicherheit    ,2,8,P
 52106,Algorithmen und Datenstrukturen    ,2,8,P
 53105,Theoretische Informatik und Logik   ,2,7,P
-52301,Softskill-Wahlmodul 2     ,2,2,S
 53106,Datenbanken und Webtechnologien    ,3,8,P
 53107,"Architektur von Rechnersystemen, Betriebssystemkonzepte und verteilte und",3,8,P
 55107,Software Engineering     ,3,5,P
 53111,Objektorientierte Softwareentwicklung     ,3,5,P
 55301,BWL      ,3,4,P
-54201,Wahlmodul 1     ,4,6,W
-54202,Wahlmodul 2     ,4,6,W
-54203,Wahlmodul 3     ,4,6,W
-54204,Wahlmodul 4     ,4,6,W
-54205,Wahlmodul 5     ,4,6,W
-54206,Wahlmodul 6     ,5,6,W
-54207,Wahlmodul 7     ,5,6,W
-54208,Wahlmodul 8     ,5,6,W
-54209,Wahlmodul 9     ,5,6,W
 55201,Interdisziplinäres Projekt     ,5,6,P
 56101,Praxisprojekt      ,6,15,P
 8998,Bachelorarbeit      ,6,12,P
 8999,Bachelorkolloquium      ,6,3,P
+55623,Angewandte Mathematik     ,3,6,W
+55611,Angewandte Wahrscheinlichkeitsrechnung     ,3,6,W
+55641,Big Data Analytics I     ,3,6,W
+55642,Big Data Analytics II     ,3,6,W
+55607,Bildverarbeitung     ,3,6,W
+55757,Blended commerce     ,3,6,W
+55657,computergrafik     ,3,6,W
+55678,Development for Operations     ,3,6,W
+55638,Digital Analytics     ,3,6,W
+55746,Digitalisierung und Innovation     ,3,6,W
+55665,Einführung in die KI     ,3,6,W
+55679,Fehlertolerante Systeme     ,3,6,W
+55768,Führen im IT­Umfeld     ,3,6,W
+55760,Geschäftsprozessmanagement     ,3,6,W
+55680,Grundlagen der Medieninformatik     ,3,6,W
+55681,Grundlagen der Virtualisierung/cloud computing     ,3,6,W
+55664,IT Service Management     ,3,6,W
+55660,IT­Forensik     ,3,6,W
+55682,IT­Infrastruktur     ,3,6,W
+55683,IT­Sicherheit II     ,3,6,W
+55684,Informationssicherheitsmanagement     ,3,6,W
+55619,Kryptologie     ,3,6,W
+55763,Medienkompression und ­übertragung     ,3,6,W
+55756,Medienproduktion     ,3,6,W
+55762,Mediensicherheit und ­forensik     ,3,6,W
+55685,Konzepte moderner Programmiersprachen     ,3,6,W
+55771,Requirements Engineering     ,3,6,W
+55686,Robotik     ,3,6,W
+55711,User centered Project Management     ,3,6,W
+55689,Verteilte Systeme 2     ,3,6,W
+55636,Web Application Security     ,3,6,W
+55690,Virtual Reality/Augmented Reality     ,3,6,W
+55639,Wissensrepräsentation und High­level control     ,3,6,W
+55671,Training allgemeiner Kompetenzen     ,3,2,S
+55693,Technisches Englisch     ,3,2,S
+55695,Lern­ und Selbstmanagement     ,3,2,S
+55667,Kommunikationstechniken     ,3,2,S
+55668,Wissenschaftliches Arbeiten     ,3,2,S
+55669,Tutorenarbeit     ,3,2,S
+55672,Gremientätigkeit     ,3,2,S
+55670,studentische Projekte (K1 genehmigt)     ,3,2,S
