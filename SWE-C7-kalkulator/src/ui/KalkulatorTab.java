@@ -45,13 +45,14 @@ public class KalkulatorTab extends QisTab {
 
     public KalkulatorTab(Benutzer benutzer){
 
-        //*
+        /*
         ArrayList<Modul> daten = new ArrayList<>();
         for (int i = 0; i < benutzer.getStudiengang().getModuleSize(); i++)
         {
             daten.add(benutzer.getStudiengang().getModul(i));
         }
         //*/
+        ArrayList<Modul> daten = (ArrayList<Modul>) benutzer.getStudiengang().getModule();
 
         //Output Texte des Tabs
         Text aktDurchschnittTx = new Text("Aktuelle Durchschnittsnote:\t"+benutzer.durchschnittsNote());
@@ -90,20 +91,26 @@ public class KalkulatorTab extends QisTab {
         modulname.setCellValueFactory(new PropertyValueFactory<>("name"));
         credits.setCellValueFactory(new PropertyValueFactory<>("credits"));
         note.setCellValueFactory(new PropertyValueFactory<>("note"));
+        verbesserung.setCellValueFactory(new PropertyValueFactory<>("verbesserung"));
         note.setCellFactory((TableColumn<Modul, Float> param) -> new EditingCell());
         note.setOnEditCommit((TableColumn.CellEditEvent<Modul,Float> e)->  (e.getTableView().getItems().get(e.getTablePosition().getRow())).setPlanNote(e.getNewValue()));
-        kalkulator.setItems(FXCollections.observableArrayList(daten));
+        kalkulator.setItems(FXCollections.observableArrayList(benutzer.getStudiengang().getModule()));
 
 
         Button reset = new Button("Reset");
         reset.setOnAction(e->{
             //TODO Daten aus TableView-> Plannote auf note setzen
             //Update items in TableView
-            //Durchschnitt neu berechnen - Warum? Diese ändert sich nicht.
             //Text aktualisieren
+
+            for (int c = 0; c < benutzer.getStudiengang().getModule().size(); c++){
+                benutzer.getStudiengang().getModule().get(c).setPlanNote(0);
+            }
             aktDurchschnittTx.setText("Aktuelle Durchschnittsnote:\t" + benutzer.durchschnittsNote());
             verblVersuche.setText("Verbleibende Verbesserungsversuche:\t" + benutzer.getVersuche());
-
+            errechDurchschnittTx.setText("Errechnete Durchschnittsnote:\t");
+            kalkulator.setItems(FXCollections.observableArrayList(benutzer.getStudiengang().getModule()));
+            System.out.println(benutzer.toString());
         });
 
         HBox wunschnoteBox = new HBox();
@@ -129,18 +136,19 @@ public class KalkulatorTab extends QisTab {
                     zuschreiben.add(daten.get(c));
                 }
             }
-            float opencredit = credit - fixedcredits;
             float wunschnote = Float.parseFloat(wunschnoteTf.getCharacters().toString());
+            
             benutzer.setWunschNote(wunschnote);
 
             ArrayList<Modul> fixed = new ArrayList<>();
             for (int c = 0; c < geschrieben.size(); c++){
+                //hier abfrage für zu verbessernde
                 fixed.add(geschrieben.get(c));
                 fixedcredits += geschrieben.get(c).getCredits();
                 scalar += geschrieben.get(c).getCredits() * geschrieben.get(c).getNote();
             }
 
-            System.out.println("Exact: " + (wunschnote  * credit - scalar)/opencredit);
+            float opencredit = credit - fixedcredits;
             float restnote = round_note_up((wunschnote  * credit - scalar)/opencredit);
 
             for (int c = 0; c < benutzer.getStudiengang().getModule().size(); c++){
@@ -151,11 +159,16 @@ public class KalkulatorTab extends QisTab {
                     benutzer.getStudiengang().getModul(c).setPlanNote(benutzer.getStudiengang().getModul(c).getNote());
                 }
             }
-            for (int c = 0; benutzer.PlanSchnitt() > wunschnote && c < benutzer.getStudiengang().getModule().size(); c++){
-                if (zuschreiben.contains(benutzer.getStudiengang().getModul(c))){
-                    benutzer.getStudiengang().getModul(c).setPlanNote(round_note_down(benutzer.getStudiengang().getModul(c).getPlanNote() - (float) 0.01));
+            for (int c = 0; benutzer.PlanSchnitt() > wunschnote; c++){
+                if (zuschreiben.contains(benutzer.getStudiengang().getModul(c % benutzer.getStudiengang().getModule().size()))){
+                    benutzer.getStudiengang().getModul(c % benutzer.getStudiengang().getModule().size()).setPlanNote(round_note_down(benutzer.getStudiengang().getModul(c % benutzer.getStudiengang().getModule().size()).getPlanNote() - (float) 0.01));
                 }
             }
+
+            aktDurchschnittTx.setText("Aktuelle Durchschnittsnote:\t" + benutzer.durchschnittsNote());
+            verblVersuche.setText("Verbleibende Verbesserungsversuche:\t" + benutzer.getVersuche());
+            errechDurchschnittTx.setText("Errechnete Durchschnittsnote:\t" + benutzer.PlanSchnitt());
+            kalkulator.setItems(FXCollections.observableArrayList(benutzer.getStudiengang().getModule()));
             System.out.println(benutzer.toString());
         });
 
@@ -191,38 +204,27 @@ public class KalkulatorTab extends QisTab {
     }
     private float round_note_down(float Note){
         float ganzenote = (long) Note;
-
-        if (Note%1 < 0.3){
+        if (Note%1 < 0.3)
             Note = ganzenote;
-        }
-        else if ( Note%1 < 0.7){
+        else if ( Note%1 < 0.7)
             Note = ganzenote + (float) 0.3;
-        }
-        else {
+        else
             Note = ganzenote + (float) 0.7;
-        }
-        if (Note >5.0){
+        if (Note >5.0)
             Note = (float) 5.0;
-        }
         return Note;
     }
 
     private float round_note_up(float Note){
         float ganzenote = (long) Note;
-
-        if (Note%1 < 0.3){
+        if (Note%1 < 0.3)
             Note = ganzenote + (float) 0.3;
-        }
-        else if ( Note%1 < 0.7){
+        else if ( Note%1 < 0.7)
             Note = ganzenote + (float) 0.7;
-        }
-        else {
+        else
             Note = ganzenote + (float) 1;
-        }
-        if (Note < 1){
+        if (Note < 1)
             Note = (float) 1.0;
-        }
-        System.out.println(Note);
         return Note;
     }
 
