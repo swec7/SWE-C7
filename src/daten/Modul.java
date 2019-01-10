@@ -18,7 +18,9 @@ public class Modul {
 	private int semester;
 	private Typ typ;
 	private float planNote;
-
+	private float verbesserungspotenzial;
+	
+	
 	public Modul(int modulnummer, String name, int credits, float note, int versuche, Datum ablaufdatum,
 			Datum pruefungsDatum, int semester, Typ typ, float planNote) {
 		this.modulnummer = modulnummer;
@@ -51,6 +53,7 @@ public class Modul {
 			note = Float.parseFloat(htmlZeile[3].replaceAll(",", "."));
 			versuche = (int) Float.parseFloat(htmlZeile[3].replaceAll(",", "."));
 			ablaufdatum = Datum.parseDatum(htmlZeile[2]);
+			this.verbesserungspotenzial = (this.note - 1.0f)*this.credits;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			throw new HTMLLeseException(
@@ -82,6 +85,10 @@ public class Modul {
 		return ablaufdatum;
 	}
 
+	public float getVerbesserungspotenzial() {
+		return verbesserungspotenzial;
+	}
+	
 	public Datum getPruefungsDatum() {
 		return pruefungsDatum;
 	}
