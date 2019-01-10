@@ -25,7 +25,7 @@ public class Factory {
 				break;
 			}
 		}
-		return new Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap()), 0);
+		return new Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap()), 0, 0);
 	}
 
 	public static Modul buildModul(List<String> csvZeile) throws CSVLeseException {
@@ -40,7 +40,7 @@ public class Factory {
 			semester = Integer.parseInt(csvZeile.get(2));
 			typ = Typ.parseTyp(csvZeile.get(4));
 		} catch (NumberFormatException | TypFormatException e) {
-			throw new CSVLeseException("Ungültiger Wert");
+			throw new CSVLeseException("UngÃ¼ltiger Wert");
 		} catch (IndexOutOfBoundsException e) {
 			throw new CSVLeseException("Fehlender Wert");
 		}
@@ -66,7 +66,7 @@ public class Factory {
 			anzSoftskill = Integer.parseInt(studiengangDaten.get(4));
 			maxVerbleibendeVersuche = 0;
 		} catch (NumberFormatException e) {
-			throw new CSVLeseException("Ungültiger Wert");
+			throw new CSVLeseException("UngÃ¼ltiger Wert");
 		} catch (IndexOutOfBoundsException e) {
 			throw new CSVLeseException("Fehlender Wert");
 		}
