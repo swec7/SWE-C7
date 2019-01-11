@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 import daten.Benutzer;
+import daten.Studiengang;
 import einlesen.CSVReader;
 import einlesen.Factory;
 import einlesen.HTMLDaten;
@@ -39,6 +40,8 @@ public class StartTab extends QisTab {
 
 	TextField importTf;
 
+	Factory factory = new Factory();
+	
 	public StartTab(Hauptpane haupt) {
 
 		GridPane anleitungBox = new GridPane();
@@ -215,14 +218,22 @@ public class StartTab extends QisTab {
 			List<List<String>> moduleCSV = null;
 			int i = 1;
 			for (; i < studiengaengeCSV.size(); i++) {
+				System.out.println(htmlDaten.getStudiengang() + " == " + studiengaengeCSV.get(i).get(0));
 				if (htmlDaten.getStudiengang().equals(studiengaengeCSV.get(i).get(0))) {
 					moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
+					System.out.println(moduleCSV);
 					break;
 				}
 			}
 			// System.out.println("HALLO ICH BIN HIER");
-			return new Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap()), 0,
+			//return new Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap()), 0,anzVersuche);
+			System.out.println(i);
+			Studiengang stud = Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap());
+			Benutzer ben = new Benutzer(stud, 0,
 					anzVersuche);
+			
+			return ben;
+			
 		} catch (FileNotFoundException e) {
 			importTf.setText("Datei nicht gefunden !");
 			throw e;

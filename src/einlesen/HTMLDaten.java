@@ -8,7 +8,7 @@ import java.util.Map;
  *
  */
 public class HTMLDaten {
-	private String studiengang;
+	private String studiengang = "";
 	private Map<String, String[]> map;
 
 	public HTMLDaten(String studiengang, Map<String, String[]> map) {
@@ -18,7 +18,8 @@ public class HTMLDaten {
 	}
 
 	public String getStudiengang() {
-		return "Informatik";
+		//return "Informatik";
+		return studiengang;
 	}
 
 	public void setStudiengang(String studiengang) {

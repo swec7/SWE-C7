@@ -44,22 +44,27 @@ public class Modul {
 	 *             wenn beim lesen der HTML daten ein Fehler auftritt.
 	 */
 	public void loadQIS(String[] htmlZeile) throws HTMLLeseException {
+//		System.out.println("[00]DEBUG");
 		if (htmlZeile == null) {
 			return;
 		}
+//		System.out.println("[01]DEBUG");
 		// for (String string : htmlZeile) {
 		// System.out.print(string + "|");
 		// }
 		// System.out.println();
 		try {
+//			System.out.println("[02]DEBUG");
 			if (htmlZeile[3].isEmpty()) {
 				note = 0;
 			} else {
 				note = Float.parseFloat(htmlZeile[3].replaceAll(",", "."));
 			}
+//			System.out.println("[03]DEBUG");
 			versuche = (int) Float.parseFloat(htmlZeile[6].replaceAll(",", "."));
 			ablaufdatum = Datum.parseDatum(htmlZeile[2]);
 			this.verbesserungspotenzial = (this.note - 1.0f) * this.credits;
+//			System.out.println("[04]DEBUG");
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			throw new HTMLLeseException(
