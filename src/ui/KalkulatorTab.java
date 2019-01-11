@@ -385,11 +385,39 @@ public class KalkulatorTab extends QisTab {
         private void createTextField() {
             textField = new TextField(getString());
             textField.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
-            textField.setOnAction((e) -> commitEdit(Float.parseFloat(textField.getText())));
+            textField.setOnAction((e) -> {
+                float number = 2.0f;
+                try {
+                    number = Float.parseFloat(textField.getText());
+                } catch (NumberFormatException exc) {
+                    try {
+                        String s = textField.getText();
+                        s = s.replaceAll(",",".");
+                        number = Float.parseFloat(s);
+                    }
+                    catch (NumberFormatException ex) {
+                        number = super.getItem().floatValue();
+                    }
+                }
+                commitEdit(number);
+            });
             textField.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
                 if (!newValue) {
 //	                    System.out.println("Commiting " + textField.getText());
-                    commitEdit(Float.parseFloat(textField.getText()));
+                    float number;
+                    try {
+                        number = Float.parseFloat(textField.getText());
+                    } catch (NumberFormatException exc) {
+                        try {
+                            String s = textField.getText();
+                            s = s.replaceAll(",",".");
+                            number = Float.parseFloat(s);
+                        }
+                        catch (NumberFormatException ex) {
+                            number = super.getItem().floatValue();
+                        }
+                    }
+                    commitEdit(number);
                 }
             });
         }
