@@ -70,8 +70,7 @@ public class UebersichtTab extends QisTab {
 		GridPane.setVgrow(uebersicht, Priority.ALWAYS);
 		uebersicht.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		// Tabelle set Items
-		uebersicht.setItems(FXCollections.observableList(benutzer.getStudiengang().getModule()));
-
+		uebersicht.setItems(FXCollections.observableList(benutzer.getStudiengang().getModule()));		
 		modulname.setCellValueFactory(new PropertyValueFactory<>("name"));
 		semester.setCellValueFactory(new PropertyValueFactory<>("semester"));
 		credits.setCellValueFactory(new PropertyValueFactory<>("credits"));

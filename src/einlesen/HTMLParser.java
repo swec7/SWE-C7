@@ -17,6 +17,9 @@ import exceptions.HTMLLeseException;
  *
  */
 public class HTMLParser {
+	/*
+	 * <tr>\s.*\s*(\d*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)
+	 */
 	private final static String regex = "<tr>\\s.*\\s*(\\d*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)";
 	private static final int COLLUMS = 9;
 
@@ -77,7 +80,7 @@ public class HTMLParser {
 				String[] row = new String[COLLUMS - 2];
 				for (int i = 2; i < COLLUMS; i++) {
 					String s = matcher.group(i);
-					// System.out.println(s);
+					//System.out.println(s);
 					row[i - 2] = s;
 				}
 				map.put(matcher.group(1), row);
@@ -89,6 +92,7 @@ public class HTMLParser {
 			throw new HTMLLeseException("Fehlerhafte HTML Datei (" + e.getMessage() + ")");
 		}
 		sc.close();
+		
 		return map;
 	}
 

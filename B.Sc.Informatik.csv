@@ -1,8 +1,8 @@
-Modulnummer,Modulname,Semester,CreditPoints,Typ
+﻿Modulnummer,Modulname,Semester,CreditPoints,Typ
 51101,Höhere Mathematik 1    ,1,8,P
 51104,Grundlagen der Informatik und höhere Programmiersprache höhere,1,11,P
 52105,Technische Informatik     ,1,8,P
-52108,Höhere Mathematik 2 für Informatik  Informatik,2,6,P
+52108,Höhere Mathematik 2 für Informatik ,2,6,P
 52110,Datennetze und IT-Sicherheit    ,2,8,P
 52106,Algorithmen und Datenstrukturen    ,2,8,P
 53105,Theoretische Informatik und Logik   ,2,7,P
