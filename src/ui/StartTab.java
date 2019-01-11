@@ -187,14 +187,14 @@ public class StartTab extends QisTab {
 		});
 
 		RadioButton v4 = new RadioButton("4");
-		v3.setToggleGroup(versucheGr);
-		v3.setOnAction(event -> {
+		v4.setToggleGroup(versucheGr);
+		v4.setOnAction(event -> {
 			anzVersuche = 4;
 		});
 
 		RadioButton v5 = new RadioButton("5");
-		v3.setToggleGroup(versucheGr);
-		v3.setOnAction(event -> {
+		v5.setToggleGroup(versucheGr);
+		v5.setOnAction(event -> {
 			anzVersuche = 5;
 		});
 
