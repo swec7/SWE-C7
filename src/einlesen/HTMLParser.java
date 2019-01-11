@@ -103,7 +103,7 @@ public class HTMLParser {
 	static String getName(String path) throws HTMLLeseException, FileNotFoundException {
 		StringBuffer sb = new StringBuffer(5000);
 		String course_n = "";
-		Pattern course_name = Pattern.compile("align..left.colspan=.9.>\\s*(.*)<.th><.tr>");
+		Pattern course_name = Pattern.compile("align..left.*colspan=.9.>\\s*(.*)<.th><.tr>");
 		Matcher course_name_matcher;
 
 		FileInputStream inputStream = null;
@@ -119,6 +119,7 @@ public class HTMLParser {
 		course_name_matcher = course_name.matcher(sb);
 		while (course_name_matcher.find()) {
 			course_n = course_name_matcher.group(1);
+			System.out.println(course_n);
 		}
 		sc.close();
 		return course_n;
