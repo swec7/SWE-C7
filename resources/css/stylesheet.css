@@ -177,5 +177,6 @@ Button:pressed {
 }
 
 .redText {
-	-fx-text-text-color: red;
+	-fx-text-fill: red;
+	-fx-text-inner-color: red;
 }
