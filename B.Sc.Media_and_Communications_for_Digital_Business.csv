@@ -1,42 +1,42 @@
-Modulname,Semester,CreditPoints,Typ
-Grundlagen der Informatik und hÃ¶here Programmiersprache,1,11,P
-EinfÃ¼hrung in die Kommunikations- und Medientheorie,1,5,P
-Grundlagen der Betriebswirtschaft,1,5,P
-Grundlagen des Design,1,8,P
-Journalistik,1,2,P
-Grundlagen der Medieninformatik,2,6,P
-Kontextbezogene Kommunikation,2,5,P
-Mediendramaturgie,2,5,P
-Journalistik II,2,2,P
-Grundlagen des Rechnungswesens und der finanzorientierten,2,5,P
-Wirtschaftsprivatrecht,2,5,P
-Datenbanken und Webtechnologien,3,8,P
-Medientechnik,3,8,P
-Kommunikationstechniken,3,5,P
-Grundlagen des Marketing,3,7,P
-Projektmanagement,3,3,P
-InterdisziplinÃ¤res,5,6,P
-Praxisprojekt,6,15,P
-Bachelor-Arbeit,6,12,P
-Kolloquium,6,3,P
+Modulnummer,Modulname,Semester,CreditPoints,Typ
+51189,Grundlagen der Informatik und höhere Programmiersprache,1,11,P
+51195,Einführung in die Kommunikations- und Medientheorie,1,5,P
+51198,Grundlagen der Betriebswirtschaft,1,5,P
+51199,Grundlagen des Design,1,8,P
+51194,Journalistik,1,2,P
+52189,Grundlagen der Medieninformatik,2,6,P
+52188,Kontextbezogene Kommunikation,2,5,P
+52195,Mediendramaturgie,2,5,P
+52187,Journalistik II,2,2,P
+52199,Grundlagen des Rechnungswesens und der finanzorientierten Unternehmensführung,2,5,P
+52186,Wirtschaftsprivatrecht,2,5,P
+53189,Datenbanken und Webtechnologien,3,8,P
+53188,Medientechnik,3,8,P
+53195,Kommunikationstechniken,3,5,P
+53199,Grundlagen des Marketing,3,7,P
+53187,Projektmanagement,3,3,P
+54120,Interdisziplinäres Projekt,5,6,P
+56101,Praxisprojekt,6,15,P
+8988,Bachelor-Arbeit,6,12,P
+8999,Kolloquium,6,3,P
 55757,Blended Commerce,4,6,W
 55713,Change Management,4,6,W
 55755,Customer Insights & Marketing Performance,4,6,W
 55746,Digitalisierung und Innovation,4,6,W
 55638,Digital Analytics,4,6,W
 55752,Editorial Design,4,6,W
-55768,FÃ¼hren im ITÂ­Umfeld,4,6,W
-55760,GeschÃ¤ftsprozessmanagement,4,6,W
+55768,Führen im IT­Umfeld,4,6,W
+55760,Geschäftsprozessmanagement,4,6,W
 55664,IT Service Management,4,6,W
 55764,Medienentwicklung,4,6,W
-55763,Medienkompression und Â­Ã¼bertragung,4,6,W
-55769,MedienÃ¶konomie,4,6,W
+55763,Medienkompression und Übertragung,4,6,W
+55769,Medienökonomie,4,6,W
 55756,Medienproduktion,4,6,W
-55762,Mediensicherheit und Â­forensik,4,6,W
+55762,Mediensicherheit und IT­forensik,4,6,W
 55758,Mobile Data, Sensors, Location,4,6,W
-55770,OnlineÂ­Marketing,4,6,W
+55770,Online­Marketing,4,6,W
 55771,Requirements Engineering,4,6,W
-55765,Strategische UnternehmensÂ­ und Marketingkommunikation,4,6,W
+55765,Strategische Unternehmens­ und Marketingkommunikation,4,6,W
 55766,Strategische Mediengestaltung,4,6,W
 55711,User Centered Project Management,4,6,W
 55767,Verhandlungstechniken und Konfliktmanagement,4,6,W
@@ -44,8 +44,8 @@ Kolloquium,6,3,P
 55636,Web Application Security,4,6,W
 55671,Training allgemeiner Kompetenzen,3,2,S
 55693,Technisches Englisch,3,2,S
-55695,LernÂ­ und Selbstmanagement,3,2,S
+55695,Lern­ und Selbstmanagement,3,2,S
 55668,Wissenschaftliches Arbeiten,3,2,S
 55669,Tutorenarbeit,3,2,S
-55672,GremientÃ¤tigkeit,3,2,S
+55672,Gremientätigkeit,3,2,S
 55670,studentische Projekte (K1 genehmigt),3,2,S
