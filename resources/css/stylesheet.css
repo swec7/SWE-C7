@@ -176,3 +176,6 @@ Button:pressed {
 	-fx-background-color: lightgray;
 }
 
+.redText {
+	-fx-text-text-color: red;
+}

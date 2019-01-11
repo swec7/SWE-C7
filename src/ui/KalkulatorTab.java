@@ -158,8 +158,20 @@ public class KalkulatorTab extends QisTab {
         wunschnoteBer.setOnAction(e->{
             //TODO Berechnungsmethode Hier
 
-
-            float wunschnote = Float.parseFloat(wunschnoteTf.getCharacters().toString());
+            float wunschnote = 2.5f;
+            boolean wrongFormat = false;
+            try {
+                wunschnote = Float.parseFloat(wunschnoteTf.getCharacters().toString());
+            } catch (NumberFormatException exc) {
+                try {
+                    String s = wunschnoteTf.getCharacters().toString();
+                    s = s.replaceAll(",",".");
+                    wunschnote = Float.parseFloat(s);
+                }
+                catch (NumberFormatException ex) {
+                    wrongFormat = true;
+                }
+            }
             Benutzer calc = benutzer;
             for (int c = 0; c < calc.getStudiengang().getModuleSize(); c++)
             {
@@ -223,7 +235,11 @@ public class KalkulatorTab extends QisTab {
             scoretwo = round_final(scoretwo/credit);
             Boolean without = wunschnote > scoreone;
             Boolean with = wunschnote > scoretwo;
-            if (without)
+            if(wrongFormat) {
+                wunschnoteNichtBerTx.setText("Ungültige Eingabe");
+                wunschnoteNichtBerTx.getStyleClass().add("redText");
+            }
+            else if (without)
                 wunschnoteNichtBerTx.setText("Um deine Wunschnote zu erreichen, musst du einen Notendurchschnitt von " + score + "\nin den ausstehenden Klausuren erreichen. Dazu sind keine Verbesserungsversuche notwendig");
             else if (with)
                 wunschnoteNichtBerTx.setText("Um deine Wunschnote zu erreichen, musst du einen Notendurchschnitt von " + score + "\nin den ausstehenden Klausuren erreichen. Dazu sind Verbesserungsversuche notwendig");
