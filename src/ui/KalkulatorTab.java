@@ -281,13 +281,7 @@ public class KalkulatorTab extends QisTab {
     }
     private float round_note(float Note){
         float ganzenote = Math.round(Note*10)/10;
-        if (Note == 1.3)
-            return Note;
-        else if (Note == 2.3)
-            return Note;
-        else if (Note == 3.3)
-            return Note;
-        if (Note - ganzenote < 0.3)
+        if (Note - ganzenote < 0.299)
             Note = ganzenote;
         else if (Note%1 < 0.7)
             Note = ganzenote + (float) 0.3;
@@ -299,6 +293,7 @@ public class KalkulatorTab extends QisTab {
             return (float) 5.0;
         return Note;
     }
+
     public float round_final(float note){
         float score = Math.round(note*10)/10;
 
@@ -313,7 +308,7 @@ public class KalkulatorTab extends QisTab {
 
     private float round_note_down(float Note){
         float ganzenote = (long) Note;
-        if (Note%1 < 0.3)
+        if (Note%1 < 0.299)
             Note = ganzenote;
         else if ( Note%1 < 0.7)
             Note = ganzenote + (float) 0.3;
@@ -328,7 +323,7 @@ public class KalkulatorTab extends QisTab {
 
     private float round_note_up(float Note){
         float ganzenote = (long) Note;
-        if (Note%1 < 0.3)
+        if (Note%1 < 0.299)
             Note = ganzenote + (float) 0.3;
         else if ( Note%1 < 0.7)
             Note = ganzenote + (float) 0.7;
@@ -338,6 +333,7 @@ public class KalkulatorTab extends QisTab {
             Note = 5f;
         return Note;
     }
+
 
     class EditingCell extends TableCell<Modul, Float> {
         private TextField textField;
