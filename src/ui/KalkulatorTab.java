@@ -236,7 +236,7 @@ public class KalkulatorTab extends QisTab {
             Boolean without = wunschnote > scoreone;
             Boolean with = wunschnote > scoretwo;
             if(wrongFormat) {
-                wunschnoteNichtBerTx.setText("Ungültige Eingabe");
+                wunschnoteNichtBerTx.setText("UngÃ¼ltige Eingabe");
                 wunschnoteNichtBerTx.getStyleClass().add("redText");
             }
             else if (without)
@@ -280,10 +280,16 @@ public class KalkulatorTab extends QisTab {
 
     }
     private float round_note(float Note){
-        float ganzenote = (long) Note;
-        if (Note%1 < 0.3)
+        float ganzenote = Math.round(Note*10)/10;
+        if (Note == 1.3)
+            return Note;
+        else if (Note == 2.3)
+            return Note;
+        else if (Note == 3.3)
+            return Note;
+        if (Note - ganzenote < 0.3)
             Note = ganzenote;
-        else if ( Note%1 < 0.7)
+        else if (Note%1 < 0.7)
             Note = ganzenote + (float) 0.3;
         else
             Note = ganzenote + (float) 0.7;
@@ -293,7 +299,6 @@ public class KalkulatorTab extends QisTab {
             return (float) 5.0;
         return Note;
     }
-
     public float round_final(float note){
         float score = Math.round(note*10)/10;
 
