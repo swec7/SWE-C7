@@ -42,6 +42,6 @@ public class Datum {
 
 	@Override
 	public String toString() {
-		return tag + "." + monat + "." + jahr;
+		return String.format("%02d", tag) + "." + String.format("%02d", monat) + "." + jahr;
 	}
 }
