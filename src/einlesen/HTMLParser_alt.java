@@ -217,7 +217,7 @@ public class HTMLParser_alt {
 								+ "|" + "\t");
 
 			}
-			System.out.println();
+			// System.out.println();
 		}
 
 		// von lukas

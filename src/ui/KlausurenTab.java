@@ -126,23 +126,16 @@ public class KlausurenTab extends QisTab {
 			};
 		});
 		verbesserungspotenzial.setCellValueFactory(new PropertyValueFactory<>("verbesserungspotenzial"));
-		
+
 		/*
-		verbesserungspotenzial.setCellFactory((TableColumn<Modul, Modul> column) -> {
-			return new TableCell<Modul, Modul>() {
-				@Override
-				protected void updateItem(Modul item, boolean empty) {
-					super.updateItem(item, empty);
-					// ---------> Methode fuer verbesserungsversuch
-					if (item == null || empty) {
-						setText(null);
-					} else {
-						setText(""+ item.getModulnummer());
-					}
-				}
-			};
-		});
-		*/
+		 * verbesserungspotenzial.setCellFactory((TableColumn<Modul, Modul>
+		 * column) -> { return new TableCell<Modul, Modul>() {
+		 * 
+		 * @Override protected void updateItem(Modul item, boolean empty) {
+		 * super.updateItem(item, empty); // ---------> Methode fuer
+		 * verbesserungsversuch if (item == null || empty) { setText(null); }
+		 * else { setText(""+ item.getModulnummer()); } } }; });
+		 */
 		// GridPane.setMargin(bestandeneKlausuren, new Insets(0, 60, 0, 0));
 		versucheNB.setCellValueFactory(new PropertyValueFactory<>("versuche"));
 		// Location
