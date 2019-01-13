@@ -1,5 +1,7 @@
 package ui;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 
 import daten.Benutzer;
@@ -126,7 +128,20 @@ public class KlausurenTab extends QisTab {
 			};
 		});
 		verbesserungspotenzial.setCellValueFactory(new PropertyValueFactory<>("verbesserungspotenzial"));
+		verbesserungspotenzial.setCellFactory((TableColumn<Modul, Float> column) -> {
+			return new TableCell<Modul, Float>() {
+				@Override
+				protected void updateItem(Float item, boolean empty) {
+					super.updateItem(item, empty);
+					if (!empty) {
+						BigDecimal bd = new BigDecimal(item);
+						BigDecimal res = bd.setScale(2, RoundingMode.HALF_UP);
+						setText(Float.toString(res.floatValue()));
+					}
 
+				}
+			};
+		});
 		/*
 		 * verbesserungspotenzial.setCellFactory((TableColumn<Modul, Modul>
 		 * column) -> { return new TableCell<Modul, Modul>() {
