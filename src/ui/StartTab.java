@@ -218,10 +218,11 @@ public class StartTab extends QisTab {
 			List<List<String>> moduleCSV = null;
 			int i = 1;
 			for (; i < studiengaengeCSV.size(); i++) {
-				System.out.println(htmlDaten.getStudiengang() + " == " + studiengaengeCSV.get(i).get(0));
+				// System.out.println(htmlDaten.getStudiengang() + " == " +
+				// studiengaengeCSV.get(i).get(0));
 				if (htmlDaten.getStudiengang().equals(studiengaengeCSV.get(i).get(0))) {
 					moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
-					System.out.println(moduleCSV);
+					// System.out.println(moduleCSV);
 					break;
 				}
 			}
@@ -229,7 +230,7 @@ public class StartTab extends QisTab {
 			// return new
 			// Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i),
 			// moduleCSV, htmlDaten.getMap()), 0,anzVersuche);
-			System.out.println(i);
+			// System.out.println(i);
 			Studiengang stud = Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap());
 			Benutzer ben = new Benutzer(stud, 0, anzVersuche);
 
