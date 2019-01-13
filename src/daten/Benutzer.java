@@ -61,7 +61,7 @@ public class Benutzer {
 		return round_note(summe / credits);
 	}
 
-	public float round_note(float Note) {
+	public static float round_note(float Note) {
 		float note = Float.parseFloat(String.format("%.1f", Note).replace(",", "."));
 		// System.out.println(note);
 		if (note >= 5)

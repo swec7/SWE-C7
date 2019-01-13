@@ -41,7 +41,7 @@ public class StartTab extends QisTab {
 	TextField importTf;
 
 	Factory factory = new Factory();
-	
+
 	public StartTab(Hauptpane haupt) {
 
 		GridPane anleitungBox = new GridPane();
@@ -146,11 +146,11 @@ public class StartTab extends QisTab {
 
 			try {
 				path = importTf.getText();
-				importTf.setText("Everythings seems fine ;)");
+				// importTf.setText("Everythings seems fine ;)");
 				user = loadBenutzer(path);
 				haupt.enableTabs();
 			} catch (CSVLeseException | IOException | HTMLLeseException e) {
-				importTf.setText(e.getMessage());
+				// importTf.setText(e.getMessage());
 				// e.printStackTrace();
 				haupt.disableTabs();
 			}
@@ -226,14 +226,15 @@ public class StartTab extends QisTab {
 				}
 			}
 			// System.out.println("HALLO ICH BIN HIER");
-			//return new Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap()), 0,anzVersuche);
+			// return new
+			// Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i),
+			// moduleCSV, htmlDaten.getMap()), 0,anzVersuche);
 			System.out.println(i);
 			Studiengang stud = Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap());
-			Benutzer ben = new Benutzer(stud, 0,
-					anzVersuche);
-			
+			Benutzer ben = new Benutzer(stud, 0, anzVersuche);
+
 			return ben;
-			
+
 		} catch (FileNotFoundException e) {
 			importTf.setText("Datei nicht gefunden !");
 			throw e;

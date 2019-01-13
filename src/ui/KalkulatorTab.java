@@ -167,6 +167,7 @@ public class KalkulatorTab extends QisTab {
 			boolean wrongFormat = false;
 			try {
 				wunschnote = Float.parseFloat(wunschnoteTf.getCharacters().toString());
+
 			} catch (NumberFormatException exc) {
 				try {
 					String s = wunschnoteTf.getCharacters().toString();
@@ -175,6 +176,9 @@ public class KalkulatorTab extends QisTab {
 				} catch (NumberFormatException ex) {
 					wrongFormat = true;
 				}
+			}
+			if (wunschnote > 4.0 || wunschnote < 1.0) {
+				wrongFormat = true;
 			}
 			Benutzer calc = benutzer;
 			for (int c = 0; c < calc.getStudiengang().getModuleSize(); c++) {
