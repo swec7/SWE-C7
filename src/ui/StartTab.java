@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import daten.Benutzer;
 import daten.Studiengang;
 import einlesen.CSVReader;
@@ -148,10 +150,13 @@ public class StartTab extends QisTab {
 				path = importTf.getText();
 				// importTf.setText("Everythings seems fine ;)");
 				user = loadBenutzer(path);
+				user.setVersuche(anzVersuche);
+				JOptionPane.showMessageDialog(null, path + " wurde erfolgreich geladen!");
 				haupt.enableTabs();
 			} catch (CSVLeseException | IOException | HTMLLeseException e) {
 				// importTf.setText(e.getMessage());
 				// e.printStackTrace();
+				JOptionPane.showMessageDialog(null, e.getMessage());
 				haupt.disableTabs();
 			}
 		});
@@ -169,36 +174,54 @@ public class StartTab extends QisTab {
 		v0.setSelected(true);
 		v0.setOnAction(event -> {
 			anzVersuche = 0;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		RadioButton v1 = new RadioButton("1");
 		v1.setToggleGroup(versucheGr);
 		v1.setOnAction(event -> {
 			anzVersuche = 1;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		RadioButton v2 = new RadioButton("2");
 		v2.setToggleGroup(versucheGr);
 		v2.setOnAction(event -> {
 			anzVersuche = 2;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		RadioButton v3 = new RadioButton("3");
 		v3.setToggleGroup(versucheGr);
 		v3.setOnAction(event -> {
 			anzVersuche = 3;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		RadioButton v4 = new RadioButton("4");
 		v4.setToggleGroup(versucheGr);
 		v4.setOnAction(event -> {
 			anzVersuche = 4;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		RadioButton v5 = new RadioButton("5");
 		v5.setToggleGroup(versucheGr);
 		v5.setOnAction(event -> {
 			anzVersuche = 5;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		versucheBox.getChildren().addAll(versucheTx, v0, v1, v2, v3, v4, v5);
@@ -237,10 +260,10 @@ public class StartTab extends QisTab {
 			return ben;
 
 		} catch (FileNotFoundException e) {
-			importTf.setText("Datei nicht gefunden !");
+			// importTf.setText("Datei nicht gefunden !");
 			throw e;
 		} catch (HTMLLeseException e) {
-			importTf.setText(e.getMessage());
+			// importTf.setText(e.getMessage());
 			throw e;
 		}
 	}

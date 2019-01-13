@@ -106,6 +106,10 @@ public class Benutzer {
 		return versuche;
 	}
 
+	public void setVersuche(float versuche) {
+		this.versuche = versuche;
+	}
+
 	@Override
 	public String toString() {
 		String s = "<<Benutzer>>\n";
