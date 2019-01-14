@@ -61,10 +61,11 @@ public class Benutzer {
 		return round_note(summe / credits);
 	}
 
-	public float round_note(float Note) {
+	public static float round_note(float Note) {
+		// System.out.println(Note);
 		float note = Float.parseFloat(String.format("%.1f", Note).replace(",", "."));
 		// System.out.println(note);
-		if (note >= 5)
+		if (note >= 5.0)
 			note = 4.0f;
 		if (note < 1)
 			note = 1.0f;
@@ -103,6 +104,10 @@ public class Benutzer {
 
 	public float getVersuche() {
 		return versuche;
+	}
+
+	public void setVersuche(float versuche) {
+		this.versuche = versuche;
 	}
 
 	@Override

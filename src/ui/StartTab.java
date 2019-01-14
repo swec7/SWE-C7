@@ -16,6 +16,8 @@ import exceptions.HTMLLeseException;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -41,7 +43,7 @@ public class StartTab extends QisTab {
 	TextField importTf;
 
 	Factory factory = new Factory();
-	
+
 	public StartTab(Hauptpane haupt) {
 
 		GridPane anleitungBox = new GridPane();
@@ -146,12 +148,26 @@ public class StartTab extends QisTab {
 
 			try {
 				path = importTf.getText();
-				importTf.setText("Everythings seems fine ;)");
+				// importTf.setText("Everythings seems fine ;)");
 				user = loadBenutzer(path);
+				user.setVersuche(anzVersuche);
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Information Dialog");
+				alert.setHeaderText(path);
+				alert.setContentText("Die Datei wurde erfolgreich geladen.");
+
+				alert.showAndWait();
 				haupt.enableTabs();
+				haupt.ubersicht(getUser());
 			} catch (CSVLeseException | IOException | HTMLLeseException e) {
-				importTf.setText(e.getMessage());
+				// importTf.setText(e.getMessage());
 				// e.printStackTrace();
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error Dialog");
+				alert.setHeaderText("Error");
+				alert.setContentText(e.getMessage());
+
+				alert.showAndWait();
 				haupt.disableTabs();
 			}
 		});
@@ -169,36 +185,54 @@ public class StartTab extends QisTab {
 		v0.setSelected(true);
 		v0.setOnAction(event -> {
 			anzVersuche = 0;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		RadioButton v1 = new RadioButton("1");
 		v1.setToggleGroup(versucheGr);
 		v1.setOnAction(event -> {
 			anzVersuche = 1;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		RadioButton v2 = new RadioButton("2");
 		v2.setToggleGroup(versucheGr);
 		v2.setOnAction(event -> {
 			anzVersuche = 2;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		RadioButton v3 = new RadioButton("3");
 		v3.setToggleGroup(versucheGr);
 		v3.setOnAction(event -> {
 			anzVersuche = 3;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		RadioButton v4 = new RadioButton("4");
 		v4.setToggleGroup(versucheGr);
 		v4.setOnAction(event -> {
 			anzVersuche = 4;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		RadioButton v5 = new RadioButton("5");
 		v5.setToggleGroup(versucheGr);
 		v5.setOnAction(event -> {
 			anzVersuche = 5;
+			if (user != null) {
+				user.setVersuche(anzVersuche);
+			}
 		});
 
 		versucheBox.getChildren().addAll(versucheTx, v0, v1, v2, v3, v4, v5);
@@ -218,27 +252,29 @@ public class StartTab extends QisTab {
 			List<List<String>> moduleCSV = null;
 			int i = 1;
 			for (; i < studiengaengeCSV.size(); i++) {
-				System.out.println(htmlDaten.getStudiengang() + " == " + studiengaengeCSV.get(i).get(0));
+				// System.out.println(htmlDaten.getStudiengang() + " == " +
+				// studiengaengeCSV.get(i).get(0));
 				if (htmlDaten.getStudiengang().equals(studiengaengeCSV.get(i).get(0))) {
 					moduleCSV = CSVReader.loadCsv(studiengaengeCSV.get(i).get(6) + ".csv");
-					System.out.println(moduleCSV);
+					// System.out.println(moduleCSV);
 					break;
 				}
 			}
 			// System.out.println("HALLO ICH BIN HIER");
-			//return new Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap()), 0,anzVersuche);
-			System.out.println(i);
+			// return new
+			// Benutzer(Factory.buildStudiengang(studiengaengeCSV.get(i),
+			// moduleCSV, htmlDaten.getMap()), 0,anzVersuche);
+			// System.out.println(i);
 			Studiengang stud = Factory.buildStudiengang(studiengaengeCSV.get(i), moduleCSV, htmlDaten.getMap());
-			Benutzer ben = new Benutzer(stud, 0,
-					anzVersuche);
-			
+			Benutzer ben = new Benutzer(stud, 0, anzVersuche);
+
 			return ben;
-			
+
 		} catch (FileNotFoundException e) {
-			importTf.setText("Datei nicht gefunden !");
+			// importTf.setText("Datei nicht gefunden !");
 			throw e;
 		} catch (HTMLLeseException e) {
-			importTf.setText(e.getMessage());
+			// importTf.setText(e.getMessage());
 			throw e;
 		}
 	}

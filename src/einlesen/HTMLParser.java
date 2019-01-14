@@ -18,7 +18,9 @@ import exceptions.HTMLLeseException;
  */
 public class HTMLParser {
 	/*
-	 * <tr>\s.*\s*(\d*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)
+	 * <tr>\s.*\s*(\d*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.
+	 * *>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.*)\s*<\/td>\s*.*>\s*(.
+	 * *)\s*<\/td>\s*.*>\s*(.*)
 	 */
 	private final static String regex = "<tr>\\s.*\\s*(\\d*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)\\s*<\\/td>\\s*.*>\\s*(.*)";
 	private static final int COLLUMS = 9;
@@ -80,7 +82,7 @@ public class HTMLParser {
 				String[] row = new String[COLLUMS - 2];
 				for (int i = 2; i < COLLUMS; i++) {
 					String s = matcher.group(i);
-					//System.out.println(s);
+					// System.out.println(s);
 					row[i - 2] = s;
 				}
 				map.put(matcher.group(1), row);
@@ -92,7 +94,7 @@ public class HTMLParser {
 			throw new HTMLLeseException("Fehlerhafte HTML Datei (" + e.getMessage() + ")");
 		}
 		sc.close();
-		
+
 		return map;
 	}
 
@@ -103,7 +105,9 @@ public class HTMLParser {
 	static String getName(String path) throws HTMLLeseException, FileNotFoundException {
 		StringBuffer sb = new StringBuffer(5000);
 		String course_n = "";
-		//Pattern course_name = Pattern.compile("align..left.*colspan=.9.>\\s*(.*)<.th><.tr>"); old version
+		// Pattern course_name =
+		// Pattern.compile("align..left.*colspan=.9.>\\s*(.*)<.th><.tr>"); old
+		// version
 		Pattern course_name = Pattern.compile("align..left.*colspan=.9.>\\s*Bachelor\\s*(.*)<.th><.tr>");
 		Matcher course_name_matcher;
 
@@ -120,7 +124,7 @@ public class HTMLParser {
 		course_name_matcher = course_name.matcher(sb);
 		while (course_name_matcher.find()) {
 			course_n = course_name_matcher.group(1);
-			System.out.println(course_n);
+			// System.out.println(course_n);
 		}
 		sc.close();
 		return course_n;
