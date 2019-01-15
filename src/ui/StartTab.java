@@ -24,10 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -36,7 +33,7 @@ public class StartTab extends QisTab {
 
 	String path = "";
 
-	float anzVersuche = 0;
+	float anzVersuche = 3;
 
 	Benutzer user = null;
 
@@ -80,21 +77,26 @@ public class StartTab extends QisTab {
 
 		Label z2 = new Label("2.");
 		GridPane.setValignment(z2, VPos.TOP);
-		WrapLabel anleitung2 = new WrapLabel("Klicken Sie auf den Punkt 'Notenspiegel' Und danach hinter dem"
-				+ "entsprechenden Studiengang auf 'Info'.");
+		WrapLabel anleitung2 = new WrapLabel("Klicken Sie auf den Link 'Notenspiegel' und danach auf 'Info'.");
 
 		Label z3 = new Label("3.");
 		GridPane.setValignment(z3, VPos.TOP);
-		WrapLabel anleitung3 = new WrapLabel("Exportieren Sie die HTML-Seite, indem Sie Strg und s"
-				+ " auf Ihrer Tastatur Drücken oder mit Rechtsklick irgendwo auf die Seite und '(Seite)"
-				+ " speichern unter...' drücken");
+		WrapLabel anleitung3 = new WrapLabel("Speichern Sie die HTML-Seite, indem Sie  STRG + S " +
+				"gleichzeitig auf Ihrer Tastatur drücken oder betätigen Sie die rechte " +
+				"Maustaste und klicken auf" +
+				" '(Seite) speichern unter...'. Anschließend wählen Sie aus, wo die Datei auf Ihrem " +
+				"Computer " +
+				"gespeichert werden soll (z.B. Desktop)");
+
+		GridPane.setValignment(z3, VPos.TOP);
 
 		Label z4 = new Label("4.");
 		GridPane.setValignment(z4, VPos.TOP);
-		WrapLabel anleitung4 = new WrapLabel("Importieren Sie nun die HTML-Datei mit hilfe des '...' Buttons."
-				+ "Wählen Sie im geöffneten Datei-Browse die entsprechende Datei aus und bestätigen Sie die"
-				+ "Auswahl. Im Textfeld neben dem Button wird nun der Pfad der Datei angezeigt. Zum schluss"
-				+ "drücken Sie aud 'Importieren' um die Daten in das Programm  zu Lesen");
+		WrapLabel anleitung4 = new WrapLabel("Nachdem Sie auf den '...' Knopf gedrückt haben, müssen Sie die Datei," +
+				" welche Sie eben gespeichert haben im Datei-Browser suchen und auswählen." +
+				"Im Textfeld neben dem 'Importieren' Knopf sollte nun der Pfad zur Datei angezeigt werden."+
+				" Sie können noch auswählen, wie viele Verbesserungsversuche Ihnen noch verbleiben." +
+				 " Abschließend drücken Sie auf 'Importieren' um Ihre Daten im Programm zu importieren");
 
 		anleitungBox.addRow(0, z1, anleitungZ1);
 		anleitungBox.addRow(1, z2, anleitung2);
@@ -137,11 +139,9 @@ public class StartTab extends QisTab {
 		HBox.setHgrow(importTf, Priority.ALWAYS);
 		HBox.setHgrow(importBtn, Priority.NEVER);
 		// GridPane.setHgrow(importBox, Priority.ALWAYS);
-		importBox.getChildren().addAll(importTf, importBtn);
+		HBox internUpload = new HBox();
+		HBox.setHgrow(internUpload, Priority.ALWAYS);
 
-		// TODO Benutzer erstellen mit path zu HTML Datei und Felder enablen
-		// TODO und vorher ausgrauen
-		this.add(importBox, 0, 1);
 		Button upload = new Button("Importieren");
 		GridPane.setHgrow(upload, Priority.NEVER);
 		upload.setOnAction(event -> {
@@ -171,11 +171,18 @@ public class StartTab extends QisTab {
 				haupt.disableTabs();
 			}
 		});
-		this.add(upload, 1, 1);
+		//this.add(upload, 1, 1);
+		internUpload.getChildren().addAll(importTf, importBtn);
+		importBox.getChildren().addAll(internUpload, upload);
+		importBox.setSpacing(20);
+
+
+		this.add(importBox, 0, 1);
+
 
 		HBox versucheBox = new HBox();
-		versucheBox.setSpacing(15.0);
-		Text versucheTx = new Text("Verbesserungsversuche:");
+		versucheBox.setSpacing(10.0);
+		Text versucheTx = new Text("Verbleibende Verbesserungsversuche:");
 		versucheTx.getStyleClass().add("tabtext");
 
 		ToggleGroup versucheGr = new ToggleGroup();
@@ -216,6 +223,7 @@ public class StartTab extends QisTab {
 				user.setVersuche(anzVersuche);
 			}
 		});
+		v3.setSelected(true);
 
 		RadioButton v4 = new RadioButton("4");
 		v4.setToggleGroup(versucheGr);

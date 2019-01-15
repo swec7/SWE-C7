@@ -63,7 +63,7 @@ public class Modul {
 			// System.out.println("[03]DEBUG");
 			versuche = (int) Float.parseFloat(htmlZeile[6].replaceAll(",", "."));
 			pruefungsDatum = Datum.parseDatum(htmlZeile[2]);
-			ablaufdatum = new Datum(pruefungsDatum.getTag(), pruefungsDatum.getMonat(), pruefungsDatum.getJahr() + 1);
+			if(note != 0) {ablaufdatum = new Datum(pruefungsDatum.getTag(), pruefungsDatum.getMonat(), pruefungsDatum.getJahr() + 1);}
 			this.verbesserungspotenzial = (this.note - 1.0f) * this.credits;
 			// System.out.println("[04]DEBUG");
 		} catch (NumberFormatException e) {

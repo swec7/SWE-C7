@@ -159,7 +159,7 @@ public class UebersichtTab extends QisTab {
 
 		this.add(uebersicht, 0, 0);
 		this.add(schnitt, 0, 1);
-		// this.setGridLinesVisible(true);
+		 //this.setGridLinesVisible(true);
 
 	}
 

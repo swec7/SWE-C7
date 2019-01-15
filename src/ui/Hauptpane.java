@@ -21,7 +21,7 @@ public class Hauptpane extends BorderPane {
 	public Hauptpane(HostServices services) {
 		this.setPrefSize(800, 600);
 		VBox box = new VBox();
-		box.getStyleClass().add("box"); // Fügt dem Object eine style Class aus
+		box.getStyleClass().add("box"); // FÃ¼gt dem Object eine style Class aus
 										// der CSS datei hinzu
 		box.setPrefSize(200, 600);
 		box.setMaxWidth(200);
@@ -29,11 +29,11 @@ public class Hauptpane extends BorderPane {
 		hStart.getStyleClass().add("tabbox");
 		hStart.setAlignment(Pos.CENTER); // Positioniert Elemente in der Mitte
 											// der von der Box zugeteilten
-											// Fläche
+											// FlÃ¤che
 		hStart.setPrefSize(200, 100);
 		Text startText = new Text("Start");
 		startText.getStyleClass().add("tabtext");
-		hStart.getChildren().add(startText); // Fügt einem JavaFX Object Objects
+		hStart.getChildren().add(startText); // FÃ¼gt einem JavaFX Object Objects
 												// hinzu
 		startText.getStyleClass().add("pressed");
 		activeText = startText;
@@ -43,7 +43,7 @@ public class Hauptpane extends BorderPane {
 		hUebersicht.getStyleClass().addAll("tabbox", "disable");
 		hUebersicht.setAlignment(Pos.CENTER);
 		hUebersicht.setPrefSize(200, 100);
-		uebersichtText = new Text("Übersicht");
+		uebersichtText = new Text("Ãœbersicht");
 		uebersichtText.getStyleClass().add("tabtext");
 		hUebersicht.getChildren().add(uebersichtText);
 
@@ -66,8 +66,8 @@ public class Hauptpane extends BorderPane {
 		hKalkulator.getChildren().add(kalkulatorText);
 
 		StartTab start = new StartTab(this);
-		start.setHostServices(services); // setzt die HostServices für das Tab
-											// (wird beim Hyperlink benötigt)
+		start.setHostServices(services); // setzt die HostServices fÃ¼r das Tab
+											// (wird beim Hyperlink benÃ¶tigt)
 		// UebersichtTab uebersicht = new UebersichtTab();
 		// KlausurenTab klausuren = new KlausurenTab();
 		// KalkulatorTab kalkulator = new KalkulatorTab();
