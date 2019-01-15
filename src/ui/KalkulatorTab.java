@@ -299,7 +299,7 @@ public class KalkulatorTab extends QisTab {
 			Note = ganzenote + (float) 0.7;
 		if (Note < 1)
 			Note = (float) 1.0;
-		if (Note >= 4)
+		if (Note > 4)
 			return (float) 5.0;
 		return Note;
 	}

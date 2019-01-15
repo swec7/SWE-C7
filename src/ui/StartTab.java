@@ -36,7 +36,7 @@ public class StartTab extends QisTab {
 
 	String path = "";
 
-	float anzVersuche = 0;
+	float anzVersuche = 3;
 
 	Benutzer user = null;
 
@@ -216,7 +216,7 @@ public class StartTab extends QisTab {
 				user.setVersuche(anzVersuche);
 			}
 		});
-
+		v3.setSelected(true);
 		RadioButton v4 = new RadioButton("4");
 		v4.setToggleGroup(versucheGr);
 		v4.setOnAction(event -> {
