@@ -259,18 +259,21 @@ public class KalkulatorTab extends QisTab {
 
 		});
 
-		this.add(kalkulator, 0, 0, 4, 1);
-		this.add(aktDurchschnittTx, 0, 1, 2, 1);
-		this.add(errechDurchschnittTx, 0, 2, 2, 1);
-		this.add(reset, 2, 1, 1, 2);
-
-		this.add(verblVersuche, 0, 3, 2, 1);
-
-		this.add(wunschnoteBox, 0, 4, 3, 1);
-		this.add(wunschnoteTx, 0, 5);
-		this.add(wunschnoteTf, 1, 5);
-		this.add(wunschnoteBer, 2, 5);
-		this.add(wunschnoteNichtBerTx, 0, 6, 3, 1);
+		GridPane grid = new GridPane();
+		this.add(kalkulator, 0, 0);
+		grid.add(aktDurchschnittTx, 0, 0, 2, 1);
+		grid.add(errechDurchschnittTx, 0, 1, 2, 1);
+		grid.add(reset, 2, 1, 1, 2);
+		grid.add(verblVersuche, 0, 2, 2, 1);
+		grid.add(wunschnoteBox, 0, 3, 3, 1);
+		grid.add(wunschnoteTx, 0, 4);
+		grid.add(wunschnoteTf, 1, 4);
+		grid.add(wunschnoteBer, 2, 4);
+		grid.add(wunschnoteNichtBerTx, 0, 5, 3, 1);
+		this.add(grid, 0, 1);
+		grid.setHgap(20);
+		grid.setVgap(20);
+		grid.setVisible(true);
 
 		// ColumnConstraints first = new ColumnConstraints();
 		// first.setHgrow(Priority.NEVER);

@@ -130,7 +130,7 @@ Button:pressed {
 }
 
 .table-view{
-	-fx-background-color: lightgrey ;
+	-fx-background-color: transparent ;
 	-fx-border-color: black;
     -fx-border-width: 1;
 }
@@ -140,7 +140,7 @@ Button:pressed {
 .table-view .column-header-background{
 	-fx-border-color: black;
 	-fx-table-cell-border-color:black;
-	-fx-background-color: #efefef ;
+	-fx-background-color: transparent ;
 	-fx-font-family: 'sans-serif';
 }
 
@@ -155,15 +155,20 @@ Button:pressed {
 	-fx-background-color: #00b5ad;
 }
 
+.grey .table-row-cell:empty {
+	-fx-background-color: white;
+	-fx-table-cell-border-color: white;
+}
 
-.table-row-cell {
+.table-row-cell:filled {
 	-fx-border-color: black;
-	-fx-border-width: 1 0 0 0;
+	-fx-border-width: 0 0 1 0;
 	-fx-table-cell-border-color:black;
 	-fx-focus-color: transparent;
    	-fx-text-background-color:  black;   
    	-fx-font-family: 'sans-serif';
 }
+
 .grey .table-row-cell {
 	-fx-background-color: #efefef ;
 }

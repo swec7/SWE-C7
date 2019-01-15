@@ -3,8 +3,8 @@ package daten;
 import exceptions.HTMLLeseException;
 
 /**
- * Speichert alle daten die über ein modul verfügbar sind. nur die wunschnote
- * ist veränderbar.
+ * Speichert alle daten die ï¿½ber ein modul verfï¿½gbar sind. nur die wunschnote
+ * ist verï¿½nderbar.
  */
 public class Modul {
 
@@ -35,7 +35,7 @@ public class Modul {
 	}
 
 	/**
-	 * läd die daten aus einer html datei
+	 * lï¿½d die daten aus einer html datei
 	 * 
 	 * @param htmlZeile
 	 *            die geparste zeile aus der html datei (eine zeile aus der
@@ -61,15 +61,15 @@ public class Modul {
 				note = Float.parseFloat(htmlZeile[3].replaceAll(",", "."));
 			}
 			// System.out.println("[03]DEBUG");
-			versuche = (int) Float.parseFloat(htmlZeile[6].replaceAll(",", "."));
+			if(note != 0) {versuche = (int) Float.parseFloat(htmlZeile[6].replaceAll(",", "."));}
 			pruefungsDatum = Datum.parseDatum(htmlZeile[2]);
-			ablaufdatum = new Datum(pruefungsDatum.getTag(), pruefungsDatum.getMonat(), pruefungsDatum.getJahr() + 1);
+			if(note != 0) {ablaufdatum = new Datum(pruefungsDatum.getTag(), pruefungsDatum.getMonat(), pruefungsDatum.getJahr() + 1);}
 			this.verbesserungspotenzial = (this.note - 1.0f) * this.credits;
 			// System.out.println("[04]DEBUG");
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 			throw new HTMLLeseException(
-					"Ungültiger Wert (" + e.getMessage() + ")\"" + note + "\"+\"" + versuche + "\"");
+					"Ungï¿½ltiger Wert (" + e.getMessage() + ")\"" + note + "\"+\"" + versuche + "\"");
 		}
 	}
 

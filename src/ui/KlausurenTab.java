@@ -57,7 +57,7 @@ public class KlausurenTab extends QisTab {
 		Text bestandenTx = new Text("Bestandene Klausuren");
 		Text durchschnittTx = new Text("Aktuelle Durchschnittsnote:\t" + durchschnittsnote);
 		Text verbesserungsversucheTx = new Text("Verbleibende Verbesserungsversuche:\t" + versuche);
-		Text nichtBestandenTx = new Text("nicht bestandene Klausuren");
+		Text nichtBestandenTx = new Text("Nicht bestandene Klausuren");
 		// CSS Styles der Texte
 		bestandenTx.getStyleClass().add("zueberschrift");
 		durchschnittTx.getStyleClass().add("tabtext");
@@ -84,6 +84,7 @@ public class KlausurenTab extends QisTab {
 				ablaufdatum);
 		// Properties von bestandeneKlausuren
 		bestandeneKlausuren.setFocusTraversable(false);
+		bestandeneKlausuren.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		// note.prefWidthProperty().bind(new SimpleIntegerProperty(50));
 		GridPane.setHgrow(bestandeneKlausuren, Priority.ALWAYS);
 		GridPane.setVgrow(bestandeneKlausuren, Priority.SOMETIMES);
