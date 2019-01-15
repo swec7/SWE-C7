@@ -51,7 +51,7 @@ public class KlausurenTab extends QisTab {
 
 		// Parser Data
 		float durchschnittsnote = benutzer.durchschnittsNote();
-		int versuche = benutzer.getStudiengang().getMaxVerbleibendeVersuche();
+		int versuche = (int) benutzer.getVersuche();
 
 		// Output Texte des Tabs
 		Text bestandenTx = new Text("Bestandene Klausuren");
