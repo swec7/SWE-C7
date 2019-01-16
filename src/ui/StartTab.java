@@ -80,21 +80,21 @@ public class StartTab extends QisTab {
 
 		Label z2 = new Label("2.");
 		GridPane.setValignment(z2, VPos.TOP);
-		WrapLabel anleitung2 = new WrapLabel("Klicken Sie auf den Punkt 'Notenspiegel' Und danach hinter dem"
-				+ "entsprechenden Studiengang auf 'Info'.");
+		WrapLabel anleitung2 = new WrapLabel("Klicken Sie auf den Punkt 'Notenspiegel' und danach hinter dem"
+				+ " entsprechenden Studiengang auf 'Info'.");
 
 		Label z3 = new Label("3.");
 		GridPane.setValignment(z3, VPos.TOP);
-		WrapLabel anleitung3 = new WrapLabel("Exportieren Sie die HTML-Seite, indem Sie Strg und s"
-				+ " auf Ihrer Tastatur Drücken oder mit Rechtsklick irgendwo auf die Seite und '(Seite)"
-				+ " speichern unter...' drücken");
+		WrapLabel anleitung3 = new WrapLabel("Exportieren Sie die HTML-Seite, indem Sie STRG + S"
+				+ " auf Ihrer Tastatur drücken oder mit Rechtsklick irgendwo auf die Seite und '(Seite)"
+				+ " speichern unter...' drücken.");
 
 		Label z4 = new Label("4.");
 		GridPane.setValignment(z4, VPos.TOP);
-		WrapLabel anleitung4 = new WrapLabel("Importieren Sie nun die HTML-Datei mit hilfe des '...' Buttons."
-				+ "Wählen Sie im geöffneten Datei-Browse die entsprechende Datei aus und bestätigen Sie die"
-				+ "Auswahl. Im Textfeld neben dem Button wird nun der Pfad der Datei angezeigt. Zum schluss"
-				+ "drücken Sie aud 'Importieren' um die Daten in das Programm  zu Lesen");
+		WrapLabel anleitung4 = new WrapLabel("Importieren Sie nun die HTML-Datei mit Hilfe des '...' Buttons."
+				+ "wählen Sie im geöffneten Datei-Browser die entsprechende Datei aus und bestätigen Sie die"
+				+ " Auswahl. Im Textfeld neben dem Button wird nun der Pfad der Datei angezeigt. Zum Schluss "
+				+ "drücken Sie auf 'Importieren', um die Daten in das Programm zu lesen.");
 
 		anleitungBox.addRow(0, z1, anleitungZ1);
 		anleitungBox.addRow(1, z2, anleitung2);
