@@ -137,6 +137,9 @@ public class KalkulatorTab extends QisTab {
 			note.setCellValueFactory(new PropertyValueFactory<>("planNote"));
 			kalkulator.refresh();
 		});// */
+		for (Modul m : benutzer.getStudiengang().getModule()) {
+			m.setPlanNote(m.getNote());
+		}
 		kalkulator.setItems(FXCollections.observableArrayList(benutzer.getStudiengang().getModule()));
 
 		Button reset = new Button("Reset");
