@@ -118,11 +118,12 @@ public class KalkulatorTab extends QisTab {
 			float scalar = 0;
 			int partialcredit = 0;
 			for (int c = 0; c < wertung.size(); c++) {
-				if (wertung.get(c).getPlanNote() == 0 && wertung.get(c).getNote() != 0) {
+				if (wertung.get(c).getPlanNote() == 0 && wertung.get(c).getNote() != 0
+						&& wertung.get(c).getNote() != 5.0) {
 					wertung.get(c).setPlanNote(wertung.get(c).getNote());
 					scalar += wertung.get(c).getCredits() * wertung.get(c).getPlanNote();
 					partialcredit += wertung.get(c).getCredits();
-				} else if (wertung.get(c).getPlanNote() != 0) {
+				} else if (wertung.get(c).getPlanNote() != 0 && wertung.get(c).getPlanNote() != 5.0) {
 					scalar += wertung.get(c).getCredits() * wertung.get(c).getPlanNote();
 					partialcredit += wertung.get(c).getCredits();
 				}

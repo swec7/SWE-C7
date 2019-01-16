@@ -84,10 +84,11 @@ public class KlausurenTab extends QisTab {
 				ablaufdatum);
 		// Properties von bestandeneKlausuren
 		bestandeneKlausuren.setFocusTraversable(false);
-		bestandeneKlausuren.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		// note.prefWidthProperty().bind(new SimpleIntegerProperty(50));
 		GridPane.setHgrow(bestandeneKlausuren, Priority.ALWAYS);
 		GridPane.setVgrow(bestandeneKlausuren, Priority.SOMETIMES);
+
+		bestandeneKlausuren.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		// Columns von nichtBestandeneKlausuren
 		TableColumn<Modul, String> modulname1 = new TableColumn<>("Modulname");
 		TableColumn<Modul, Integer> semester1 = new TableColumn<>("Semester");
@@ -155,6 +156,12 @@ public class KlausurenTab extends QisTab {
 		// GridPane.setMargin(bestandeneKlausuren, new Insets(0, 60, 0, 0));
 		versucheNB.setCellValueFactory(new PropertyValueFactory<>("versuche"));
 		// Location
+		// bestandenTx.setOnMouseClicked(event -> {
+		// bestandeneKlausuren.refresh();
+		// });
+		bestandeneKlausuren.widthProperty().addListener(event -> {
+			bestandeneKlausuren.refresh();
+		});
 		this.setPadding(new Insets(20, 80, 20, 20));
 		this.setVgap(10);
 		this.add(bestandenTx, 0, 0);
@@ -163,6 +170,7 @@ public class KlausurenTab extends QisTab {
 		this.add(verbesserungsversucheTx, 0, 3);
 		this.add(nichtBestandenTx, 0, 4);
 		this.add(nichtBestandeneKlausuren, 0, 5);
+
 		// ------------------------------------------------------------------------------------------
 		// this.setGridLinesVisible(true);
 	}
