@@ -80,24 +80,21 @@ public class StartTab extends QisTab {
 
 		Label z2 = new Label("2.");
 		GridPane.setValignment(z2, VPos.TOP);
-		WrapLabel anleitung2 = new WrapLabel("Klicken Sie auf den Link 'Notenspiegel' und danach auf 'Info'.");
+		WrapLabel anleitung2 = new WrapLabel("Klicken Sie auf den Punkt 'Notenspiegel' Und danach hinter dem"
+				+ "entsprechenden Studiengang auf 'Info'.");
 
 		Label z3 = new Label("3.");
 		GridPane.setValignment(z3, VPos.TOP);
-		WrapLabel anleitung3 = new WrapLabel("Speichern Sie die HTML-Seite, indem Sie  STRG + S " +
-				"gleichzeitig auf Ihrer Tastatur drücken oder betätigen Sie die rechte " +
-				"Maustaste und klicken auf" +
-				" '(Seite) speichern unter...'. Anschließend wählen Sie aus, wo die Datei auf Ihrem " +
-				"Computer " +
-				"gespeichert werden soll (z.B. Desktop)");
+		WrapLabel anleitung3 = new WrapLabel("Exportieren Sie die HTML-Seite, indem Sie Strg und s"
+				+ " auf Ihrer Tastatur Drücken oder mit Rechtsklick irgendwo auf die Seite und '(Seite)"
+				+ " speichern unter...' drücken");
 
 		Label z4 = new Label("4.");
 		GridPane.setValignment(z4, VPos.TOP);
-		WrapLabel anleitung4 = new WrapLabel("Nachdem Sie auf den '...' Knopf gedrückt haben, müssen Sie die Datei," +
-				" welche Sie eben gespeichert haben im Datei-Browser suchen und auswählen." +
-				" Im Textfeld neben dem 'Importieren' Knopf sollte nun der Pfad zur Datei angezeigt werden."+
-				" Sie können noch auswählen, wie viele Verbesserungsversuche Ihnen noch verbleiben." +
-				" Abschließend drücken Sie auf 'Importieren' um Ihre Daten im Programm zu importieren");
+		WrapLabel anleitung4 = new WrapLabel("Importieren Sie nun die HTML-Datei mit hilfe des '...' Buttons."
+				+ "Wählen Sie im geöffneten Datei-Browse die entsprechende Datei aus und bestätigen Sie die"
+				+ "Auswahl. Im Textfeld neben dem Button wird nun der Pfad der Datei angezeigt. Zum schluss"
+				+ "drücken Sie aud 'Importieren' um die Daten in das Programm  zu Lesen");
 
 		anleitungBox.addRow(0, z1, anleitungZ1);
 		anleitungBox.addRow(1, z2, anleitung2);
@@ -178,7 +175,6 @@ public class StartTab extends QisTab {
 		// TODO Benutzer erstellen mit path zu HTML Datei und Felder enablen
 		// TODO und vorher ausgrauen
 		this.add(importBox, 0, 1);
-
 
 		HBox versucheBox = new HBox();
 		versucheBox.setSpacing(10.0);
