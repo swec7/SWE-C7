@@ -28,7 +28,7 @@ public class Benutzer {
 		float summe = 0;
 		float credits = 0;
 		for (Modul m : studiengang.getModule()) {
-			if (m.isGeschrieben() && m.getTyp() != Typ.SOFTSKILL) {
+			if (m.isGeschrieben() && m.getTyp() != Typ.SOFTSKILL && m.getNote() != 5.0) {
 				summe += m.getCredits() * m.getNote();
 				credits += m.getCredits();
 			}
@@ -50,7 +50,7 @@ public class Benutzer {
 		float summe = 0;
 		float credits = 0;
 		for (Modul m : studiengang.getModule()) {
-			if (m.isGeschrieben() && m.getTyp() != Typ.SOFTSKILL) {
+			if (m.isGeschrieben() && m.getTyp() != Typ.SOFTSKILL && m.getNote() != 5.0) {
 				summe += m.getCredits() * m.getPlanNote();
 				credits += m.getCredits();
 			}
